@@ -1,0 +1,8 @@
+<!-- layouts/_default/single.html -->
+{{ define "main" }}
+  <article>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Date.Format "02/01/2006" }}</p>
+    {{ .Content }}
+  </article>
+{{ end }}

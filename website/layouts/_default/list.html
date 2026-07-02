@@ -1,0 +1,11 @@
+<!-- layouts/_default/list.html -->
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ range .Pages.ByDate.Reverse }}
+    <article>
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      <p>{{ .Date.Format "02/01/2006" }}</p>
+      {{ with .Summary }}<p>{{ . }}</p>{{ end }}
+    </article>
+  {{ end }}
+{{ end }}
