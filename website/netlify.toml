@@ -1,7 +1,12 @@
-# netlify.toml
 [build.environment]
 HUGO_VERSION = "0.163.3"
+NODE_VERSION = "24.16.0"
+TZ = "Europe/Rome"
 
 [build]
 publish = "public"
 command = "hugo build --gc --minify --baseURL ${URL}"
+
+[context.production.environment]
+HUGO_ENV = "production"
+HUGO_ENABLEGITINFO = "true"
