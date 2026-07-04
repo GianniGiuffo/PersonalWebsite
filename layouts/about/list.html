@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="max-w-2xl mx-auto px-4 py-16">
+  <div class="flex items-center gap-6 mb-10">
+    <div class="w-20 h-20 rounded-full overflow-hidden ring-2 ring-slate-200 dark:ring-slate-700 flex-shrink-0">
+      <img src="/img/avatar.jpg"
+           alt="Tommaso Francescon"
+           width="80" height="80"
+           class="w-full h-full object-cover"
+           onerror="this.onerror=null;this.parentElement.innerHTML='<div class=&quot;w-full h-full bg-teal-600 flex items-center justify-center text-white text-2xl font-bold&quot;>TF</div>'">
+    </div>
+    <div>
+      <h1 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Tommaso Francescon</h1>
+      <p class="text-slate-500 dark:text-slate-400">Game Developer · Unity · C#</p>
+    </div>
+  </div>
+
+  <div class="prose prose-slate dark:prose-invert max-w-none">
+    {{ .Content }}
+  </div>
+</div>
+{{ end }}

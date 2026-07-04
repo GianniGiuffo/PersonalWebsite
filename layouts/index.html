@@ -1,32 +1,32 @@
 {{ define "main" }}
-<section class="max-w-2xl mx-auto px-4 py-16">
+<section class="max-w-5xl mx-auto px-4 py-16">
   <div class="mb-12">
-    <h1 class="text-4xl font-bold text-slate-900 mb-3">Ciao, sono Tommaso 👋</h1>
-    <p class="text-lg text-slate-600">Questo è il mio spazio personale — un diario di note, progetti e pensieri sul game development.</p>
+    <h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-3">Ciao, sono Tommaso 👋</h1>
+    <p class="text-lg text-slate-600 dark:text-slate-400">Questo è il mio spazio personale — un diario di note, progetti e pensieri sul game development.</p>
   </div>
 
   <section>
-    <h2 class="text-xl font-semibold text-slate-800 mb-6 border-b border-slate-200 pb-2">Ultimi post</h2>
+    <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-200 mb-6 border-b border-slate-200 dark:border-slate-700 pb-2">Ultimi post</h2>
     {{ $posts := where .Site.RegularPages "Section" "posts" }}
     {{ if $posts }}
       <ul class="space-y-6">
         {{ range first 5 ($posts.ByDate.Reverse) }}
           <li>
             <a href="{{ .RelPermalink }}" class="group block">
-              <h3 class="text-lg font-medium text-slate-900 group-hover:text-teal-700 transition-colors">{{ .Title }}</h3>
-              <p class="text-sm text-slate-500 mt-1">{{ .Date.Format "02 January 2006" }}</p>
+              <h3 class="text-lg font-medium text-slate-900 dark:text-slate-100 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">{{ .Title }}</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">{{ .Date.Format "02 January 2006" }}</p>
               {{ with .Summary }}
-                <p class="text-slate-600 mt-1 text-sm">{{ . }}</p>
+                <p class="text-slate-600 dark:text-slate-400 mt-1 text-sm">{{ . }}</p>
               {{ end }}
             </a>
           </li>
         {{ end }}
       </ul>
       <div class="mt-8">
-        <a href="/posts/" class="text-teal-700 hover:text-teal-900 font-medium text-sm transition-colors">Tutti i post →</a>
+        <a href="/posts/" class="text-teal-700 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 font-medium text-sm transition-colors">Tutti i post →</a>
       </div>
     {{ else }}
-      <p class="text-slate-500 text-sm">Nessun post ancora. Il diario è pronto — basta iniziare a scrivere!</p>
+      <p class="text-slate-500 dark:text-slate-400 text-sm">Nessun post ancora.</p>
     {{ end }}
   </section>
 </section>
