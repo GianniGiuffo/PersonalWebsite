@@ -1,7 +1,17 @@
 +++
-date = '2026-07-02T22:26:16+02:00'
-draft = true
-title = 'Primo Post'
+title = 'Primo post'
+date = 2026-07-04T14:00:00+02:00
+draft = false
 +++
 
-Ciao, questo e' il mio primo post per il diario
+Benvenuto nel mio diario. Questo è il primo post di prova per verificare che tutto funzioni correttamente con Hugo e Tailwind CSS.
+
+## Come funziona
+
+Ogni post è un file Markdown dentro `content/posts/`. Il titolo e la data vengono dal **front matter** in cima al file, poi il corpo è semplice Markdown.
+
+## Prossimi passi
+
+- Personalizzare il layout
+- Aggiungere nuovi post
+- Migliorare lo stile con Tailwind

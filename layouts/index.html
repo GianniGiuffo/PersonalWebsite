@@ -1,0 +1,33 @@
+{{ define "main" }}
+<section class="max-w-2xl mx-auto px-4 py-16">
+  <div class="mb-12">
+    <h1 class="text-4xl font-bold text-slate-900 mb-3">Ciao, sono Tommaso 👋</h1>
+    <p class="text-lg text-slate-600">Questo è il mio spazio personale — un diario di note, progetti e pensieri sul game development.</p>
+  </div>
+
+  <section>
+    <h2 class="text-xl font-semibold text-slate-800 mb-6 border-b border-slate-200 pb-2">Ultimi post</h2>
+    {{ $posts := where .Site.RegularPages "Section" "posts" }}
+    {{ if $posts }}
+      <ul class="space-y-6">
+        {{ range first 5 ($posts.ByDate.Reverse) }}
+          <li>
+            <a href="{{ .RelPermalink }}" class="group block">
+              <h3 class="text-lg font-medium text-slate-900 group-hover:text-teal-700 transition-colors">{{ .Title }}</h3>
+              <p class="text-sm text-slate-500 mt-1">{{ .Date.Format "02 January 2006" }}</p>
+              {{ with .Summary }}
+                <p class="text-slate-600 mt-1 text-sm">{{ . }}</p>
+              {{ end }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+      <div class="mt-8">
+        <a href="/posts/" class="text-teal-700 hover:text-teal-900 font-medium text-sm transition-colors">Tutti i post →</a>
+      </div>
+    {{ else }}
+      <p class="text-slate-500 text-sm">Nessun post ancora. Il diario è pronto — basta iniziare a scrivere!</p>
+    {{ end }}
+  </section>
+</section>
+{{ end }}

@@ -1,8 +1,15 @@
 <!-- layouts/_default/single.html -->
 {{ define "main" }}
-  <article class="prose mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-slate-800">{{ .Title }}</h1>
-    <p class="text-sm text-slate-500">{{ .Date.Format "02/01/2006" }}</p>
+<div class="max-w-2xl mx-auto px-4 py-12">
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold text-slate-900 mb-2">{{ .Title }}</h1>
+    <p class="text-sm text-slate-500">{{ .Date.Format "02 January 2006" }}</p>
+  </header>
+  <div class="prose prose-slate max-w-none">
     {{ .Content }}
-  </article>
+  </div>
+  <div class="mt-12 pt-6 border-t border-slate-200">
+    <a href="/posts/" class="text-teal-700 hover:text-teal-900 text-sm font-medium transition-colors">← Torna ai post</a>
+  </div>
+</div>
 {{ end }}
