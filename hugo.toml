@@ -1,5 +1,5 @@
-baseURL = 'https://mytruestory.netlify.app/'
-languageCode = 'it-it'
+baseURL = 'https://personalwebsite-gg.netlify.app/'
+locale = 'it-it'
 title = 'Tommaso Francescon'
 
 [build]

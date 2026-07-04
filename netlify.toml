@@ -5,7 +5,7 @@ TZ = "Europe/Rome"
 
 [build]
 publish = "public"
-command = "hugo build --gc --minify --baseURL ${URL}"
+command = "npm install && hugo build --gc --minify --baseURL ${URL}"
 
 [context.production.environment]
 HUGO_ENV = "production"
