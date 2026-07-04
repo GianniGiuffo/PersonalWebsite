@@ -1,8 +1,8 @@
 <!-- layouts/_default/single.html -->
 {{ define "main" }}
-  <article>
-    <h1>{{ .Title }}</h1>
-    <p>{{ .Date.Format "02/01/2006" }}</p>
+  <article class="prose mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-slate-800">{{ .Title }}</h1>
+    <p class="text-sm text-slate-500">{{ .Date.Format "02/01/2006" }}</p>
     {{ .Content }}
   </article>
 {{ end }}
