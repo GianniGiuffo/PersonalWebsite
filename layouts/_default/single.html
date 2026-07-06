@@ -1,15 +1,17 @@
-<!-- layouts/_default/single.html -->
 {{ define "main" }}
 <div class="max-w-2xl mx-auto px-4 py-12">
   <header class="mb-8">
-    <h1 class="text-3xl font-bold text-slate-900 mb-2">{{ .Title }}</h1>
-    <p class="text-sm text-slate-500">{{ .Date.Format "02 January 2006" }}</p>
+    <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">{{ .Title }}</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400">{{ .Date.Format "02 January 2006" }}</p>
   </header>
-  <div class="prose prose-slate max-w-none">
+  <div class="prose prose-slate dark:prose-invert max-w-none">
     {{ .Content }}
   </div>
-  <div class="mt-12 pt-6 border-t border-slate-200">
-    <a href="/posts/" class="text-teal-700 hover:text-teal-900 text-sm font-medium transition-colors">← Torna ai post</a>
+  <div class="mt-12 pt-6 border-t border-slate-200 dark:border-slate-700">
+    <a href="{{ .Section | relURL }}" class="inline-flex items-center gap-1.5 text-teal-700 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 text-sm font-medium transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Torna indietro
+    </a>
   </div>
 </div>
 {{ end }}
