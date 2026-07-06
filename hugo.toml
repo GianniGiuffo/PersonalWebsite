@@ -1,5 +1,5 @@
 baseURL = 'https://personalwebsite-gg.netlify.app/'
-locale = 'it-it'
+languageCode = 'it-it'
 title = 'Tommaso Francescon'
 
 [build]
