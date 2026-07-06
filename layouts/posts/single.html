@@ -15,7 +15,7 @@
   <header class="mb-8">
     <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-3">{{ .Title }}</h1>
     <div class="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
-      <time>{{ .Date.Format "02 January 2006" }}</time>
+      <time>{{ .Date.Format "02 January 2006" }} | {{ .WordCount }} parole | {{ .ReadingTime }} min di lettura</time>
       {{ with .Params.tags }}
         <span class="text-slate-300 dark:text-slate-600">·</span>
         <div class="flex flex-wrap gap-1.5">
