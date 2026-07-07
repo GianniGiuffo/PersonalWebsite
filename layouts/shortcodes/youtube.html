@@ -1,0 +1,45 @@
+{{- $id := .Get "id" | default (.Get 0) -}}
+{{- $start := .Get "start" | default 0 -}}
+{{- $end := .Get "end" | default 0 -}}
+{{- $autoplay := .Get "autoplay" | default false -}}
+{{- $mute := .Get "mute" | default false -}}
+{{- $loop := .Get "loop" | default false -}}
+{{- $controls := .Get "controls" | default true -}}
+{{- $allowFullScreen := .Get "allowFullScreen" | default true -}}
+{{- $loading := .Get "loading" | default "eager" -}}
+{{- $title := .Get "title" | default "YouTube video" -}}
+{{- $class := .Get "class" -}}
+
+{{- if $autoplay }}{{- $mute = true }}{{- end -}}
+
+{{- $url := printf "https://www.youtube-nocookie.com/embed/%s?autoplay=%d&controls=%d&end=%d&loop=%d&mute=%d&start=%d"
+  $id
+  (cond (eq $autoplay true) 1 0)
+  (cond (eq $controls false) 0 1)
+  ($end | int)
+  (cond (eq $loop true) 1 0)
+  (cond (eq $mute true) 1 0)
+  ($start | int)
+-}}
+
+{{ if $class }}
+<div class="{{ $class }}">
+  <iframe
+    src="{{ $url }}"
+    title="{{ $title }}"
+    loading="{{ $loading }}"
+    {{ if $allowFullScreen }}allowfullscreen{{ end }}>
+  </iframe>
+</div>
+{{ else }}
+<div class="relative w-full overflow-hidden rounded-xl my-6"
+     style="aspect-ratio: 16/9;">
+  <iframe
+    src="{{ $url }}"
+    title="{{ $title }}"
+    loading="{{ $loading }}"
+    class="absolute inset-0 w-full h-full border-0 rounded-xl"
+    {{ if $allowFullScreen }}allowfullscreen{{ end }}>
+  </iframe>
+</div>
+{{ end }}

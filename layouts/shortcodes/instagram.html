@@ -1,0 +1,56 @@
+{{- $id := .Get "id" | default (.Get 0) -}}
+{{- $hideCaption := .Get "hideCaption" | default false -}}
+{{- $hideCaptionParam := cond (eq $hideCaption true) "1" "0" -}}
+
+<div class="instagram-embed my-6 flex justify-center">
+  <blockquote
+    class="instagram-media"
+    data-instgrm-permalink="https://www.instagram.com/p/{{ $id }}/"
+    data-instgrm-version="14"
+    data-instgrm-hidecaption="{{ $hideCaptionParam }}"
+    style="
+      background: var(--ig-bg, #fff);
+      border: 1px solid var(--ig-border, #dbdbdb);
+      border-radius: 12px;
+      max-width: 540px;
+      width: 100%;
+      min-width: 280px;
+      padding: 0;
+    ">
+  </blockquote>
+</div>
+
+{{/* Script embed Instagram — caricato una volta sola per pagina */}}
+{{ if not (.Page.Store.Get "igScriptLoaded") }}
+  {{ .Page.Store.Set "igScriptLoaded" true }}
+  <script>
+    // Adatta il tema Instagram al tema corrente del sito
+    (function () {
+      function applyIgTheme() {
+        var isDark = document.documentElement.classList.contains('dark');
+        // Instagram legge data-color-scheme sul tag blockquote
+        document.querySelectorAll('.instagram-media').forEach(function (el) {
+          el.setAttribute('data-instgrm-color-scheme', isDark ? 'dark' : 'light');
+        });
+        // Ri-processa gli embed se lo script IG è già caricato
+        if (window.instgrm && window.instgrm.Embeds) {
+          window.instgrm.Embeds.process();
+        }
+      }
+
+      // Applica subito
+      applyIgTheme();
+
+      // Ri-applica quando l'utente cambia tema (intercetta il toggle del sito)
+      var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+          if (m.attributeName === 'class' || m.attributeName === 'data-theme') {
+            applyIgTheme();
+          }
+        });
+      });
+      observer.observe(document.documentElement, { attributes: true });
+    })();
+  </script>
+  <script async defer src="//www.instagram.com/embed.js"></script>
+{{ end }}
