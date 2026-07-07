@@ -1,0 +1,2 @@
+[home]
+  formats = ["HTML", "RSS", "JSON"]
