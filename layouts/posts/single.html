@@ -1,6 +1,5 @@
 {{ define "main" }}
-<!-- post-content-outer è il containing block per le annotation-note -->
-<div class="post-content-outer relative" style="max-width: 42rem; margin-inline: auto; padding: 3rem 1rem;">
+<div class="max-w-2xl mx-auto px-4 py-12">
 
   <!-- Back link -->
   <div class="mb-8">
@@ -18,7 +17,7 @@
     <div class="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
       <time>{{ .Date.Format "02 January 2006" }} | {{ .WordCount }} parole | {{ .ReadingTime }} min di lettura</time>
       {{ with .Params.tags }}
-        <span class="text-slate-300 dark:text-slate-600">·</span>
+        <span class="text-slate-300 dark:text-slate-600">&middot;</span>
         <div class="flex flex-wrap gap-1.5">
           {{ range . }}
             <span class="inline-block bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs px-2 py-0.5 rounded-full">{{ . }}</span>
@@ -29,9 +28,7 @@
   </header>
 
   <!-- Content -->
-  <!-- overflow:visible è fondamentale: permette alle note di uscire
-       lateralmente senza essere clippate dal contenitore. -->
-  <div class="prose prose-slate dark:prose-invert max-w-none" style="overflow: visible;">
+  <div class="prose prose-slate dark:prose-invert max-w-none">
     {{ .Content }}
   </div>
 
@@ -56,4 +53,25 @@
   </div>
 
 </div>
+
+<script>
+// Per ogni annotation-note, imposta il top in base alla posizione
+// del suo marker fratello nel documento (coordinata Y rispetto alla viewport).
+function positionAnnotations() {
+  document.querySelectorAll('.annotation-wrap').forEach(function(wrap) {
+    var marker = wrap.querySelector('.annotation-marker');
+    var note   = wrap.querySelector('.annotation-note');
+    if (!marker || !note) return;
+    var rect = marker.getBoundingClientRect();
+    note.style.top = (rect.top + window.scrollY) + 'px';
+  });
+}
+
+// Ricalcola al caricamento e al resize
+document.addEventListener('DOMContentLoaded', positionAnnotations);
+window.addEventListener('resize', positionAnnotations);
+// Ricalcola anche dopo eventuali immagini caricate (cambiano l'altezza)
+window.addEventListener('load', positionAnnotations);
+</script>
+
 {{ end }}
