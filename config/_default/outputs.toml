@@ -1,5 +1,5 @@
 [home]
-  formats = ["HTML", "RSS", "JSON"]
+formats = ["HTML", "RSS", "JSON"]
 
 [_default]
-  formats = ["HTML"]
+formats = ["HTML"]
