@@ -1,2 +1,3 @@
-["application/json"]
-suffixes = ["json"]
+[mediaTypes]
+  [mediaTypes."application/json"]
+    suffixes = ["json"]
