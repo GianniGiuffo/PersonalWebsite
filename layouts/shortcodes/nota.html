@@ -1,0 +1,10 @@
+{{- $testo := .Get "testo" | default (.Inner | markdownify) -}}
+{{- $lato  := .Get "lato"  | default "destra" -}}
+
+<span class="margin-note-anchor" data-side="{{ $lato }}">
+  <span class="margin-note margin-note--{{ $lato }}">
+    {{ $testo | safeHTML }}
+  </span>
+  {{/* Indicatore visibile solo su mobile */}}
+  <span class="margin-note-toggle" aria-label="nota" title="{{ $testo }}">⁕</span>
+</span>
