@@ -1,0 +1,13 @@
+{{/*
+  Shortcode: annotation
+  Uso: {{< annotation >}}Testo dell'annotazione{{< /annotation >}}
+
+  Posiziona una nota marginale ancorata a destra del body del post,
+  all'altezza esatta in cui viene inserita nel markdown.
+*/}}
+<span class="annotation-anchor" aria-hidden="true">
+  <span class="annotation-note">
+    <span class="annotation-asterisk">*</span>
+    {{ .Inner | markdownify }}
+  </span>
+</span>

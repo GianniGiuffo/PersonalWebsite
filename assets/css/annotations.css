@@ -1,0 +1,58 @@
+/*
+  Annotation shortcode styles
+  Richiede che il wrapper del post abbia position: relative
+  Le note vengono ancorate a destra del contenuto (max-w-2xl)
+*/
+
+/* Ogni annotation-anchor è inline nel flusso di testo, zero dimensioni */
+.annotation-anchor {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  vertical-align: baseline;
+}
+
+/* La nota vera e propria fluttua a destra del corpo */
+.annotation-note {
+  position: absolute;
+  left: calc(100% + 2rem); /* parte dal bordo destro del testo */
+  top: 0;
+  width: 180px;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #94a3b8;          /* slate-400 – grigio chiaro come nell'immagine */
+  background: transparent;
+  pointer-events: none;
+  user-select: none;
+  white-space: normal;
+}
+
+/* Dark mode: il grigio rimane leggibile ma tenue */
+.dark .annotation-note {
+  color: #64748b;           /* slate-500 */
+}
+
+/* L'asterisco evidenziato come nell'immagine */
+.annotation-asterisk {
+  display: inline-block;
+  margin-right: 0.2em;
+  font-weight: 600;
+  color: #cbd5e1;           /* slate-300 */
+}
+
+.dark .annotation-asterisk {
+  color: #475569;           /* slate-600 */
+}
+
+/*
+  Su schermi stretti (< 900px) le annotazioni non hanno spazio laterale:
+  le nascondiamo per non rompere il layout mobile.
+  Se vuoi mostrarle comunque puoi fare un tooltip al tap.
+*/
+@media (max-width: 900px) {
+  .annotation-note {
+    display: none;
+  }
+}
