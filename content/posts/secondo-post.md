@@ -13,7 +13,8 @@ Benvenuto nel mio diario. Questo è il secondo post di prova per verificare che 
 
 ### Inseriro' delle immagini
 
-Questa e' una foto di esempio
+Questa e' una foto di esempio 
+
 
 ![Gumball foto di prova](https://res.cloudinary.com/nhuws9fe/image/upload/v1783376711/GumballTest_bitivy.jpg)
 
@@ -32,4 +33,4 @@ func main() {
 {{< /highlight >}}
 
 
-{{< instagram CMHmnMiBLQR >}}
+{{< instagram id=DZsBp0LjcFd hideCaption=true >}}
