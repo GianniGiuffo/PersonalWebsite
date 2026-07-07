@@ -1,13 +1,12 @@
 {{/*
   Shortcode: annotation
-  Uso: {{< annotation >}}Testo dell'annotazione{{< /annotation >}}
+  Uso: {{< annotation >}}Testo nota{{< /annotation >}}
 
-  Posiziona una nota marginale ancorata a destra del body del post,
-  all'altezza esatta in cui viene inserita nel markdown.
+  Su desktop: nota marginale a destra del body, all'altezza del punto in cui è inserita.
+  Su mobile:  asterisco cliccabile che mostra la nota in un popup nativo del browser.
 */}}
-<span class="annotation-anchor" aria-hidden="true">
-  <span class="annotation-note">
-    <span class="annotation-asterisk">*</span>
-    {{ .Inner | markdownify }}
-  </span>
+{{- $text := .Inner | markdownify | plainify -}}
+<span class="annotation-wrap">
+  <span class="annotation-marker" title="{{ $text }}" role="note" tabindex="0" aria-label="Annotazione: {{ $text }}">*</span>
+  <span class="annotation-note" aria-hidden="true">{{ .Inner | markdownify }}</span>
 </span>

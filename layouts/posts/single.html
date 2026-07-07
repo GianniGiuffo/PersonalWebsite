@@ -1,5 +1,6 @@
 {{ define "main" }}
-<div class="max-w-2xl mx-auto px-4 py-12">
+<!-- post-content-outer è il containing block per le annotation-note -->
+<div class="post-content-outer relative" style="max-width: 42rem; margin-inline: auto; padding: 3rem 1rem;">
 
   <!-- Back link -->
   <div class="mb-8">
@@ -27,8 +28,10 @@
     </div>
   </header>
 
-  <!-- Content — position:relative permette alle annotation-note di ancorarsi lateralmente -->
-  <div class="prose prose-slate dark:prose-invert max-w-none" style="position: relative; overflow: visible;">
+  <!-- Content -->
+  <!-- overflow:visible è fondamentale: permette alle note di uscire
+       lateralmente senza essere clippate dal contenitore. -->
+  <div class="prose prose-slate dark:prose-invert max-w-none" style="overflow: visible;">
     {{ .Content }}
   </div>
 
