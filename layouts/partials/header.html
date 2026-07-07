@@ -14,56 +14,35 @@
 
       <!-- Navigazione principale -->
       <nav class="flex items-center gap-1">
-
         {{ $isHome := .IsHome }}
         {{ $section := .Section }}
-        {{ $permalink := .RelPermalink }}
 
-        {{/* Home */}}
         {{ $homeActive := $isHome }}
         <a href="/"
            class="relative px-3 py-1.5 rounded-md text-sm transition-colors
-                  {{ if $homeActive }}
-                    font-semibold text-teal-700 dark:text-teal-400
-                  {{ else }}
-                    font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800
-                  {{ end }}">
+                  {{ if $homeActive }}font-semibold text-teal-700 dark:text-teal-400
+                  {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
           Home
-          {{ if $homeActive }}
-            <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>
-          {{ end }}
+          {{ if $homeActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
         </a>
 
-        {{/* Posts */}}
         {{ $postsActive := eq $section "posts" }}
         <a href="/posts/"
            class="relative px-3 py-1.5 rounded-md text-sm transition-colors
-                  {{ if $postsActive }}
-                    font-semibold text-teal-700 dark:text-teal-400
-                  {{ else }}
-                    font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800
-                  {{ end }}">
+                  {{ if $postsActive }}font-semibold text-teal-700 dark:text-teal-400
+                  {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
           Posts
-          {{ if $postsActive }}
-            <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>
-          {{ end }}
+          {{ if $postsActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
         </a>
 
-        {{/* Projects */}}
         {{ $projectsActive := eq $section "projects" }}
         <a href="/projects/"
            class="relative px-3 py-1.5 rounded-md text-sm transition-colors
-                  {{ if $projectsActive }}
-                    font-semibold text-teal-700 dark:text-teal-400
-                  {{ else }}
-                    font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800
-                  {{ end }}">
+                  {{ if $projectsActive }}font-semibold text-teal-700 dark:text-teal-400
+                  {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
           Projects
-          {{ if $projectsActive }}
-            <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>
-          {{ end }}
+          {{ if $projectsActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
         </a>
-
       </nav>
     </div>
 
@@ -71,50 +50,37 @@
     <div class="flex items-center gap-2">
 
       <!-- Bottone Ricerca -->
-      <button id="search-btn"
-              aria-label="Cerca"
+      <button id="search-btn" aria-label="Cerca"
               class="w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"/>
-          <path d="m21 21-4.35-4.35"/>
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
       </button>
 
-      <!-- Avatar rotondo → pagina profilo -->
+      <!-- Avatar -->
       {{ $aboutActive := eq $section "about" }}
       <a href="/about/"
          class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden transition-all
-                {{ if $aboutActive }}
-                  ring-2 ring-teal-500 dark:ring-teal-400
-                {{ else }}
-                  ring-2 ring-slate-200 dark:ring-slate-700 hover:ring-teal-500 dark:hover:ring-teal-400
-                {{ end }}"
+                {{ if $aboutActive }}ring-2 ring-teal-500 dark:ring-teal-400
+                {{ else }}ring-2 ring-slate-200 dark:ring-slate-700 hover:ring-teal-500 dark:hover:ring-teal-400{{ end }}"
          aria-label="Profilo">
         <img src="https://res.cloudinary.com/nhuws9fe/image/upload/v1783375318/Tom_m8knp0.jpg"
-             alt="Tommaso Francescon"
-             width="32" height="32"
-             class="w-full h-full object-cover"
+             alt="Tommaso Francescon" width="32" height="32" class="w-full h-full object-cover"
              onerror="this.onerror=null;this.src='';this.parentElement.innerHTML='<span class=&quot;w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center text-white text-xs font-bold&quot;>TF</span>'">
       </a>
 
-      <!-- Bottone Contatti -->
+      <!-- Contatti -->
       {{ $contactActive := eq $section "contact" }}
       <a href="/contact/"
          class="relative px-3 py-1.5 rounded-md text-sm transition-colors
-                {{ if $contactActive }}
-                  font-semibold text-teal-700 dark:text-teal-400
-                {{ else }}
-                  font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800
-                {{ end }}">
+                {{ if $contactActive }}font-semibold text-teal-700 dark:text-teal-400
+                {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
         Contatti
-        {{ if $contactActive }}
-          <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>
-        {{ end }}
+        {{ if $contactActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
       </a>
 
-      <!-- Toggle tema chiaro/scuro -->
-      <button id="theme-toggle"
-              aria-label="Cambia tema"
+      <!-- Toggle tema -->
+      <button id="theme-toggle" aria-label="Cambia tema"
               class="w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
         <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
           <circle cx="12" cy="12" r="4"/>
@@ -125,187 +91,157 @@
         </svg>
       </button>
     </div>
-
   </div>
 </header>
 
 <!-- Search Popup Overlay -->
 <div id="search-overlay"
-     role="dialog"
-     aria-modal="true"
-     aria-label="Cerca nel sito"
+     role="dialog" aria-modal="true" aria-label="Cerca nel sito"
      style="display:none; position:fixed; inset:0; z-index:100; background:rgba(0,0,0,0.4); backdrop-filter:blur(4px); align-items:flex-start; justify-content:center; padding-top:6rem;">
   <div id="search-box"
        style="width:100%; max-width:32rem; margin:0 1rem; border-radius:0.75rem; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
-    <!-- Input -->
-    <div style="display:flex; align-items:center; gap:0.5rem; padding:0.75rem 1rem; border-bottom-width:1px;" id="search-input-row">
+    <div id="search-input-row"
+         style="display:flex; align-items:center; gap:0.5rem; padding:0.75rem 1rem; border-bottom:1px solid transparent;">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; opacity:0.5;" aria-hidden="true">
-        <circle cx="11" cy="11" r="8"/>
-        <path d="m21 21-4.35-4.35"/>
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
       </svg>
-      <input id="search-input"
-             type="search"
-             placeholder="Cerca per titolo…"
-             autocomplete="off"
+      <input id="search-input" type="search" placeholder="Cerca per titolo…" autocomplete="off"
              style="flex:1; background:transparent; border:none; outline:none; font-size:1rem; padding:0;">
-      <kbd style="font-size:0.7rem; padding:0.15rem 0.4rem; border-radius:0.25rem; border-width:1px; opacity:0.5;">Esc</kbd>
+      <kbd style="font-size:0.7rem; padding:0.15rem 0.4rem; border-radius:0.25rem; border:1px solid; opacity:0.5;">Esc</kbd>
     </div>
-    <!-- Risultati -->
     <ul id="search-results" role="listbox" style="list-style:none; margin:0; padding:0.5rem; max-height:24rem; overflow-y:auto;"></ul>
-    <!-- Empty state -->
     <p id="search-empty" style="display:none; padding:2rem 1rem; text-align:center; font-size:0.875rem; opacity:0.5;">Nessun risultato trovato.</p>
   </div>
 </div>
 
 <script>
-  (function() {
-    /* ── Theme toggle ── */
-    const btn   = document.getElementById('theme-toggle');
-    const sun   = document.getElementById('icon-sun');
-    const moon  = document.getElementById('icon-moon');
-    const html  = document.documentElement;
+(function () {
+  var html        = document.documentElement;
 
-    function applyTheme(theme) {
-      if (theme === 'dark') {
-        html.classList.add('dark');
-        html.setAttribute('data-theme', 'dark');
-        sun.classList.remove('hidden');
-        moon.classList.add('hidden');
-      } else {
-        html.classList.remove('dark');
-        html.setAttribute('data-theme', 'light');
-        sun.classList.add('hidden');
-        moon.classList.remove('hidden');
+  /* ── Tutti i riferimenti DOM dichiarati prima di qualsiasi uso ── */
+  var toggleBtn   = document.getElementById('theme-toggle');
+  var sun         = document.getElementById('icon-sun');
+  var moon        = document.getElementById('icon-moon');
+  var searchBtn   = document.getElementById('search-btn');
+  var overlay     = document.getElementById('search-overlay');
+  var box         = document.getElementById('search-box');
+  var input       = document.getElementById('search-input');
+  var resultsList = document.getElementById('search-results');
+  var emptyMsg    = document.getElementById('search-empty');
+  var inputRow    = document.getElementById('search-input-row');
+
+  var allPages   = [];
+  var indexLoaded = false;
+
+  /* ── Search theme ── */
+  function applySearchTheme() {
+    var dark = html.classList.contains('dark');
+    box.style.background        = dark ? '#1e293b' : '#ffffff';
+    box.style.color             = dark ? '#f1f5f9' : '#0f172a';
+    inputRow.style.borderColor  = dark ? '#334155' : '#e2e8f0';
+    input.style.color           = dark ? '#f1f5f9' : '#0f172a';
+    input.style.caretColor      = dark ? '#f1f5f9' : '#0f172a';
+  }
+
+  /* ── Theme toggle ── */
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      html.classList.add('dark');
+      html.setAttribute('data-theme', 'dark');
+      sun.classList.remove('hidden');
+      moon.classList.add('hidden');
+    } else {
+      html.classList.remove('dark');
+      html.setAttribute('data-theme', 'light');
+      sun.classList.add('hidden');
+      moon.classList.remove('hidden');
+    }
+    localStorage.setItem('theme', theme);
+    applySearchTheme();
+  }
+
+  applyTheme(html.getAttribute('data-theme') || 'light');
+
+  toggleBtn.addEventListener('click', function () {
+    applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  /* ── Search index ── */
+  function loadIndex() {
+    if (indexLoaded) return;
+    fetch('/index.json')
+      .then(function (r) { return r.json(); })
+      .then(function (data) { allPages = data; indexLoaded = true; })
+      .catch(function () {});
+  }
+
+  /* ── Open / close ── */
+  function openSearch() {
+    applySearchTheme();
+    overlay.style.display = 'flex';
+    input.value = '';
+    resultsList.innerHTML = '';
+    emptyMsg.style.display = 'none';
+    setTimeout(function () { input.focus(); }, 50);
+    loadIndex();
+  }
+
+  function closeSearch() {
+    overlay.style.display = 'none';
+  }
+
+  searchBtn.addEventListener('click', openSearch);
+
+  overlay.addEventListener('click', function (e) {
+    if (!box.contains(e.target)) closeSearch();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeSearch(); return; }
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+  });
+
+  /* ── Filtering ── */
+  input.addEventListener('input', function () {
+    var query = input.value.trim().toLowerCase();
+    resultsList.innerHTML = '';
+    emptyMsg.style.display = 'none';
+    if (!query) return;
+
+    var dark = html.classList.contains('dark');
+    var matches = allPages.filter(function (p) {
+      return p.title && p.title.toLowerCase().indexOf(query) !== -1;
+    }).slice(0, 8);
+
+    if (matches.length === 0) { emptyMsg.style.display = 'block'; return; }
+
+    matches.forEach(function (page) {
+      var li = document.createElement('li');
+      var a  = document.createElement('a');
+      a.href = page.permalink;
+      a.style.cssText = 'display:flex;flex-direction:column;gap:0.15rem;padding:0.6rem 0.75rem;border-radius:0.5rem;text-decoration:none;transition:background 0.15s;color:inherit;';
+      a.onmouseover = function () { a.style.background = dark ? '#334155' : '#f1f5f9'; };
+      a.onmouseout  = function () { a.style.background = 'transparent'; };
+
+      var titleEl = document.createElement('span');
+      titleEl.style.cssText = 'font-size:0.9rem;font-weight:500;';
+      titleEl.textContent = page.title;
+
+      a.appendChild(titleEl);
+
+      if (page.section) {
+        var meta = document.createElement('span');
+        meta.style.cssText = 'font-size:0.75rem;opacity:0.5;';
+        meta.textContent = page.section;
+        a.appendChild(meta);
       }
-      localStorage.setItem('theme', theme);
-      applySearchTheme();
-    }
 
-    const current = html.getAttribute('data-theme') || 'light';
-    applyTheme(current);
-
-    btn.addEventListener('click', function() {
-      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      li.appendChild(a);
+      resultsList.appendChild(li);
     });
-
-    /* ── Search popup ── */
-    const searchBtn     = document.getElementById('search-btn');
-    const overlay       = document.getElementById('search-overlay');
-    const box           = document.getElementById('search-box');
-    const input         = document.getElementById('search-input');
-    const resultsList   = document.getElementById('search-results');
-    const emptyMsg      = document.getElementById('search-empty');
-    const inputRow      = document.getElementById('search-input-row');
-
-    // Fetch del search index generato da Hugo
-    let allPages = [];
-    let indexLoaded = false;
-
-    function loadIndex() {
-      if (indexLoaded) return;
-      fetch('/index.json')
-        .then(function(r){ return r.json(); })
-        .then(function(data){
-          allPages = data;
-          indexLoaded = true;
-        })
-        .catch(function(){});
-    }
-
-    function applySearchTheme() {
-      const dark = html.classList.contains('dark');
-      if (!box) return;
-      box.style.background     = dark ? '#1e293b' : '#ffffff';
-      box.style.color           = dark ? '#f1f5f9' : '#0f172a';
-      box.style.borderColor     = dark ? '#334155' : '#e2e8f0';
-      inputRow.style.borderColor = dark ? '#334155' : '#e2e8f0';
-      if (input) {
-        input.style.color = dark ? '#f1f5f9' : '#0f172a';
-        input.style.caretColor = dark ? '#f1f5f9' : '#0f172a';
-      }
-    }
-
-    function openSearch() {
-      applySearchTheme();
-      overlay.style.display = 'flex';
-      input.value = '';
-      resultsList.innerHTML = '';
-      emptyMsg.style.display = 'none';
-      setTimeout(function(){ input.focus(); }, 50);
-      loadIndex();
-    }
-
-    function closeSearch() {
-      overlay.style.display = 'none';
-    }
-
-    searchBtn.addEventListener('click', openSearch);
-
-    overlay.addEventListener('click', function(e) {
-      if (!box.contains(e.target)) closeSearch();
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeSearch();
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        openSearch();
-      }
-    });
-
-    input.addEventListener('input', function() {
-      const query = input.value.trim().toLowerCase();
-      resultsList.innerHTML = '';
-      emptyMsg.style.display = 'none';
-
-      if (!query) return;
-
-      const dark = html.classList.contains('dark');
-      const matches = allPages.filter(function(p) {
-        return p.title && p.title.toLowerCase().includes(query);
-      }).slice(0, 8);
-
-      if (matches.length === 0) {
-        emptyMsg.style.display = 'block';
-        return;
-      }
-
-      matches.forEach(function(page) {
-        const li = document.createElement('li');
-        li.setAttribute('role', 'option');
-        li.style.cssText = 'list-style:none;';
-        const a = document.createElement('a');
-        a.href = page.permalink;
-        a.style.cssText = [
-          'display:flex',
-          'flex-direction:column',
-          'gap:0.15rem',
-          'padding:0.6rem 0.75rem',
-          'border-radius:0.5rem',
-          'text-decoration:none',
-          'transition:background 0.15s',
-          'color:inherit',
-        ].join(';');
-        a.addEventListener('mouseover', function(){
-          a.style.background = dark ? '#334155' : '#f1f5f9';
-        });
-        a.addEventListener('mouseout', function(){
-          a.style.background = 'transparent';
-        });
-
-        const title = document.createElement('span');
-        title.style.cssText = 'font-size:0.9rem; font-weight:500;';
-        title.textContent = page.title;
-
-        const meta = document.createElement('span');
-        meta.style.cssText = 'font-size:0.75rem; opacity:0.5;';
-        meta.textContent = page.section || '';
-
-        a.appendChild(title);
-        if (page.section) a.appendChild(meta);
-        li.appendChild(a);
-        resultsList.appendChild(li);
-      });
-    });
-  })();
+  });
+})();
 </script>
