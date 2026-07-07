@@ -4,32 +4,3 @@
 @import "./annotations.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
-
-/* ── Sfondo globale del sito ── */
-.site-bg {
-  background-image: url('https://res.cloudinary.com/nhuws9fe/image/upload/v1783457930/BackgroundForWebsite_cc93zo.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-
-.dark .site-bg,
-:where(.dark) .site-bg,
-.dark body,
-body.dark {
-  background-image: url('https://res.cloudinary.com/nhuws9fe/image/upload/v1783457931/Progetto_senza_titolo_y8h5nx.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-
-/* Quando e' dark il body stesso deve cambiare sfondo */
-html.dark body {
-  background-image: url('https://res.cloudinary.com/nhuws9fe/image/upload/v1783457931/Progetto_senza_titolo_y8h5nx.png') !important;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
