@@ -3,53 +3,44 @@
 
     <!-- Sinistra: logo + navigazione -->
     <div class="flex items-center gap-6">
-
-      <!-- Logo -->
       <a href="/" aria-label="Homepage" class="flex-shrink-0 hover:opacity-80 transition-opacity">
         <img src="https://res.cloudinary.com/nhuws9fe/image/upload/v1783374914/Logo_ewohcb.jpg"
-             alt="Logo Tommaso Francescon"
-             width="32" height="32"
-             class="h-8 w-auto">
+             alt="Logo Tommaso Francescon" width="32" height="32" class="h-8 w-auto">
       </a>
 
-      <!-- Navigazione principale -->
       <nav class="flex items-center gap-1">
         {{ $isHome := .IsHome }}
         {{ $section := .Section }}
 
         {{ $homeActive := $isHome }}
-        <a href="/"
-           class="relative px-3 py-1.5 rounded-md text-sm transition-colors
-                  {{ if $homeActive }}font-semibold text-teal-700 dark:text-teal-400
-                  {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
+        <a href="/" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
+           {{ if $homeActive }}font-semibold text-teal-700 dark:text-teal-400
+           {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
           Home
           {{ if $homeActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
         </a>
 
         {{ $postsActive := eq $section "posts" }}
-        <a href="/posts/"
-           class="relative px-3 py-1.5 rounded-md text-sm transition-colors
-                  {{ if $postsActive }}font-semibold text-teal-700 dark:text-teal-400
-                  {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
+        <a href="/posts/" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
+           {{ if $postsActive }}font-semibold text-teal-700 dark:text-teal-400
+           {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
           Posts
           {{ if $postsActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
         </a>
 
         {{ $projectsActive := eq $section "projects" }}
-        <a href="/projects/"
-           class="relative px-3 py-1.5 rounded-md text-sm transition-colors
-                  {{ if $projectsActive }}font-semibold text-teal-700 dark:text-teal-400
-                  {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
+        <a href="/projects/" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
+           {{ if $projectsActive }}font-semibold text-teal-700 dark:text-teal-400
+           {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
           Projects
           {{ if $projectsActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
         </a>
       </nav>
     </div>
 
-    <!-- Destra: ricerca, avatar, contatti, tema -->
+    <!-- Destra -->
     <div class="flex items-center gap-2">
 
-      <!-- Bottone Ricerca -->
       <button id="search-btn" aria-label="Cerca"
               class="w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -57,7 +48,6 @@
         </svg>
       </button>
 
-      <!-- Avatar -->
       {{ $aboutActive := eq $section "about" }}
       <a href="/about/"
          class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden transition-all
@@ -69,17 +59,14 @@
              onerror="this.onerror=null;this.src='';this.parentElement.innerHTML='<span class=&quot;w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center text-white text-xs font-bold&quot;>TF</span>'">
       </a>
 
-      <!-- Contatti -->
       {{ $contactActive := eq $section "contact" }}
-      <a href="/contact/"
-         class="relative px-3 py-1.5 rounded-md text-sm transition-colors
-                {{ if $contactActive }}font-semibold text-teal-700 dark:text-teal-400
-                {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
+      <a href="/contact/" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
+         {{ if $contactActive }}font-semibold text-teal-700 dark:text-teal-400
+         {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
         Contatti
         {{ if $contactActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
       </a>
 
-      <!-- Toggle tema -->
       <button id="theme-toggle" aria-label="Cambia tema"
               class="w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
         <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
@@ -94,31 +81,46 @@
   </div>
 </header>
 
+<!-- Animazione slide-down per il box -->
+<style>
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#search-box {
+  animation: none;
+}
+#search-box.is-open {
+  animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
+
 <!-- Search Popup Overlay -->
 <div id="search-overlay"
      role="dialog" aria-modal="true" aria-label="Cerca nel sito"
-     style="display:none; position:fixed; inset:0; z-index:100; background:rgba(0,0,0,0.4); backdrop-filter:blur(4px); align-items:flex-start; justify-content:center; padding-top:6rem;">
+     style="display:none; position:fixed; inset:0; z-index:100; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); align-items:flex-start; justify-content:center; padding-top:6rem;">
   <div id="search-box"
-       style="width:100%; max-width:32rem; margin:0 1rem; border-radius:0.75rem; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+       style="width:100%; max-width:32rem; margin:0 1rem; border-radius:0.75rem; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.35);">
     <div id="search-input-row"
          style="display:flex; align-items:center; gap:0.5rem; padding:0.75rem 1rem; border-bottom:1px solid transparent;">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; opacity:0.5;" aria-hidden="true">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
       </svg>
-      <input id="search-input" type="search" placeholder="Cerca per titolo…" autocomplete="off"
+      <input id="search-input" type="search" placeholder="Cerca nel sito…" autocomplete="off"
              style="flex:1; background:transparent; border:none; outline:none; font-size:1rem; padding:0;">
-      <kbd style="font-size:0.7rem; padding:0.15rem 0.4rem; border-radius:0.25rem; border:1px solid; opacity:0.5;">Esc</kbd>
+      <kbd style="font-size:0.7rem; padding:0.15rem 0.4rem; border-radius:0.25rem; border:1px solid; opacity:0.5;">esc</kbd>
     </div>
     <ul id="search-results" role="listbox" style="list-style:none; margin:0; padding:0.5rem; max-height:24rem; overflow-y:auto;"></ul>
-    <p id="search-empty" style="display:none; padding:2rem 1rem; text-align:center; font-size:0.875rem; opacity:0.5;">Nessun risultato trovato.</p>
+    <!-- Hint di default (input vuoto) -->
+    <p id="search-hint" style="padding:1.5rem 1rem; text-align:center; font-size:0.875rem; opacity:0.45;">Scrivi, usa le frecce, premi INVIO.</p>
+    <!-- Nessun risultato -->
+    <p id="search-empty" style="display:none; padding:1.5rem 1rem; text-align:center; font-size:0.875rem; opacity:0.45;">Nessun risultato trovato.</p>
   </div>
 </div>
 
 <script>
 (function () {
   var html        = document.documentElement;
-
-  /* ── Tutti i riferimenti DOM dichiarati prima di qualsiasi uso ── */
   var toggleBtn   = document.getElementById('theme-toggle');
   var sun         = document.getElementById('icon-sun');
   var moon        = document.getElementById('icon-moon');
@@ -128,19 +130,20 @@
   var input       = document.getElementById('search-input');
   var resultsList = document.getElementById('search-results');
   var emptyMsg    = document.getElementById('search-empty');
+  var hintMsg     = document.getElementById('search-hint');
   var inputRow    = document.getElementById('search-input-row');
-
-  var allPages   = [];
+  var allPages    = [];
   var indexLoaded = false;
+  var selectedIdx = -1;
 
   /* ── Search theme ── */
   function applySearchTheme() {
     var dark = html.classList.contains('dark');
-    box.style.background        = dark ? '#1e293b' : '#ffffff';
-    box.style.color             = dark ? '#f1f5f9' : '#0f172a';
-    inputRow.style.borderColor  = dark ? '#334155' : '#e2e8f0';
-    input.style.color           = dark ? '#f1f5f9' : '#0f172a';
-    input.style.caretColor      = dark ? '#f1f5f9' : '#0f172a';
+    box.style.background       = dark ? '#1e293b' : '#ffffff';
+    box.style.color            = dark ? '#f1f5f9' : '#0f172a';
+    inputRow.style.borderColor = dark ? '#334155' : '#e2e8f0';
+    input.style.color          = dark ? '#f1f5f9' : '#0f172a';
+    input.style.caretColor     = dark ? '#f1f5f9' : '#0f172a';
   }
 
   /* ── Theme toggle ── */
@@ -161,12 +164,11 @@
   }
 
   applyTheme(html.getAttribute('data-theme') || 'light');
-
   toggleBtn.addEventListener('click', function () {
     applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
 
-  /* ── Search index ── */
+  /* ── Index ── */
   function loadIndex() {
     if (indexLoaded) return;
     fetch('/index.json')
@@ -179,37 +181,65 @@
   function openSearch() {
     applySearchTheme();
     overlay.style.display = 'flex';
+    /* slide animation: remove and re-add class */
+    box.classList.remove('is-open');
+    void box.offsetWidth; /* reflow */
+    box.classList.add('is-open');
     input.value = '';
     resultsList.innerHTML = '';
     emptyMsg.style.display = 'none';
+    hintMsg.style.display  = 'block';
+    selectedIdx = -1;
     setTimeout(function () { input.focus(); }, 50);
     loadIndex();
   }
 
   function closeSearch() {
     overlay.style.display = 'none';
+    box.classList.remove('is-open');
   }
 
   searchBtn.addEventListener('click', openSearch);
-
   overlay.addEventListener('click', function (e) {
     if (!box.contains(e.target)) closeSearch();
   });
 
+  /* ── Keyboard shortcuts ── */
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { closeSearch(); return; }
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-      e.preventDefault();
-      openSearch();
+      e.preventDefault(); openSearch(); return;
+    }
+    /* Arrow navigation inside open popup */
+    if (overlay.style.display === 'flex') {
+      var items = resultsList.querySelectorAll('a');
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        selectedIdx = Math.min(selectedIdx + 1, items.length - 1);
+        if (items[selectedIdx]) items[selectedIdx].focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        selectedIdx = Math.max(selectedIdx - 1, -1);
+        if (selectedIdx === -1) { input.focus(); }
+        else if (items[selectedIdx]) items[selectedIdx].focus();
+      } else if (e.key === 'Enter' && document.activeElement === input) {
+        e.preventDefault();
+        runSearch(input.value.trim().toLowerCase());
+      }
     }
   });
 
-  /* ── Filtering ── */
-  input.addEventListener('input', function () {
-    var query = input.value.trim().toLowerCase();
+  /* ── Search logic ── */
+  function runSearch(query) {
     resultsList.innerHTML = '';
     emptyMsg.style.display = 'none';
-    if (!query) return;
+    hintMsg.style.display  = 'none';
+    selectedIdx = -1;
+
+    if (!query) {
+      hintMsg.style.display = 'block';
+      return;
+    }
 
     var dark = html.classList.contains('dark');
     var matches = allPages.filter(function (p) {
@@ -222,14 +252,15 @@
       var li = document.createElement('li');
       var a  = document.createElement('a');
       a.href = page.permalink;
-      a.style.cssText = 'display:flex;flex-direction:column;gap:0.15rem;padding:0.6rem 0.75rem;border-radius:0.5rem;text-decoration:none;transition:background 0.15s;color:inherit;';
+      a.style.cssText = 'display:flex;flex-direction:column;gap:0.15rem;padding:0.6rem 0.75rem;border-radius:0.5rem;text-decoration:none;transition:background 0.12s;color:inherit;';
       a.onmouseover = function () { a.style.background = dark ? '#334155' : '#f1f5f9'; };
       a.onmouseout  = function () { a.style.background = 'transparent'; };
+      a.onfocus     = function () { a.style.background = dark ? '#334155' : '#f1f5f9'; };
+      a.onblur      = function () { a.style.background = 'transparent'; };
 
       var titleEl = document.createElement('span');
       titleEl.style.cssText = 'font-size:0.9rem;font-weight:500;';
       titleEl.textContent = page.title;
-
       a.appendChild(titleEl);
 
       if (page.section) {
@@ -242,6 +273,11 @@
       li.appendChild(a);
       resultsList.appendChild(li);
     });
+  }
+
+  /* Live search mentre si scrive */
+  input.addEventListener('input', function () {
+    runSearch(input.value.trim().toLowerCase());
   });
 })();
 </script>
