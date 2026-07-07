@@ -1,19 +1,31 @@
 /* ==============================================
    Annotation shortcode
-   La .annotation-note usa position:fixed con
-   left calcolato come:
-     50vw + (meta larghezza post) + gap
-   Il post ha max-w-2xl = 42rem = 672px.
-   Quindi il bordo destro del post e' a:
-     50vw + 336px
-   E la nota parte da li' + 1.5rem di gap.
-   Il top usa una variabile CSS settata via JS
-   per seguire l'altezza dell'ancora nel documento.
+
+   Struttura HTML della pagina post:
+     <div class="post-outer">          <- fullwidth, position:relative
+       <div class="max-w-2xl ...">    <- corpo centrato, 672px
+         <div class="prose ...">
+           ...testo...
+           <span class="annotation-wrap">
+             <button class="annotation-marker">*</button>
+             <span class="annotation-note">...</span>
+           </span>
+         </div>
+       </div>
+     </div>
+
+   La .annotation-note usa position:absolute
+   con left calcolato come:
+     50% (meta' di .post-outer, cioe' meta' pagina)
+     + 336px (meta' del post body max-w-2xl)
+     + 1.5rem (gap)
+   Questo la porta nello spazio scuro a destra,
+   e scorre con il documento come il testo.
    ============================================== */
 
 .annotation-wrap {
-  position: relative;
   display: inline;
+  position: static;
 }
 
 /* Asterisco superscript inline */
@@ -30,25 +42,29 @@
   margin: 0;
   cursor: default;
   font-family: inherit;
+  user-select: none;
 }
 
 .dark .annotation-marker {
   color: #64748b;
 }
 
-/* La nota e' fixed rispetto alla viewport,
-   posizionata a destra del post body.
-   top e' gestito inline dallo script sotto. */
+/* La nota e' absolute rispetto a .post-outer (fullwidth).
+   left: calc(50% + 336px + 1.5rem)
+     50%    = meta' larghezza di .post-outer = meta' pagina
+     336px  = meta' di max-w-2xl (672px / 2)
+     1.5rem = gap tra bordo post e nota
+   top: viene impostato inline dallo script per
+        allinearsi verticalmente al marker. */
 .annotation-note {
-  position: fixed;
-  left: calc(50vw + 336px + 1.5rem);
+  position: absolute;
+  left: calc(50% + 336px + 1.5rem);
   width: 180px;
   font-size: 0.78rem;
   line-height: 1.5;
   color: #94a3b8;
   pointer-events: none;
   white-space: normal;
-  /* top viene impostato dall'attributo style inline via JS */
 }
 
 .dark .annotation-note {
@@ -56,7 +72,7 @@
 }
 
 /* Mobile: nascondi la nota floating,
-   rendi il marker cliccabile */
+   rendi il marker un pulsante cliccabile */
 @media (max-width: 900px) {
   .annotation-note {
     display: none;
@@ -64,6 +80,5 @@
   .annotation-marker {
     cursor: pointer;
     text-decoration: underline dotted;
-    color: #94a3b8;
   }
 }

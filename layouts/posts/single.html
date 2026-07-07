@@ -1,4 +1,7 @@
 {{ define "main" }}
+{{/* post-outer e' fullwidth con position:relative:
+     e' il containing block per le annotation-note absolute. */}}
+<div class="post-outer" style="position: relative; width: 100%;">
 <div class="max-w-2xl mx-auto px-4 py-12">
 
   <!-- Back link -->
@@ -53,25 +56,32 @@
   </div>
 
 </div>
+</div>
 
 <script>
-// Per ogni annotation-note, imposta il top in base alla posizione
-// del suo marker fratello nel documento (coordinata Y rispetto alla viewport).
-function positionAnnotations() {
-  document.querySelectorAll('.annotation-wrap').forEach(function(wrap) {
-    var marker = wrap.querySelector('.annotation-marker');
-    var note   = wrap.querySelector('.annotation-note');
-    if (!marker || !note) return;
-    var rect = marker.getBoundingClientRect();
-    note.style.top = (rect.top + window.scrollY) + 'px';
-  });
-}
+(function () {
+  function positionAnnotations() {
+    var outer = document.querySelector('.post-outer');
+    if (!outer) return;
+    var outerRect = outer.getBoundingClientRect();
+    var scrollY = window.scrollY || window.pageYOffset;
 
-// Ricalcola al caricamento e al resize
-document.addEventListener('DOMContentLoaded', positionAnnotations);
-window.addEventListener('resize', positionAnnotations);
-// Ricalcola anche dopo eventuali immagini caricate (cambiano l'altezza)
-window.addEventListener('load', positionAnnotations);
+    document.querySelectorAll('.annotation-wrap').forEach(function (wrap) {
+      var marker = wrap.querySelector('.annotation-marker');
+      var note   = wrap.querySelector('.annotation-note');
+      if (!marker || !note) return;
+
+      var markerRect = marker.getBoundingClientRect();
+      // top relativo a .post-outer (absolute positioning)
+      var topRelativeToOuter = (markerRect.top + scrollY) - (outerRect.top + scrollY);
+      note.style.top = topRelativeToOuter + 'px';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', positionAnnotations);
+  window.addEventListener('load', positionAnnotations);
+  window.addEventListener('resize', positionAnnotations);
+})();
 </script>
 
 {{ end }}
