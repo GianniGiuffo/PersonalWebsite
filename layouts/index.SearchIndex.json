@@ -1,1 +1,1 @@
-{{- $pages := where .Site.RegularPages "Title" "ne" "" -}}{{- $result := slice -}}{{- range $pages -}}{{- $result = $result | append (dict "title" .Title "permalink" .Permalink "section" .Section) -}}{{- end -}}{{- $result | jsonify -}}
+{{- $pages := where .Site.RegularPages "Title" "ne" "" -}}{{- $result := slice -}}{{- range $pages -}}{{- $item := dict "title" .Title "permalink" .Permalink "section" .Section "date" (.Date.Format "2006-01-02") -}}{{- $result = $result | append $item -}}{{- end -}}{{- $result | jsonify -}}
