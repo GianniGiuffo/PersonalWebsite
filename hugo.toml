@@ -2,6 +2,9 @@ baseURL = 'https://personalwebsite-gg.netlify.app/'
 languageCode = 'it-it'
 title = 'Tommaso Francescon'
 
+[outputs]
+  home = ['HTML', 'JSON']
+
 [build]
   [build.buildStats]
     enable = true
