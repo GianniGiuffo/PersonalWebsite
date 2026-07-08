@@ -14,6 +14,8 @@ Benvenuto nel mio diario. Questo è il secondo post di prova per verificare che 
 ### Inseriro' delle immagini
 
 Questa e' una foto di esempio 
+{{< annotation >}} Questo e' un esempio di annotazione
+{{< /annotation >}}
 
 
 ![Gumball foto di prova](https://res.cloudinary.com/nhuws9fe/image/upload/v1783376711/GumballTest_bitivy.jpg)

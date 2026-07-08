@@ -5,6 +5,11 @@ title = 'Tommaso Francescon'
 [outputs]
   home = ['HTML', 'RSS', 'JSON']
 
+[outputFormats.JSON]
+  baseName = "index"
+  isPlainText = true
+  mediaType = "application/json"
+
 [build]
   [build.buildStats]
     enable = true
