@@ -111,9 +111,7 @@
       <kbd style="font-size:0.7rem; padding:0.15rem 0.4rem; border-radius:0.25rem; border:1px solid; opacity:0.5;">esc</kbd>
     </div>
     <ul id="search-results" role="listbox" style="list-style:none; margin:0; padding:0.5rem; max-height:24rem; overflow-y:auto;"></ul>
-    <!-- Hint di default (input vuoto) -->
     <p id="search-hint" style="padding:1.5rem 1rem; text-align:center; font-size:0.875rem; opacity:0.45;">Scrivi, usa le frecce, premi INVIO.</p>
-    <!-- Nessun risultato -->
     <p id="search-empty" style="display:none; padding:1.5rem 1rem; text-align:center; font-size:0.875rem; opacity:0.45;">Nessun risultato trovato.</p>
   </div>
 </div>
@@ -168,12 +166,37 @@
     applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
 
-  /* ── Index ── */
+  /* ── Load index from RSS XML ── */
   function loadIndex() {
     if (indexLoaded) return;
-    fetch('/index.json')
-      .then(function (r) { return r.json(); })
-      .then(function (data) { allPages = data; indexLoaded = true; })
+    fetch('/index.xml')
+      .then(function (r) { return r.text(); })
+      .then(function (text) {
+        var parser = new DOMParser();
+        var xml    = parser.parseFromString(text, 'application/xml');
+        var items  = xml.querySelectorAll('item');
+        allPages   = [];
+        items.forEach(function (item) {
+          var title = item.querySelector('title');
+          var link  = item.querySelector('link');
+          /* <link> in RSS is a text node after the element, use textContent */
+          var permalink = link ? (link.textContent || link.getAttribute('href') || '') : '';
+          /* derive section from URL path segment */
+          var section = '';
+          try {
+            var parts = new URL(permalink).pathname.replace(/^\//, '').split('/');
+            if (parts.length > 1) section = parts[0];
+          } catch (e) {}
+          if (title && title.textContent) {
+            allPages.push({
+              title:     title.textContent,
+              permalink: permalink,
+              section:   section
+            });
+          }
+        });
+        indexLoaded = true;
+      })
       .catch(function () {});
   }
 
@@ -181,9 +204,8 @@
   function openSearch() {
     applySearchTheme();
     overlay.style.display = 'flex';
-    /* slide animation: remove and re-add class */
     box.classList.remove('is-open');
-    void box.offsetWidth; /* reflow */
+    void box.offsetWidth;
     box.classList.add('is-open');
     input.value = '';
     resultsList.innerHTML = '';
@@ -210,7 +232,6 @@
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
       e.preventDefault(); openSearch(); return;
     }
-    /* Arrow navigation inside open popup */
     if (overlay.style.display === 'flex') {
       var items = resultsList.querySelectorAll('a');
       if (e.key === 'ArrowDown') {
