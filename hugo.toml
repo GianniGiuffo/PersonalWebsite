@@ -3,7 +3,7 @@ languageCode = 'it-it'
 title = 'Tommaso Francescon'
 
 [outputs]
-  home = ['HTML', 'RSS']
+  home = ['HTML', 'RSS', 'JSON']
 
 [build]
   [build.buildStats]

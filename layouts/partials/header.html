@@ -164,31 +164,25 @@
     applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
 
-  /* ── Load index from custom XML ── */
+  /* ── Load JSON index ── */
   function loadIndex() {
     if (indexLoaded) return;
-    fetch('/index.xml')
-      .then(function (r) { return r.text(); })
-      .then(function (text) {
-        var parser = new DOMParser();
-        var xml    = parser.parseFromString(text, 'text/xml');
-        var items  = xml.querySelectorAll('page');
-        allPages   = [];
-        items.forEach(function (item) {
-          var title   = item.querySelector('title');
-          var url     = item.querySelector('url');
-          var section = item.querySelector('section');
-          if (title && title.textContent && url && url.textContent) {
-            allPages.push({
-              title:     title.textContent.trim(),
-              permalink: url.textContent.trim(),
-              section:   section ? section.textContent.trim() : ''
-            });
-          }
+    fetch('/index.json')
+      .then(function (r) {
+        if (!r.ok) throw new Error('index.json not found: ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        if (!Array.isArray(data)) throw new Error('index.json is not an array');
+        allPages = data.filter(function (p) {
+          return p && typeof p.title === 'string' && p.title.length > 0
+              && typeof p.permalink === 'string' && p.permalink.length > 0;
         });
         indexLoaded = true;
       })
-      .catch(function () {});
+      .catch(function (err) {
+        console.warn('[search] failed to load index.json:', err);
+      });
   }
 
   /* ── Open / close ── */
@@ -252,7 +246,7 @@
 
     var dark = html.classList.contains('dark');
     var matches = allPages.filter(function (p) {
-      return p.title && p.title.toLowerCase().indexOf(query) !== -1;
+      return p.title.toLowerCase().indexOf(query) !== -1;
     }).slice(0, 8);
 
     if (matches.length === 0) { emptyMsg.style.display = 'block'; return; }
