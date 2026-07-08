@@ -1,0 +1,10 @@
+{{- $pages := where .Site.RegularPages "Title" "ne" "" -}}
+<pages>
+{{- range $pages }}
+  <page>
+    <title>{{ .Title }}</title>
+    <url>{{ .Permalink }}</url>
+    <section>{{ .Section }}</section>
+  </page>
+{{- end }}
+</pages>

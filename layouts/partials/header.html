@@ -87,9 +87,7 @@
   from { opacity: 0; transform: translateY(-12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-#search-box {
-  animation: none;
-}
+#search-box { animation: none; }
 #search-box.is-open {
   animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -166,32 +164,25 @@
     applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
 
-  /* ── Load index from RSS XML ── */
+  /* ── Load index from custom XML ── */
   function loadIndex() {
     if (indexLoaded) return;
     fetch('/index.xml')
       .then(function (r) { return r.text(); })
       .then(function (text) {
         var parser = new DOMParser();
-        var xml    = parser.parseFromString(text, 'application/xml');
-        var items  = xml.querySelectorAll('item');
+        var xml    = parser.parseFromString(text, 'text/xml');
+        var items  = xml.querySelectorAll('page');
         allPages   = [];
         items.forEach(function (item) {
-          var title = item.querySelector('title');
-          var link  = item.querySelector('link');
-          /* <link> in RSS is a text node after the element, use textContent */
-          var permalink = link ? (link.textContent || link.getAttribute('href') || '') : '';
-          /* derive section from URL path segment */
-          var section = '';
-          try {
-            var parts = new URL(permalink).pathname.replace(/^\//, '').split('/');
-            if (parts.length > 1) section = parts[0];
-          } catch (e) {}
-          if (title && title.textContent) {
+          var title   = item.querySelector('title');
+          var url     = item.querySelector('url');
+          var section = item.querySelector('section');
+          if (title && title.textContent && url && url.textContent) {
             allPages.push({
-              title:     title.textContent,
-              permalink: permalink,
-              section:   section
+              title:     title.textContent.trim(),
+              permalink: url.textContent.trim(),
+              section:   section ? section.textContent.trim() : ''
             });
           }
         });
@@ -257,10 +248,7 @@
     hintMsg.style.display  = 'none';
     selectedIdx = -1;
 
-    if (!query) {
-      hintMsg.style.display = 'block';
-      return;
-    }
+    if (!query) { hintMsg.style.display = 'block'; return; }
 
     var dark = html.classList.contains('dark');
     var matches = allPages.filter(function (p) {
