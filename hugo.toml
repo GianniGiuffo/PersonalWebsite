@@ -3,12 +3,18 @@ languageCode = 'it-it'
 title = 'Tommaso Francescon'
 
 [outputs]
-  home = ['HTML', 'RSS', 'JSON']
+  home = ['HTML', 'RSS', 'SearchIndex']
 
-[outputFormats.JSON]
-  baseName = "index"
-  isPlainText = true
-  mediaType = "application/json"
+[mediaTypes]
+  [mediaTypes."application/json"]
+    suffixes = ['json']
+
+[outputFormats]
+  [outputFormats.SearchIndex]
+    mediaType = "application/json"
+    baseName  = "index"
+    isPlainText = true
+    notAlternative = true
 
 [build]
   [build.buildStats]
