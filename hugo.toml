@@ -1,9 +1,20 @@
 baseURL = 'https://personalwebsite-gg.netlify.app/'
-languageCode = 'it-it'
-title = 'Tommaso Francescon'
+locale   = 'it-IT'
+title    = 'Tommaso Francescon'
 
 [outputs]
   home = ['HTML', 'RSS', 'JSON']
+
+[mediaTypes]
+  [mediaTypes."application/json"]
+    suffixes = ['json']
+
+[outputFormats]
+  [outputFormats.JSON]
+    mediaType      = "application/json"
+    baseName       = "index"
+    isHTML         = false
+    notAlternative = true
 
 [build]
   [build.buildStats]
