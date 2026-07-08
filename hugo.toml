@@ -11,9 +11,9 @@ title = 'Tommaso Francescon'
 
 [outputFormats]
   [outputFormats.SearchIndex]
-    mediaType = "application/json"
-    baseName  = "index"
-    isPlainText = true
+    mediaType      = "application/json"
+    baseName       = "index"
+    isHTML         = false
     notAlternative = true
 
 [build]
