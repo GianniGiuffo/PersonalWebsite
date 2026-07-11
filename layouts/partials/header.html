@@ -1,3 +1,6 @@
+<!-- Netlify Identity Widget -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
 <header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
   <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
 
@@ -67,6 +70,26 @@
         {{ if $contactActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
       </a>
 
+      <!-- Bottone Area Privata / Identity -->
+      <button id="identity-btn" aria-label="Area privata"
+              class="w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              title="Area privata">
+        <!-- Icona lucchetto chiuso (default: non loggato) -->
+        <svg id="identity-icon-locked" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <!-- Icona lucchetto aperto (loggato) -->
+        <svg id="identity-icon-unlocked" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+        </svg>
+      </button>
+
       <button id="theme-toggle" aria-label="Cambia tema"
               class="w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
         <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
@@ -104,7 +127,7 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; opacity:0.5;" aria-hidden="true">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
       </svg>
-      <input id="search-input" type="search" placeholder="Cerca nel sito…" autocomplete="off"
+      <input id="search-input" type="search" placeholder="Cerca nel sito\u2026" autocomplete="off"
              style="flex:1; background:transparent; border:none; outline:none; font-size:1rem; padding:0;">
       <kbd style="font-size:0.7rem; padding:0.15rem 0.4rem; border-radius:0.25rem; border:1px solid; opacity:0.5;">esc</kbd>
     </div>
@@ -282,5 +305,53 @@
   input.addEventListener('input', function () {
     runSearch(input.value.trim().toLowerCase());
   });
+
+  /* ── Netlify Identity ── */
+  (function () {
+    var identityBtn     = document.getElementById('identity-btn');
+    var iconLocked      = document.getElementById('identity-icon-locked');
+    var iconUnlocked    = document.getElementById('identity-icon-unlocked');
+
+    if (!identityBtn) return;
+
+    function waitForIdentity(cb) {
+      if (window.netlifyIdentity) { cb(); }
+      else { document.addEventListener('DOMContentLoaded', function () {
+        if (window.netlifyIdentity) cb();
+      }); }
+    }
+
+    function setLoggedIn(user) {
+      iconLocked.style.display   = 'none';
+      iconUnlocked.style.display = 'block';
+      identityBtn.title          = 'Area privata (' + (user.email || '') + ')';
+      identityBtn.onclick        = function () { window.location.href = '/private/'; };
+    }
+
+    function setLoggedOut() {
+      iconLocked.style.display   = 'block';
+      iconUnlocked.style.display = 'none';
+      identityBtn.title          = 'Accedi all\'area privata';
+      identityBtn.onclick        = function () { window.netlifyIdentity.open('login'); };
+    }
+
+    waitForIdentity(function () {
+      window.netlifyIdentity.on('init', function (user) {
+        if (user) { setLoggedIn(user); } else { setLoggedOut(); }
+      });
+      window.netlifyIdentity.on('login', function (user) {
+        window.netlifyIdentity.close();
+        setLoggedIn(user);
+        window.location.href = '/private/';
+      });
+      window.netlifyIdentity.on('logout', function () {
+        setLoggedOut();
+        if (window.location.pathname.startsWith('/private')) {
+          window.location.href = '/';
+        }
+      });
+    });
+  })();
+
 })();
 </script>
