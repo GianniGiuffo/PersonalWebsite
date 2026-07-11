@@ -301,14 +301,17 @@
 
   /* ============================================================
      Netlify Identity
-     Il widget e' gia' caricato nel <head> (baseof.html).
-     Qui gestiamo solo la logica UI del bottone.
+     Strategia: aspetta che il widget sia pronto con un polling
+     leggero (max ~2s), poi registra i listener.
+     Questo risolve il race condition sulla home page dove
+     window.netlifyIdentity puo' non essere ancora definito
+     quando questo script inline viene eseguito.
   ============================================================ */
   (function () {
     var identityBtn  = document.getElementById('identity-btn');
     var iconLocked   = document.getElementById('identity-icon-locked');
     var iconUnlocked = document.getElementById('identity-icon-unlocked');
-    if (!identityBtn || !window.netlifyIdentity) return;
+    if (!identityBtn) return;
 
     function setLoggedIn(user) {
       iconLocked.style.display   = 'none';
@@ -321,27 +324,46 @@
       iconLocked.style.display   = 'block';
       iconUnlocked.style.display = 'none';
       identityBtn.title          = "Accedi all'area privata";
-      identityBtn.onclick        = function () { window.netlifyIdentity.open('login'); };
+      identityBtn.onclick        = function () {
+        if (window.netlifyIdentity) window.netlifyIdentity.open('login');
+      };
     }
 
-    /* init viene chiamato appena il widget ha letto il token salvato --
-       se l'utente e' gia' loggato, user e' valorizzato; altrimenti null */
-    window.netlifyIdentity.on('init',   function (user) { user ? setLoggedIn(user) : setLoggedOut(); });
-    window.netlifyIdentity.on('login',  function (user) {
-      window.netlifyIdentity.close();
-      setLoggedIn(user);
-      window.location.href = '/private/';
-    });
-    window.netlifyIdentity.on('logout', function () {
-      setLoggedOut();
-      if (window.location.pathname.startsWith('/private')) {
-        window.location.href = '/';
-      }
-    });
-
-    /* Primo render sincrono: se il widget non ha ancora sparato 'init',
-       mostriamo il lucchetto chiuso come default sicuro */
+    /* Stato default immediato: lucchetto chiuso visibile subito */
     setLoggedOut();
+
+    /* Aspetta che netlifyIdentity sia disponibile (polling max 40 x 50ms = 2s) */
+    var attempts = 0;
+    var poll = setInterval(function () {
+      attempts++;
+      if (window.netlifyIdentity) {
+        clearInterval(poll);
+
+        /* Controlla subito se c'e' gia' un utente loggato (currentUser e' sincrono) */
+        var currentUser = window.netlifyIdentity.currentUser();
+        if (currentUser) {
+          setLoggedIn(currentUser);
+        }
+
+        /* Registra i listener per i cambiamenti futuri */
+        window.netlifyIdentity.on('init', function (user) {
+          user ? setLoggedIn(user) : setLoggedOut();
+        });
+        window.netlifyIdentity.on('login', function (user) {
+          window.netlifyIdentity.close();
+          setLoggedIn(user);
+          window.location.href = '/private/';
+        });
+        window.netlifyIdentity.on('logout', function () {
+          setLoggedOut();
+          if (window.location.pathname.startsWith('/private')) {
+            window.location.href = '/';
+          }
+        });
+      } else if (attempts >= 40) {
+        clearInterval(poll); /* timeout: rimane il lucchetto chiuso di default */
+      }
+    }, 50);
   })();
 
 })();
