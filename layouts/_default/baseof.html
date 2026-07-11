@@ -17,11 +17,30 @@
       const theme = saved || (prefersDark ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', theme);
       if (theme === 'dark') document.documentElement.classList.add('dark');
+
+      // Passa il tema al widget Netlify Identity PRIMA che venga caricato
+      window.netlifyIdentityConfig = { theme: theme };
     })();
   </script>
 
-  <!-- Netlify Identity Widget: caricato nell'<head> per garantire init corretto -->
+  <!-- Netlify Identity Widget: caricato nell'<head> dopo aver impostato netlifyIdentityConfig -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <script>
+    // Aggiorna il tema del widget in tempo reale quando l'utente lo cambia
+    // netlifyIdentity.setConfig e' disponibile dopo il caricamento del widget
+    document.addEventListener('DOMContentLoaded', function () {
+      var observer = new MutationObserver(function () {
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        if (window.netlifyIdentity && window.netlifyIdentity.store) {
+          try {
+            window.netlifyIdentity.store.setState({ settings: { theme: currentTheme } });
+          } catch(e) {}
+        }
+      });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    });
+  </script>
 </head>
 <body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-200">
   {{ partial "header.html" . }}
