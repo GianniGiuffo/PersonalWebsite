@@ -1,0 +1,62 @@
+[home]
+other = "Home"
+[homepage]
+other = "Homepage"
+[posts]
+other = "Posts"
+[projects]
+other = "Projects"
+[search]
+other = "Search"
+[searchSite]
+other = "Search the site"
+[searchPlaceholder]
+other = "Search the site..."
+[searchHint]
+other = "Type, use the arrow keys, then press ENTER."
+[searchEmpty]
+other = "No results found."
+[profile]
+other = "Profile"
+[privateArea]
+other = "Private area"
+[loginPrivate]
+other = "Log in to the private area"
+[changeTheme]
+other = "Change theme"
+[switchLanguage]
+other = "Switch language"
+[homeHeading]
+other = "Hi, I'm Tommaso"
+[homeIntro]
+other = "This is my personal space: a journal of notes, projects, and thoughts about game development."
+[latestPosts]
+other = "Latest posts"
+[allPosts]
+other = "All posts"
+[noPosts]
+other = "No posts yet."
+[postsIntro]
+other = "Notes, thoughts, and updates from my game development journey."
+[addPosts]
+other = "Add files in content/posts/."
+[projectsIntro]
+other = "Games and projects I am working on."
+[noProjects]
+other = "No projects yet."
+[addProjects]
+other = "Add files in content/projects/."
+[words]
+other = "words"
+[minutesRead]
+other = "min read"
+[backToTop]
+other = "Back to top"
+[goBack]
+other = "Go back"
+[noContent]
+other = "No content in this section."
+[contacts]
+other = "Contact"
+[contactsIntro]
+other = "Write to me about collaborations, questions, or just to say hello."

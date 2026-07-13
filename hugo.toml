@@ -1,6 +1,18 @@
 baseURL = 'https://personalwebsite-gg.netlify.app/'
-locale   = 'it-IT'
-title    = 'Tommaso Francescon'
+defaultContentLanguage = 'it'
+defaultContentLanguageInSubdir = false
+title = 'Tommaso Francescon'
+
+[languages]
+  [languages.it]
+    locale = 'it-IT'
+    label = 'Italiano'
+    weight = 1
+
+  [languages.en]
+    locale = 'en-US'
+    label = 'English'
+    weight = 2
 
 [outputs]
   home = ['HTML', 'RSS', 'JSON']
@@ -14,7 +26,7 @@ title    = 'Tommaso Francescon'
     mediaType      = "application/json"
     baseName       = "index"
     isHTML         = false
-    notAlternative = true
+    notAlternative = false
 
 [build]
   [build.buildStats]
@@ -38,8 +50,16 @@ title    = 'Tommaso Francescon'
     target = 'assets'
 
   [[module.mounts]]
-    source = 'content'
+    source = 'content/italian'
     target = 'content'
+    [module.mounts.sites.matrix]
+      languages = ['it']
+
+  [[module.mounts]]
+    source = 'content/english'
+    target = 'content'
+    [module.mounts.sites.matrix]
+      languages = ['en']
 
   [[module.mounts]]
     source = 'layouts'

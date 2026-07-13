@@ -1,0 +1,71 @@
+# Registro degli alias disponibili per lo shortcode {{< font >}}.
+# Scarica i file .woff2 da Google Fonts e copiali in static/fonts/.
+
+[Bit]
+family = "bit"
+fallback = "Georgia, 'Times New Roman', serif"
+file = "/fonts/BitcountSingle-VariableFont_CRSV,ELSH,ELXP,slnt,wght.woff2"
+weight = "300"
+
+[Happy]
+family = "happy"
+fallback = "'Arial Black', Impact, sans-serif"
+file = "/fonts/FascinateInline-Regular.woff2"
+weight = "500"
+
+[Paura]
+family = "paura"
+fallback = "'Arial Black', Impact, sans-serif"
+file = "/fonts/Frijole-Regular.woff2"
+weight = "400"
+
+[Stilizzato]
+family = "stilizzato"
+fallback = "'Arial Black', Impact, sans-serif"
+file = "/fonts/Geostar-Regular.woff2"
+weight = "400"
+
+[Streghetta]
+family = "streghetta"
+fallback = "'Arial Black', Impact, sans-serif"
+file = "/fonts/HennyPenny-Regular.woff2"
+weight = "400"
+
+[Fumetto]
+family = "fumetto"
+fallback = "'Arial Black', Impact, sans-serif"
+file = "/fonts/LifeSavers-Bold.woff2"
+weight = "400"
+
+[PSX]
+family = "psx"
+fallback = "'Arial Black', Impact, sans-serif"
+file = "/fonts/PressStart2P-Regular.woff2"
+weight = "400"
+
+[Murales]
+family = "murales"
+fallback = "'Arial Black', Impact, sans-serif"
+file = "/fonts/RubikVinyl-Regular.woff2"
+weight = "400"
+
+[Pensieri]
+family = "pensieri"
+fallback = "'Arial Black', Impact, sans-serif"
+file = "/fonts/Rock3D-Regular.woff2"
+weight = "400"
+
+[Giocoso]
+family = "giocoso"
+fallback = "'Arial Black', Impact, sans-serif"
+file = "/fonts/SnowburstOne-Regular.woff2"
+weight = "400"
+
+# Alias compatibile senza file locale: usa il fallback finche' non gli assegni un .woff2.
+[display]
+family = "Display"
+fallback = "'Trebuchet MS', Arial, sans-serif"
+
+[sans]
+family = "Sans"
+fallback = "system-ui, sans-serif"

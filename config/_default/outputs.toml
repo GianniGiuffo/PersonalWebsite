@@ -1,5 +1,0 @@
-[home]
-formats = ["HTML", "RSS", "JSON"]
-
-[_default]
-formats = ["HTML"]

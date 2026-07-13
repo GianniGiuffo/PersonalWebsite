@@ -1,0 +1,7 @@
++++
+title = 'Projects'
+translationKey = "projects"
+date = 2026-07-04T16:00:00+02:00
++++
+
+This is the first example of project i have work on

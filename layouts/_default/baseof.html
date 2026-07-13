@@ -1,6 +1,6 @@
 <!-- layouts/_default/baseof.html -->
 <!doctype html>
-<html lang="it" data-theme="light">
+<html lang="{{ .Site.Language.Locale }}" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +8,21 @@
 
   {{ with (templates.Defer (dict "key" "global")) }}
     {{ partial "css.html" . }}
+  {{ end }}
+
+  {{ range hugo.Data.fonts }}
+    {{ $font := . }}
+    {{ with $font.file }}
+      <style>
+        @font-face {
+          font-family: '{{ $font.family }}';
+          src: url('{{ . }}') format('woff2');
+          font-weight: {{ $font.weight | default "400" }};
+          font-style: normal;
+          font-display: swap;
+        }
+      </style>
+    {{ end }}
   {{ end }}
 
   <script>
@@ -18,8 +33,6 @@
       document.documentElement.setAttribute('data-theme', theme);
       if (theme === 'dark') document.documentElement.classList.add('dark');
 
-      // Passa il tema al widget Netlify Identity PRIMA che venga caricato
-      window.netlifyIdentityConfig = { theme: theme };
     })();
   </script>
 

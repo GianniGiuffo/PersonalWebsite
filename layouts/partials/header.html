@@ -3,7 +3,7 @@
 
     <!-- Sinistra: logo + navigazione -->
     <div class="flex items-center gap-6">
-      <a href="/" aria-label="Homepage" class="flex-shrink-0 hover:opacity-80 transition-opacity">
+      <a href="{{ .Site.Home.RelPermalink }}" aria-label="{{ i18n "homepage" }}" class="flex-shrink-0 hover:opacity-80 transition-opacity">
         <img src="https://res.cloudinary.com/nhuws9fe/image/upload/v1783374914/Logo_ewohcb.jpg"
              alt="Logo Tommaso Francescon" width="32" height="32" class="h-8 w-auto">
       </a>
@@ -13,35 +13,39 @@
         {{ $section := .Section }}
 
         {{ $homeActive := $isHome }}
-        <a href="/" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
+        <a href="{{ .Site.Home.RelPermalink }}" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
            {{ if $homeActive }}font-semibold text-teal-700 dark:text-teal-400
            {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
-          Home
+          {{ i18n "home" }}
           {{ if $homeActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
         </a>
 
         {{ $postsActive := eq $section "posts" }}
-        <a href="/posts/" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
+        {{ with site.GetPage "section" "posts" }}
+        <a href="{{ .RelPermalink }}" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
            {{ if $postsActive }}font-semibold text-teal-700 dark:text-teal-400
            {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
-          Posts
+          {{ i18n "posts" }}
           {{ if $postsActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
         </a>
+        {{ end }}
 
         {{ $projectsActive := eq $section "projects" }}
-        <a href="/projects/" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
+        {{ with site.GetPage "section" "projects" }}
+        <a href="{{ .RelPermalink }}" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
            {{ if $projectsActive }}font-semibold text-teal-700 dark:text-teal-400
            {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
-          Projects
+          {{ i18n "projects" }}
           {{ if $projectsActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
         </a>
+        {{ end }}
       </nav>
     </div>
 
     <!-- Destra -->
     <div class="flex items-center gap-2">
 
-      <button id="search-btn" aria-label="Cerca"
+      <button id="search-btn" aria-label="{{ i18n "search" }}"
               class="w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -49,30 +53,24 @@
       </button>
 
       {{ $aboutActive := eq $section "about" }}
-      <a href="/about/"
+      {{ with site.GetPage "section" "about" }}
+      <a href="{{ .RelPermalink }}"
          class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden transition-all
                 {{ if $aboutActive }}ring-2 ring-teal-500 dark:ring-teal-400
                 {{ else }}ring-2 ring-slate-200 dark:ring-slate-700 hover:ring-teal-500 dark:hover:ring-teal-400{{ end }}"
-         aria-label="Profilo">
+         aria-label="{{ i18n "profile" }}">
         <img src="https://res.cloudinary.com/nhuws9fe/image/upload/v1783375318/Tom_m8knp0.jpg"
              alt="Tommaso Francescon" width="32" height="32" class="w-full h-full object-cover"
              onerror="this.onerror=null;this.src='';this.parentElement.innerHTML='<span class=&quot;w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center text-white text-xs font-bold&quot;>TF</span>'">
       </a>
-
-      {{ $contactActive := eq $section "contact" }}
-      <a href="/contact/" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
-         {{ if $contactActive }}font-semibold text-teal-700 dark:text-teal-400
-         {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
-        Contatti
-        {{ if $contactActive }}<span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-600 dark:bg-teal-400"></span>{{ end }}
-      </a>
+      {{ end }}
 
       <!-- Bottone Area Privata / Identity -->
-      <button id="identity-btn" aria-label="Area privata" title="Accedi all'area privata"
-              class="w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+      <button id="identity-btn" aria-label="{{ i18n "privateArea" }}" title="{{ i18n "loginPrivate" }}"
+              class="w-8 h-8 flex flex-shrink-0 items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
         <!-- Lucchetto chiuso: non loggato -->
         <svg id="identity-icon-locked" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
           <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
@@ -84,7 +82,7 @@
         </svg>
       </button>
 
-      <button id="theme-toggle" aria-label="Cambia tema"
+      <button id="theme-toggle" aria-label="{{ i18n "changeTheme" }}"
               class="w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
         <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
           <circle cx="12" cy="12" r="4"/>
@@ -94,6 +92,18 @@
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
       </button>
+
+      {{ $languageLabel := "ENG" }}
+      {{ if eq .Language.Lang "it" }}{{ $languageLabel = "IT" }}{{ end }}
+      {{ with .Translations }}
+        {{ range first 1 . }}
+          <a href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Lang }}"
+             aria-label="{{ i18n "switchLanguage" }}" title="{{ i18n "switchLanguage" }}"
+             class="h-8 px-2 flex items-center justify-center rounded-md text-xs font-semibold tracking-wide text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            {{ $languageLabel }}
+          </a>
+        {{ end }}
+      {{ end }}
     </div>
   </div>
 </header>
@@ -112,7 +122,7 @@
 
 <!-- Search Popup Overlay -->
 <div id="search-overlay"
-     role="dialog" aria-modal="true" aria-label="Cerca nel sito"
+     role="dialog" aria-modal="true" aria-label="{{ i18n "searchSite" }}"
      style="display:none; position:fixed; inset:0; z-index:100; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); align-items:flex-start; justify-content:center; padding-top:6rem;">
   <div id="search-box"
        style="width:100%; max-width:32rem; margin:0 1rem; border-radius:0.75rem; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.35);">
@@ -121,13 +131,13 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; opacity:0.5;" aria-hidden="true">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
       </svg>
-      <input id="search-input" type="search" placeholder="Cerca nel sito…" autocomplete="off"
+      <input id="search-input" type="search" placeholder="{{ i18n "searchPlaceholder" }}" autocomplete="off"
              style="flex:1; background:transparent; border:none; outline:none; font-size:1rem; padding:0;">
       <kbd style="font-size:0.7rem; padding:0.15rem 0.4rem; border-radius:0.25rem; border:1px solid; opacity:0.5;">esc</kbd>
     </div>
     <ul id="search-results" role="listbox" style="list-style:none; margin:0; padding:0.5rem; max-height:24rem; overflow-y:auto;"></ul>
-    <p id="search-hint" style="padding:1.5rem 1rem; text-align:center; font-size:0.875rem; opacity:0.45;">Scrivi, usa le frecce, premi INVIO.</p>
-    <p id="search-empty" style="display:none; padding:1.5rem 1rem; text-align:center; font-size:0.875rem; opacity:0.45;">Nessun risultato trovato.</p>
+    <p id="search-hint" style="padding:1.5rem 1rem; text-align:center; font-size:0.875rem; opacity:0.45;">{{ i18n "searchHint" }}</p>
+    <p id="search-empty" style="display:none; padding:1.5rem 1rem; text-align:center; font-size:0.875rem; opacity:0.45;">{{ i18n "searchEmpty" }}</p>
   </div>
 </div>
 
@@ -146,7 +156,7 @@
   var hintMsg     = document.getElementById('search-hint');
   var inputRow    = document.getElementById('search-input-row');
   var allPages    = [];
-  var indexLoaded = false;
+  var indexRequest = null;
   var selectedIdx = -1;
 
   /* -- Search theme -- */
@@ -174,6 +184,7 @@
     }
     localStorage.setItem('theme', theme);
     applySearchTheme();
+    window.dispatchEvent(new CustomEvent('site-theme-change', { detail: { theme: theme } }));
   }
 
   applyTheme(html.getAttribute('data-theme') || 'light');
@@ -183,8 +194,8 @@
 
   /* -- Load JSON index -- */
   function loadIndex() {
-    if (indexLoaded) return;
-    fetch('/index.json')
+    if (indexRequest) return indexRequest;
+    indexRequest = fetch('{{ "index.json" | relLangURL }}')
       .then(function (r) {
         if (!r.ok) throw new Error('index.json not found: ' + r.status);
         return r.json();
@@ -195,11 +206,16 @@
           return p && typeof p.title === 'string' && p.title.length > 0
               && typeof p.permalink === 'string' && p.permalink.length > 0;
         });
-        indexLoaded = true;
+        if (overlay.style.display === 'flex' && input.value.trim()) {
+          runSearch(input.value.trim().toLowerCase());
+        }
+        return allPages;
       })
       .catch(function (err) {
+        indexRequest = null;
         console.warn('[search] failed to load index.json:', err);
       });
+    return indexRequest;
   }
 
   /* -- Open / close search -- */
@@ -311,58 +327,94 @@
     var identityBtn  = document.getElementById('identity-btn');
     var iconLocked   = document.getElementById('identity-icon-locked');
     var iconUnlocked = document.getElementById('identity-icon-unlocked');
-    if (!identityBtn) return;
+    if (!identityBtn || !iconLocked || !iconUnlocked) return;
 
     function setLoggedIn(user) {
       iconLocked.style.display   = 'none';
       iconUnlocked.style.display = 'block';
-      identityBtn.title          = 'Area privata (' + (user.email || '') + ')';
-      identityBtn.onclick        = function () { window.location.href = '/private/'; };
+      identityBtn.title          = '{{ i18n "privateArea" }} (' + (user.email || '') + ')';
+      identityBtn.onclick        = function () { window.location.href = '{{ with site.GetPage "section" "private" }}{{ .RelPermalink }}{{ end }}'; };
     }
 
     function setLoggedOut() {
       iconLocked.style.display   = 'block';
       iconUnlocked.style.display = 'none';
-      identityBtn.title          = "Accedi all'area privata";
+      identityBtn.title          = '{{ i18n "loginPrivate" }}';
       identityBtn.onclick        = function () {
         if (window.netlifyIdentity) window.netlifyIdentity.open('login');
       };
     }
 
-    /* Stato default immediato: lucchetto chiuso visibile subito */
+    /* Stato default immediato: il lucchetto non dipende dal widget esterno. */
     setLoggedOut();
 
-    /* Aspetta che netlifyIdentity sia disponibile (polling max 40 x 50ms = 2s) */
+    function bindIdentity() {
+      if (!window.netlifyIdentity) return false;
+      if (window.netlifyIdentity.__tfBound) return true;
+      window.netlifyIdentity.__tfBound = true;
+
+      var currentUser = window.netlifyIdentity.currentUser
+        ? window.netlifyIdentity.currentUser()
+        : null;
+      if (currentUser) setLoggedIn(currentUser);
+
+      window.netlifyIdentity.on('init', function (user) {
+        user ? setLoggedIn(user) : setLoggedOut();
+      });
+      window.netlifyIdentity.on('open', function () {
+        setTimeout(applyIdentityTheme, 0);
+      });
+      window.netlifyIdentity.on('login', function (user) {
+        window.netlifyIdentity.close();
+        setLoggedIn(user);
+          window.location.href = '{{ with site.GetPage "section" "private" }}{{ .RelPermalink }}{{ end }}';
+      });
+      window.netlifyIdentity.on('logout', function () {
+        setLoggedOut();
+        if (window.location.pathname.indexOf('/private') !== -1) {
+          window.location.href = '{{ .Site.Home.RelPermalink }}';
+        }
+      });
+      return true;
+    }
+
+    function applyIdentityTheme() {
+      var iframe = document.getElementById('netlify-identity-widget');
+      if (!iframe || !iframe.contentDocument) return;
+
+      var doc = iframe.contentDocument;
+      var style = doc.getElementById('site-identity-theme');
+      if (!style) {
+        style = doc.createElement('style');
+        style.id = 'site-identity-theme';
+        doc.head.appendChild(style);
+      }
+
+      if (html.classList.contains('dark')) {
+        style.textContent = [
+          ':root { --baseColor: #e2e8f0; --subduedColor: #94a3b8; }',
+          '.modalContainer::before { background-color: rgba(2, 6, 23, 0.82) !important; }',
+          '.modalContent, .btnClose, .btnHeader, .formControl, .hr::before { background: #1e293b !important; color: #e2e8f0 !important; }',
+          '.modalContent { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55) !important; }',
+          '.btnHeader { border-color: #334155 !important; }',
+          '.btnHeader.active, .btnHeader:focus { color: #f8fafc !important; border-color: #2dd4bf !important; }',
+          '.btnLink { color: #99f6e4 !important; border-color: #334155 !important; }',
+          '.formControl { border-color: #475569 !important; }',
+          '.flashMessage { background: #334155 !important; color: #e2e8f0 !important; }',
+          '.hr { border-color: #475569 !important; }'
+        ].join('');
+      } else {
+        style.textContent = '';
+      }
+    }
+
+    window.addEventListener('site-theme-change', applyIdentityTheme);
+
+    /* Aspetta che netlifyIdentity sia disponibile (polling max 40 x 50ms = 2s). */
     var attempts = 0;
     var poll = setInterval(function () {
       attempts++;
-      if (window.netlifyIdentity) {
-        clearInterval(poll);
-
-        /* Controlla subito se c'e' gia' un utente loggato (currentUser e' sincrono) */
-        var currentUser = window.netlifyIdentity.currentUser();
-        if (currentUser) {
-          setLoggedIn(currentUser);
-        }
-
-        /* Registra i listener per i cambiamenti futuri */
-        window.netlifyIdentity.on('init', function (user) {
-          user ? setLoggedIn(user) : setLoggedOut();
-        });
-        window.netlifyIdentity.on('login', function (user) {
-          window.netlifyIdentity.close();
-          setLoggedIn(user);
-          window.location.href = '/private/';
-        });
-        window.netlifyIdentity.on('logout', function () {
-          setLoggedOut();
-          if (window.location.pathname.startsWith('/private')) {
-            window.location.href = '/';
-          }
-        });
-      } else if (attempts >= 40) {
-        clearInterval(poll); /* timeout: rimane il lucchetto chiuso di default */
-      }
+      if (bindIdentity() || attempts >= 40) clearInterval(poll);
     }, 50);
   })();
 

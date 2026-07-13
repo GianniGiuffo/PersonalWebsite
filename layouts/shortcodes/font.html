@@ -1,0 +1,20 @@
+{{/*
+  Uso: {{< font name="felice" size="1.25rem" >}}Testo{{< /font >}}
+  Gli alias e i file locali sono definiti in data/fonts.toml.
+*/}}
+{{- $name := lower (.Get "name" | default (.Get 0) | default "sans") -}}
+{{- $size := .Get "size" | default "inherit" -}}
+{{- $font := false -}}
+{{- range $alias, $definition := hugo.Data.fonts -}}
+  {{- if eq (lower $alias) $name -}}
+    {{- $font = $definition -}}
+  {{- end -}}
+{{- end -}}
+{{- $family := "inherit" -}}
+{{- with $font -}}
+  {{- $family = printf "'%s', %s" .family .fallback -}}
+{{- else -}}
+  {{- warnf "font shortcode: alias sconosciuto %q" $name -}}
+{{- end -}}
+{{- $style := printf "font-family: %s; font-size: %s;" $family $size -}}
+<span style="{{ $style | safeCSS }}">{{ .Inner | markdownify }}</span>

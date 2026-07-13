@@ -1,0 +1,25 @@
+{{/*
+  Uso: {{< maps url="https://www.google.com/maps/@45.4642,9.1900,16z" >}}
+  Il link deve contenere coordinate nel formato @latitudine,longitudine.
+  La preview e' bloccata; il click apre il link originale in Google Maps.
+*/}}
+{{- $url := .Get "url" | default (.Get 0) -}}
+{{- $title := .Get "title" | default "Apri la mappa" -}}
+{{- $latitude := replaceRE `^.*@(-?[0-9.]+),-?[0-9.]+.*$` "$1" $url -}}
+{{- $longitude := replaceRE `^.*@-?[0-9.]+,(-?[0-9.]+).*$` "$1" $url -}}
+{{- if and $url (ne $latitude $url) (ne $longitude $url) -}}
+  {{- $lat := float $latitude -}}
+  {{- $lng := float $longitude -}}
+  {{- $west := sub $lng 0.012 -}}
+  {{- $south := sub $lat 0.008 -}}
+  {{- $east := add $lng 0.012 -}}
+  {{- $north := add $lat 0.008 -}}
+  {{- $bbox := printf "%.6f,%.6f,%.6f,%.6f" $west $south $east $north -}}
+  {{- $mapURL := printf "https://www.openstreetmap.org/export/embed.html?bbox=%s&layer=mapnik&marker=%s" ($bbox | urlquery) (printf "%s,%s" $latitude $longitude | urlquery) -}}
+  <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="group my-6 block overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700" aria-label="{{ $title }}">
+    <iframe src="{{ $mapURL }}" title="{{ $title }}" loading="lazy" tabindex="-1"
+            class="pointer-events-none aspect-video w-full border-0 transition-transform duration-300 group-hover:scale-105"></iframe>
+  </a>
+{{- else -}}
+  {{- warnf "maps shortcode: il link deve contenere coordinate @lat,lng: %q" $url -}}
+{{- end -}}

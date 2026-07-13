@@ -1,3 +1,0 @@
-[mediaTypes]
-  [mediaTypes."application/json"]
-    suffixes = ["json"]

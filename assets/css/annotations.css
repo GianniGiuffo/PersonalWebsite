@@ -71,6 +71,46 @@
   color: #64748b;
 }
 
+/* Popup mobile: riprende gerarchia e contrasto della ricerca. */
+.annotation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.annotation-overlay.is-open {
+  display: flex;
+}
+
+.annotation-popup {
+  width: 100%;
+  max-width: 28rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #0f172a;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.annotation-popup p {
+  margin: 0;
+}
+
+.dark .annotation-popup {
+  border-color: #334155;
+  background: #1e293b;
+  color: #f1f5f9;
+}
+
 /* Mobile: nascondi la nota floating,
    rendi il marker un pulsante cliccabile */
 @media (max-width: 900px) {

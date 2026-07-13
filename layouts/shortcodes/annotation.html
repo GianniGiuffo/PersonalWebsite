@@ -3,11 +3,11 @@
   Uso: {{< annotation >}}Testo nota{{< /annotation >}}
 
   Desktop: nota a destra del body, fuori dal flusso.
-  Mobile: pulsante asterisco che apre un alert nativo.
+  Mobile: asterisco che apre un popup centrale gestito dal template del post.
 */}}
 {{- $text := .Inner | markdownify | plainify -}}
 <span class="annotation-wrap"><button
   class="annotation-marker"
-  onclick="alert({{ $text | jsonify }})"
+  data-annotation="{{ $text }}"
   aria-label="Annotazione"
-  type="button">*</button><span class="annotation-note" aria-hidden="true">{{ .Inner | markdownify }}</span></span>
+  type="button">*</button><span class="annotation-note">{{ .Inner | markdownify }}</span></span>

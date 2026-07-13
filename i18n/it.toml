@@ -1,0 +1,62 @@
+[home]
+other = "Home"
+[homepage]
+other = "Homepage"
+[posts]
+other = "Post"
+[projects]
+other = "Progetti"
+[search]
+other = "Cerca"
+[searchSite]
+other = "Cerca nel sito"
+[searchPlaceholder]
+other = "Cerca nel sito..."
+[searchHint]
+other = "Scrivi, usa le frecce, premi INVIO."
+[searchEmpty]
+other = "Nessun risultato trovato."
+[profile]
+other = "Profilo"
+[privateArea]
+other = "Area privata"
+[loginPrivate]
+other = "Accedi all'area privata"
+[changeTheme]
+other = "Cambia tema"
+[switchLanguage]
+other = "Cambia lingua"
+[homeHeading]
+other = "Ciao, sono Tommaso"
+[homeIntro]
+other = "Questo è il mio spazio personale: un diario di note, progetti e pensieri sul game development."
+[latestPosts]
+other = "Ultimi post"
+[allPosts]
+other = "Tutti i post"
+[noPosts]
+other = "Nessun post ancora."
+[postsIntro]
+other = "Note, pensieri e aggiornamenti dal mio percorso nel game development."
+[addPosts]
+other = "Aggiungi file in content/posts/."
+[projectsIntro]
+other = "Giochi e progetti su cui sto lavorando."
+[noProjects]
+other = "Nessun progetto ancora."
+[addProjects]
+other = "Aggiungi file in content/projects/."
+[words]
+other = "parole"
+[minutesRead]
+other = "min di lettura"
+[backToTop]
+other = "Torna all'inizio"
+[goBack]
+other = "Torna indietro"
+[noContent]
+other = "Nessun contenuto in questa sezione."
+[contacts]
+other = "Contatti"
+[contactsIntro]
+other = "Scrivimi per collaborazioni, domande o anche solo per un saluto."

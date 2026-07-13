@@ -8,10 +8,12 @@
     {{ .Content }}
   </div>
   <div class="mt-12 pt-6 border-t border-slate-200 dark:border-slate-700">
-    <a href="{{ .Section | relURL }}" class="inline-flex items-center gap-1.5 text-teal-700 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 text-sm font-medium transition-colors">
+    {{ with .Site.GetPage "section" .Section }}
+    <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-1.5 text-teal-700 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 text-sm font-medium transition-colors">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-      Torna indietro
+      {{ i18n "goBack" }}
     </a>
+    {{ end }}
   </div>
 </div>
 {{ end }}

@@ -1,5 +1,6 @@
 +++
 title = 'Primo post'
+translationKey = "first-post"
 date = 2026-07-04T14:00:00+02:00
 draft = false
 +++
