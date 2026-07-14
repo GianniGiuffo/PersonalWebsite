@@ -2,5 +2,6 @@
 @plugin "@tailwindcss/typography";
 @source "../notwatching/hugo_stats.json";
 @import "./annotations.css";
+@import "./maps.css";
 
 @custom-variant dark (&:where(.dark, .dark *));

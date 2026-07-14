@@ -49,6 +49,8 @@ func main() {
 }
 {{< /highlight >}}
 
-{{< maps url="https://www.google.com/maps/@45.4642,9.1900,16z" >}}
+{{< maps url="https://www.google.com/maps/place/Via+Candiolo,+26,+10127+Torino+TO/@45.0147227,7.6528157,17z/" >}}
+
+{{< maps url="https://www.google.com/maps/@45.0145544,7.6532388,17z" >}}
 
 {{< instagram id=DZsBp0LjcFd hideCaption=true >}}

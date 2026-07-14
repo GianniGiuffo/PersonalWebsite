@@ -1,25 +1,119 @@
 {{/*
-  Uso: {{< maps url="https://www.google.com/maps/@45.4642,9.1900,16z" >}}
-  Il link deve contenere coordinate nel formato @latitudine,longitudine.
-  La preview e' bloccata; il click apre il link originale in Google Maps.
+  Uso semplice: {{< maps url="https://www.google.com/maps/@45.4642,9.1900,16z" >}}
+  Con rotta: {{< maps url="URL-PARTENZA" to="URL-ARRIVO" >}}
+  Sono accettati anche url2="URL-ARRIVO" e un secondo parametro posizionale.
+  I link devono contenere coordinate nel formato @latitudine,longitudine.
 */}}
 {{- $url := .Get "url" | default (.Get 0) -}}
+{{- $destinationURL := .Get "to" | default (.Get "url2") | default (.Get 1) -}}
 {{- $title := .Get "title" | default "Apri la mappa" -}}
 {{- $latitude := replaceRE `^.*@(-?[0-9.]+),-?[0-9.]+.*$` "$1" $url -}}
 {{- $longitude := replaceRE `^.*@-?[0-9.]+,(-?[0-9.]+).*$` "$1" $url -}}
+{{- $destinationLatitude := replaceRE `^.*@(-?[0-9.]+),-?[0-9.]+.*$` "$1" $destinationURL -}}
+{{- $destinationLongitude := replaceRE `^.*@-?[0-9.]+,(-?[0-9.]+).*$` "$1" $destinationURL -}}
 {{- if and $url (ne $latitude $url) (ne $longitude $url) -}}
-  {{- $lat := float $latitude -}}
-  {{- $lng := float $longitude -}}
-  {{- $west := sub $lng 0.012 -}}
-  {{- $south := sub $lat 0.008 -}}
-  {{- $east := add $lng 0.012 -}}
-  {{- $north := add $lat 0.008 -}}
-  {{- $bbox := printf "%.6f,%.6f,%.6f,%.6f" $west $south $east $north -}}
-  {{- $mapURL := printf "https://www.openstreetmap.org/export/embed.html?bbox=%s&layer=mapnik&marker=%s" ($bbox | urlquery) (printf "%s,%s" $latitude $longitude | urlquery) -}}
-  <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="group my-6 block overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700" aria-label="{{ $title }}">
-    <iframe src="{{ $mapURL }}" title="{{ $title }}" loading="lazy" tabindex="-1"
-            class="pointer-events-none aspect-video w-full border-0 transition-transform duration-300 group-hover:scale-105"></iframe>
+  {{- $hasDestination := and $destinationURL (ne $destinationLatitude $destinationURL) (ne $destinationLongitude $destinationURL) -}}
+  {{- $mapLink := $url -}}
+  {{- if $hasDestination -}}
+    {{- $mapLink = printf "https://www.google.com/maps/dir/?api=1&origin=%s,%s&destination=%s,%s" $latitude $longitude $destinationLatitude $destinationLongitude -}}
+  {{- end -}}
+  <a href="{{ $mapLink }}" target="_blank" rel="noopener noreferrer" class="map-preview group block" aria-label="{{ $title }}">
+    <div class="map-preview-canvas" data-map-lat="{{ $latitude }}" data-map-lng="{{ $longitude }}"
+      {{ if $hasDestination }}data-map-end-lat="{{ $destinationLatitude }}" data-map-end-lng="{{ $destinationLongitude }}"{{ end }}
+      aria-hidden="true"></div>
+    <span class="map-preview-attribution">© OpenStreetMap · CARTO</span>
   </a>
 {{- else -}}
   {{- warnf "maps shortcode: il link deve contenere coordinate @lat,lng: %q" $url -}}
 {{- end -}}
+
+{{ if not (.Page.Store.Get "mapPreviewScriptLoaded") }}
+  {{ .Page.Store.Set "mapPreviewScriptLoaded" true }}
+  <script>
+    (function () {
+      var leafletCss = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      var leafletJs = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      var lightTiles = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+      var darkTiles = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+      var maps = [];
+
+      function isDark() {
+        return document.documentElement.classList.contains('dark');
+      }
+
+      function applyTheme(entry) {
+        if (entry.layer) entry.map.removeLayer(entry.layer);
+        entry.layer = window.L.tileLayer(isDark() ? darkTiles : lightTiles, {
+          subdomains: 'abcd', maxZoom: 20, attribution: ''
+        }).addTo(entry.map);
+        if (entry.route) entry.route.setStyle({ color: isDark() ? '#65a69f' : '#0f766e' });
+      }
+
+      function markerIcon(end) {
+        return window.L.divIcon({
+          className: 'map-preview-marker',
+          html: '<span class="map-preview-pin' + (end ? ' map-preview-pin--end' : '') + '"></span>',
+          iconSize: [16, 16], iconAnchor: [8, 8]
+        });
+      }
+
+      function drawRoute(entry, start, end) {
+        var routeUrl = 'https://router.project-osrm.org/route/v1/driving/' +
+          start.lng + ',' + start.lat + ';' + end.lng + ',' + end.lat +
+          '?overview=full&geometries=geojson';
+        fetch(routeUrl)
+          .then(function (response) { return response.ok ? response.json() : null; })
+          .then(function (data) {
+            if (!data || !data.routes || !data.routes[0]) return;
+            entry.route = window.L.geoJSON(data.routes[0].geometry, {
+              style: { color: isDark() ? '#65a69f' : '#0f766e', weight: 4, opacity: 0.9, lineCap: 'round', lineJoin: 'round' }
+            }).addTo(entry.map);
+          })
+          .catch(function () {});
+      }
+
+      function initialiseMaps() {
+        document.querySelectorAll('.map-preview-canvas:not([data-map-ready])').forEach(function (element) {
+          element.setAttribute('data-map-ready', 'true');
+          var latitude = Number(element.getAttribute('data-map-lat'));
+          var longitude = Number(element.getAttribute('data-map-lng'));
+          var endLatitudeValue = element.getAttribute('data-map-end-lat');
+          var endLongitudeValue = element.getAttribute('data-map-end-lng');
+          var endLatitude = Number(endLatitudeValue);
+          var endLongitude = Number(endLongitudeValue);
+          var hasDestination = endLatitudeValue !== null && endLongitudeValue !== null &&
+            Number.isFinite(endLatitude) && Number.isFinite(endLongitude);
+          var map = window.L.map(element, {
+            attributionControl: false, zoomControl: false, dragging: false, touchZoom: false,
+            scrollWheelZoom: false, doubleClickZoom: false, boxZoom: false, keyboard: false
+          }).setView([latitude, longitude], 11);
+          var entry = { map: map, layer: null, route: null };
+          applyTheme(entry);
+          var start = { lat: latitude, lng: longitude };
+          window.L.marker([start.lat, start.lng], { icon: markerIcon(false) }).addTo(map);
+          if (hasDestination) {
+            var end = { lat: endLatitude, lng: endLongitude };
+            window.L.marker([end.lat, end.lng], { icon: markerIcon(true) }).addTo(map);
+            map.fitBounds([[start.lat, start.lng], [end.lat, end.lng]], { padding: [32, 32], animate: false });
+            drawRoute(entry, start, end);
+          }
+          maps.push(entry);
+        });
+      }
+
+      function loadLeaflet() {
+        if (window.L) { initialiseMaps(); return; }
+        var css = document.createElement('link');
+        css.rel = 'stylesheet'; css.href = leafletCss;
+        document.head.appendChild(css);
+        var script = document.createElement('script');
+        script.src = leafletJs; script.onload = initialiseMaps;
+        document.head.appendChild(script);
+      }
+
+      window.addEventListener('site-theme-change', function () { maps.forEach(applyTheme); });
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadLeaflet);
+      else loadLeaflet();
+    })();
+  </script>
+{{ end }}

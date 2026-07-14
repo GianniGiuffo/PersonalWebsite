@@ -18,6 +18,8 @@ This is an example image.
 {{< annotation >}} This is an annotation example.
 {{< /annotation >}}
 
+{{< maps url="https://www.google.com/maps/place/Via+Candiolo,+26,+10127+Torino+TO/@45.0147227,7.6528157,17z/" >}}
+
 ![Test Gumball image](https://res.cloudinary.com/nhuws9fe/image/upload/v1783376711/GumballTest_bitivy.jpg)
 
 {{< spotify type="track" id="0vmFuEhyHR8SbOhDFq021Y?si=cc1e323f0d764a87" >}}
@@ -33,5 +35,7 @@ func main() {
     println("hello")
 }
 {{< /highlight >}}
+
+{{< maps url="https://www.google.com/maps/@45.0147227,7.6528157,17z/" to="https://www.google.com/maps/@45.0690511,7.6919054,16.83z/" >}}
 
 {{< instagram id=DZsBp0LjcFd hideCaption=true >}}
