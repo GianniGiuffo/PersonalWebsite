@@ -56,7 +56,7 @@
     <div class="ml-auto flex items-center gap-2">
 
       <button id="search-btn" type="button" aria-label="{{ i18n "search" }}"
-              class="order-2 md:order-none w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+              class="order-1 md:order-none w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
@@ -65,7 +65,7 @@
       {{ $aboutActive := eq $section "about" }}
       {{ with site.GetPage "section" "about" }}
       <a href="{{ .RelPermalink }}"
-         class="order-1 md:order-none flex-shrink-0 w-8 h-8 rounded-full overflow-hidden transition-all
+         class="order-2 md:order-none flex-shrink-0 w-8 h-8 rounded-full overflow-hidden transition-all
                 {{ if $aboutActive }}ring-2 ring-teal-500 dark:ring-teal-400
                 {{ else }}ring-2 ring-slate-200 dark:ring-slate-700 hover:ring-teal-500 dark:hover:ring-teal-400{{ end }}"
          aria-label="{{ i18n "profile" }}">

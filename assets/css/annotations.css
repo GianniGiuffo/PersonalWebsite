@@ -31,9 +31,9 @@
 /* Asterisco superscript inline */
 .annotation-marker {
   display: inline-block;
-  font-size: 0.7em;
-  font-weight: 700;
-  color: #94a3b8;
+  font-size: 0.9em;
+  font-weight: 800;
+  color: #CD7F32;
   vertical-align: super;
   line-height: 1;
   background: none;
@@ -46,7 +46,7 @@
 }
 
 .dark .annotation-marker {
-  color: #64748b;
+  color: #CD7F32;
 }
 
 /* La nota e' absolute rispetto a .post-outer (fullwidth).
