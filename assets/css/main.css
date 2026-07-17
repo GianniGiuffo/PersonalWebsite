@@ -4,4 +4,8 @@
 @import "./annotations.css";
 @import "./maps.css";
 
+@theme {
+  --color-slate-900: #14213D;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));

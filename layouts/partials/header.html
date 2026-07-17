@@ -246,7 +246,7 @@
 }
 .dark .mobile-sidebar-panel {
   border-color: #334155;
-  background: #0f172a;
+  background: #14213D;
   box-shadow: 12px 0 32px rgba(0, 0, 0, 0.38);
 }
 .mobile-sidebar-backdrop.is-open .mobile-sidebar-panel { transform: translateX(0); }
@@ -255,7 +255,7 @@
   align-items: center;
   gap: 0.75rem;
   margin: 0 0.35rem 1.15rem;
-  color: #0f172a;
+  color: #14213D;
   font-size: 1rem;
   font-weight: 700;
   text-decoration: none;
@@ -293,7 +293,7 @@
 .mobile-sidebar-link:hover,
 .mobile-sidebar-link:focus-visible {
   background: #f1f5f9;
-  color: #0f172a;
+  color: #14213D;
 }
 .mobile-sidebar-link.is-active {
   background: #f0fdfa;
@@ -340,7 +340,7 @@
 }
 .mobile-theme-toggle { width: 2.25rem; }
 .mobile-language-link:hover,
-.mobile-theme-toggle:hover { background: #f1f5f9; color: #0f172a; }
+.mobile-theme-toggle:hover { background: #f1f5f9; color: #14213D; }
 .dark .mobile-language-link,
 .dark .mobile-theme-toggle { color: #94a3b8; }
 .dark .mobile-language-link:hover,
@@ -431,10 +431,10 @@ body.mobile-menu-open { overflow: hidden; }
   function applySearchTheme() {
     var dark = html.classList.contains('dark');
     box.style.background       = dark ? '#1e293b' : '#ffffff';
-    box.style.color            = dark ? '#f1f5f9' : '#0f172a';
+    box.style.color            = dark ? '#f1f5f9' : '#14213D';
     inputRow.style.borderColor = dark ? '#334155' : '#e2e8f0';
-    input.style.color          = dark ? '#f1f5f9' : '#0f172a';
-    input.style.caretColor     = dark ? '#f1f5f9' : '#0f172a';
+    input.style.color          = dark ? '#f1f5f9' : '#14213D';
+    input.style.caretColor     = dark ? '#f1f5f9' : '#14213D';
   }
 
   /* -- Theme toggle -- */
