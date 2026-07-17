@@ -18,6 +18,8 @@ Questa e' una foto di esempio
 {{< annotation >}} Questo e' un esempio di annotazione
 {{< /annotation >}}
 
+Sto provando a capire se il sito si aggiorna ad ogni push su github
+
 Questo invece e' l'esempio {{< font name="giocoso" size="2rem" >}} DI UN FONT {{< /font >}} cambiato totalmente
 
 E potrei farlo {{< font name="streghetta" size="2rem" >}} ANCORA {{< /font >}} e {{< font name="happy" size="2rem" >}} ANCORA {{< /font >}} 
