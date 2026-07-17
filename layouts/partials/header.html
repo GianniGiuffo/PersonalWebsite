@@ -121,6 +121,12 @@
 <!-- Navigazione laterale, visibile soltanto su telefono. -->
 <div id="mobile-sidebar-backdrop" class="mobile-sidebar-backdrop md:hidden" aria-hidden="true">
   <aside id="mobile-sidebar" class="mobile-sidebar-panel" aria-label="Menu">
+    <a href="{{ .Site.Home.RelPermalink }}" class="mobile-sidebar-brand" aria-label="{{ i18n "homepage" }}">
+      <img src="https://res.cloudinary.com/nhuws9fe/image/upload/v1783374914/Logo_ewohcb.jpg"
+           alt="" width="38" height="38">
+      <span>{{ .Site.Title }}</span>
+    </a>
+
     <nav class="mobile-sidebar-nav">
       <a href="{{ .Site.Home.RelPermalink }}" class="mobile-sidebar-link {{ if $headerHomeActive }}is-active{{ end }}"
          {{ if $headerHomeActive }}aria-current="page"{{ end }}>
@@ -164,7 +170,7 @@
         {{ range first 1 . }}
           <a href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Lang }}"
              aria-label="{{ i18n "switchLanguage" }}" title="{{ i18n "switchLanguage" }}"
-             class="mobile-language-link">IT / ENG</a>
+             class="mobile-language-link">{{ $languageLabel }}</a>
         {{ end }}
       {{ end }}
 
@@ -174,7 +180,7 @@
              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
              class="hidden">
           <circle cx="12" cy="12" r="4"/>
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l1.41 1.41"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
         </svg>
         <svg data-theme-moon xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -244,6 +250,24 @@
   box-shadow: 12px 0 32px rgba(0, 0, 0, 0.38);
 }
 .mobile-sidebar-backdrop.is-open .mobile-sidebar-panel { transform: translateX(0); }
+.mobile-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0.35rem 1.15rem;
+  color: #0f172a;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.mobile-sidebar-brand img {
+  width: 2.375rem;
+  height: 2.375rem;
+  flex-shrink: 0;
+  border-radius: 0.45rem;
+  object-fit: cover;
+}
+.dark .mobile-sidebar-brand { color: #f1f5f9; }
 .mobile-sidebar-nav {
   display: flex;
   flex-direction: column;
