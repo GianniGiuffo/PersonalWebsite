@@ -2,6 +2,7 @@
   "htmlElements": {
     "tags": [
       "a",
+      "aside",
       "blockquote",
       "body",
       "button",
@@ -135,6 +136,7 @@
       "inset-0",
       "instagram-embed",
       "instagram-media",
+      "is-active",
       "items-center",
       "items-start",
       "justify-between",
@@ -155,8 +157,21 @@
       "mb-4",
       "mb-6",
       "mb-8",
+      "md:flex",
+      "md:hidden",
+      "md:order-none",
       "min-h-screen",
       "min-w-0",
+      "ml-auto",
+      "mobile-language-link",
+      "mobile-menu-btn",
+      "mobile-sidebar-backdrop",
+      "mobile-sidebar-footer",
+      "mobile-sidebar-identity",
+      "mobile-sidebar-link",
+      "mobile-sidebar-nav",
+      "mobile-sidebar-panel",
+      "mobile-theme-toggle",
       "mt-0.5",
       "mt-1",
       "mt-12",
@@ -168,6 +183,8 @@
       "my-6",
       "object-cover",
       "opacity-70",
+      "order-1",
+      "order-2",
       "overflow-hidden",
       "p-1",
       "p-4",
@@ -246,6 +263,9 @@
       "identity-icon-locked",
       "identity-icon-unlocked",
       "inseriro-delle-immagini",
+      "mobile-menu-btn",
+      "mobile-sidebar",
+      "mobile-sidebar-backdrop",
       "next-steps",
       "post-top",
       "private-denied",
@@ -262,7 +282,8 @@
       "search-input-row",
       "search-overlay",
       "search-results",
-      "theme-toggle"
+      "theme-toggle",
+      "theme-toggle-mobile"
     ]
   }
 }

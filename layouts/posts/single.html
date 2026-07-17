@@ -66,6 +66,11 @@
 
 <!-- Scroll-to-top: fixed alla viewport, centrato in basso.
      Il colore background/icona si adatta al tema via JS. -->
+<style>
+@media (max-width: 767px) {
+  #scroll-top-btn { bottom: 5.5rem !important; }
+}
+</style>
 <button
   id="scroll-top-btn"
   onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"

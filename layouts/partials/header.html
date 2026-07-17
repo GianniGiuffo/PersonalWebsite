@@ -1,8 +1,18 @@
+{{ $headerSection := .Section }}
+{{ $headerHomeActive := .IsHome }}
+{{ $headerPostsActive := eq $headerSection "posts" }}
+{{ $headerProjectsActive := eq $headerSection "projects" }}
+
 <header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
   <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
 
-    <!-- Sinistra: logo + navigazione -->
-    <div class="flex items-center gap-6">
+    <button id="mobile-menu-btn" type="button" class="mobile-menu-btn md:hidden"
+            aria-label="Menu" aria-controls="mobile-sidebar" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Sinistra: logo + navigazione desktop -->
+    <div class="hidden md:flex items-center gap-6">
       <a href="{{ .Site.Home.RelPermalink }}" aria-label="{{ i18n "homepage" }}" class="flex-shrink-0 hover:opacity-80 transition-opacity">
         <img src="https://res.cloudinary.com/nhuws9fe/image/upload/v1783374914/Logo_ewohcb.jpg"
              alt="Logo Tommaso Francescon" width="32" height="32" class="h-8 w-auto">
@@ -43,10 +53,10 @@
     </div>
 
     <!-- Destra -->
-    <div class="flex items-center gap-2">
+    <div class="ml-auto flex items-center gap-2">
 
-      <button id="search-btn" aria-label="{{ i18n "search" }}"
-              class="w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+      <button id="search-btn" type="button" aria-label="{{ i18n "search" }}"
+              class="order-2 md:order-none w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
@@ -55,7 +65,7 @@
       {{ $aboutActive := eq $section "about" }}
       {{ with site.GetPage "section" "about" }}
       <a href="{{ .RelPermalink }}"
-         class="flex-shrink-0 w-8 h-8 rounded-full overflow-hidden transition-all
+         class="order-1 md:order-none flex-shrink-0 w-8 h-8 rounded-full overflow-hidden transition-all
                 {{ if $aboutActive }}ring-2 ring-teal-500 dark:ring-teal-400
                 {{ else }}ring-2 ring-slate-200 dark:ring-slate-700 hover:ring-teal-500 dark:hover:ring-teal-400{{ end }}"
          aria-label="{{ i18n "profile" }}">
@@ -66,29 +76,29 @@
       {{ end }}
 
       <!-- Bottone Area Privata / Identity -->
-      <button id="identity-btn" aria-label="{{ i18n "privateArea" }}" title="{{ i18n "loginPrivate" }}"
-              class="w-8 h-8 flex flex-shrink-0 items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+      <button id="identity-btn" type="button" data-identity-btn aria-label="{{ i18n "privateArea" }}" title="{{ i18n "loginPrivate" }}"
+              class="hidden md:flex w-8 h-8 flex-shrink-0 items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
         <!-- Lucchetto chiuso: non loggato -->
-        <svg id="identity-icon-locked" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+        <svg id="identity-icon-locked" data-identity-locked xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
           <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
         <!-- Lucchetto aperto: loggato -->
-        <svg id="identity-icon-unlocked" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+        <svg id="identity-icon-unlocked" data-identity-unlocked xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
           <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
         </svg>
       </button>
 
-      <button id="theme-toggle" aria-label="{{ i18n "changeTheme" }}"
-              class="w-8 h-8 flex items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-        <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+      <button id="theme-toggle" type="button" data-theme-toggle aria-label="{{ i18n "changeTheme" }}"
+              class="hidden md:flex w-8 h-8 items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+        <svg id="icon-sun" data-theme-sun xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
           <circle cx="12" cy="12" r="4"/>
           <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
         </svg>
-        <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="icon-moon" data-theme-moon xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
       </button>
@@ -99,7 +109,7 @@
         {{ range first 1 . }}
           <a href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Lang }}"
              aria-label="{{ i18n "switchLanguage" }}" title="{{ i18n "switchLanguage" }}"
-             class="h-8 px-2 flex items-center justify-center rounded-md text-xs font-semibold tracking-wide text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+             class="hidden md:flex h-8 px-2 items-center justify-center rounded-md text-xs font-semibold tracking-wide text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
             {{ $languageLabel }}
           </a>
         {{ end }}
@@ -108,8 +118,216 @@
   </div>
 </header>
 
+<!-- Navigazione laterale, visibile soltanto su telefono. -->
+<div id="mobile-sidebar-backdrop" class="mobile-sidebar-backdrop md:hidden" aria-hidden="true">
+  <aside id="mobile-sidebar" class="mobile-sidebar-panel" aria-label="Menu">
+    <nav class="mobile-sidebar-nav">
+      <a href="{{ .Site.Home.RelPermalink }}" class="mobile-sidebar-link {{ if $headerHomeActive }}is-active{{ end }}"
+         {{ if $headerHomeActive }}aria-current="page"{{ end }}>
+        {{ i18n "home" }}
+      </a>
+
+      {{ with site.GetPage "section" "posts" }}
+        <a href="{{ .RelPermalink }}" class="mobile-sidebar-link {{ if $headerPostsActive }}is-active{{ end }}"
+           {{ if $headerPostsActive }}aria-current="page"{{ end }}>
+          {{ i18n "posts" }}
+        </a>
+      {{ end }}
+
+      {{ with site.GetPage "section" "projects" }}
+        <a href="{{ .RelPermalink }}" class="mobile-sidebar-link {{ if $headerProjectsActive }}is-active{{ end }}"
+           {{ if $headerProjectsActive }}aria-current="page"{{ end }}>
+          {{ i18n "projects" }}
+        </a>
+      {{ end }}
+
+      <button type="button" data-identity-btn class="mobile-sidebar-link mobile-sidebar-identity"
+              aria-label="{{ i18n "privateArea" }}" title="{{ i18n "loginPrivate" }}">
+        <svg data-identity-locked xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true" style="display:block">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <svg data-identity-unlocked xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true" style="display:none">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+        </svg>
+        <span>{{ i18n "privateArea" }}</span>
+      </button>
+    </nav>
+
+    <div class="mobile-sidebar-footer">
+      {{ with .Translations }}
+        {{ range first 1 . }}
+          <a href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Lang }}"
+             aria-label="{{ i18n "switchLanguage" }}" title="{{ i18n "switchLanguage" }}"
+             class="mobile-language-link">IT / ENG</a>
+        {{ end }}
+      {{ end }}
+
+      <button id="theme-toggle-mobile" type="button" data-theme-toggle
+              aria-label="{{ i18n "changeTheme" }}" class="mobile-theme-toggle">
+        <svg data-theme-sun xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="hidden">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l1.41 1.41"/>
+        </svg>
+        <svg data-theme-moon xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </aside>
+</div>
+
 <!-- Animazione slide-down per il box -->
 <style>
+.mobile-menu-btn {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  border: 0;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: #475569;
+  cursor: pointer;
+}
+.dark .mobile-menu-btn { color: #94a3b8; }
+.mobile-menu-btn span {
+  width: 1.125rem;
+  height: 2px;
+  border-radius: 9999px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.mobile-menu-btn.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.mobile-menu-btn.is-open span:nth-child(2) { opacity: 0; }
+.mobile-menu-btn.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-sidebar-backdrop {
+  position: fixed;
+  inset: 3.5rem 0 0;
+  z-index: 70;
+  visibility: hidden;
+  background: rgba(15, 23, 42, 0);
+  transition: visibility 0.25s, background 0.25s ease;
+}
+.mobile-sidebar-backdrop.is-open {
+  visibility: visible;
+  background: rgba(15, 23, 42, 0.38);
+}
+.mobile-sidebar-panel {
+  width: min(82vw, 20rem);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1rem 1.5rem;
+  border-right: 1px solid #e2e8f0;
+  background: #fff;
+  box-shadow: 12px 0 32px rgba(15, 23, 42, 0.14);
+  transform: translateX(-100%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dark .mobile-sidebar-panel {
+  border-color: #334155;
+  background: #0f172a;
+  box-shadow: 12px 0 32px rgba(0, 0, 0, 0.38);
+}
+.mobile-sidebar-backdrop.is-open .mobile-sidebar-panel { transform: translateX(0); }
+.mobile-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.mobile-sidebar-link {
+  width: 100%;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.8rem;
+  border: 0;
+  border-radius: 0.6rem;
+  background: transparent;
+  color: #475569;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.mobile-sidebar-link:hover,
+.mobile-sidebar-link:focus-visible {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+.mobile-sidebar-link.is-active {
+  background: #f0fdfa;
+  color: #0f766e;
+  font-weight: 650;
+}
+.dark .mobile-sidebar-link { color: #94a3b8; }
+.dark .mobile-sidebar-link:hover,
+.dark .mobile-sidebar-link:focus-visible {
+  background: #1e293b;
+  color: #f1f5f9;
+}
+.dark .mobile-sidebar-link.is-active {
+  background: rgba(20, 184, 166, 0.12);
+  color: #5eead4;
+}
+.mobile-sidebar-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: auto;
+  padding: 1rem 0.35rem 0;
+  border-top: 1px solid #e2e8f0;
+}
+.dark .mobile-sidebar-footer { border-color: #334155; }
+.mobile-language-link,
+.mobile-theme-toggle {
+  min-height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: #475569;
+  text-decoration: none;
+  cursor: pointer;
+}
+.mobile-language-link {
+  padding: 0 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.mobile-theme-toggle { width: 2.25rem; }
+.mobile-language-link:hover,
+.mobile-theme-toggle:hover { background: #f1f5f9; color: #0f172a; }
+.dark .mobile-language-link,
+.dark .mobile-theme-toggle { color: #94a3b8; }
+.dark .mobile-language-link:hover,
+.dark .mobile-theme-toggle:hover { background: #1e293b; color: #f1f5f9; }
+body.mobile-menu-open { overflow: hidden; }
+
+@media (min-width: 768px) {
+  .mobile-menu-btn,
+  .mobile-sidebar-backdrop { display: none !important; }
+}
+
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-12px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -144,9 +362,9 @@
 <script>
 (function () {
   var html        = document.documentElement;
-  var toggleBtn   = document.getElementById('theme-toggle');
-  var sun         = document.getElementById('icon-sun');
-  var moon        = document.getElementById('icon-moon');
+  var toggleBtns  = document.querySelectorAll('[data-theme-toggle]');
+  var sunIcons    = document.querySelectorAll('[data-theme-sun]');
+  var moonIcons   = document.querySelectorAll('[data-theme-moon]');
   var searchBtn   = document.getElementById('search-btn');
   var overlay     = document.getElementById('search-overlay');
   var box         = document.getElementById('search-box');
@@ -158,6 +376,32 @@
   var allPages    = [];
   var indexRequest = null;
   var selectedIdx = -1;
+  var mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  var mobileSidebarBackdrop = document.getElementById('mobile-sidebar-backdrop');
+
+  function setMobileMenu(open) {
+    if (!mobileMenuBtn || !mobileSidebarBackdrop) return;
+    mobileMenuBtn.classList.toggle('is-open', open);
+    mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    mobileSidebarBackdrop.classList.toggle('is-open', open);
+    mobileSidebarBackdrop.setAttribute('aria-hidden', open ? 'false' : 'true');
+    document.body.classList.toggle('mobile-menu-open', open);
+  }
+
+  if (mobileMenuBtn && mobileSidebarBackdrop) {
+    mobileMenuBtn.addEventListener('click', function () {
+      setMobileMenu(!mobileSidebarBackdrop.classList.contains('is-open'));
+    });
+    mobileSidebarBackdrop.addEventListener('click', function (event) {
+      if (event.target === mobileSidebarBackdrop) setMobileMenu(false);
+    });
+    mobileSidebarBackdrop.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () { setMobileMenu(false); });
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth >= 768) setMobileMenu(false);
+    });
+  }
 
   /* -- Search theme -- */
   function applySearchTheme() {
@@ -174,13 +418,13 @@
     if (theme === 'dark') {
       html.classList.add('dark');
       html.setAttribute('data-theme', 'dark');
-      sun.classList.remove('hidden');
-      moon.classList.add('hidden');
+      sunIcons.forEach(function (icon) { icon.classList.remove('hidden'); });
+      moonIcons.forEach(function (icon) { icon.classList.add('hidden'); });
     } else {
       html.classList.remove('dark');
       html.setAttribute('data-theme', 'light');
-      sun.classList.add('hidden');
-      moon.classList.remove('hidden');
+      sunIcons.forEach(function (icon) { icon.classList.add('hidden'); });
+      moonIcons.forEach(function (icon) { icon.classList.remove('hidden'); });
     }
     localStorage.setItem('theme', theme);
     applySearchTheme();
@@ -188,8 +432,10 @@
   }
 
   applyTheme(html.getAttribute('data-theme') || 'light');
-  toggleBtn.addEventListener('click', function () {
-    applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  toggleBtns.forEach(function (toggleBtn) {
+    toggleBtn.addEventListener('click', function () {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
   });
 
   /* -- Load JSON index -- */
@@ -246,7 +492,11 @@
 
   /* -- Keyboard shortcuts -- */
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { closeSearch(); return; }
+    if (e.key === 'Escape') {
+      closeSearch();
+      setMobileMenu(false);
+      return;
+    }
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
       e.preventDefault(); openSearch(); return;
     }
@@ -324,25 +574,34 @@
      quando questo script inline viene eseguito.
   ============================================================ */
   (function () {
-    var identityBtn  = document.getElementById('identity-btn');
-    var iconLocked   = document.getElementById('identity-icon-locked');
-    var iconUnlocked = document.getElementById('identity-icon-unlocked');
-    if (!identityBtn || !iconLocked || !iconUnlocked) return;
+    var identityBtns = Array.prototype.slice.call(document.querySelectorAll('[data-identity-btn]'));
+    if (!identityBtns.length) return;
 
     function setLoggedIn(user) {
-      iconLocked.style.display   = 'none';
-      iconUnlocked.style.display = 'block';
-      identityBtn.title          = '{{ i18n "privateArea" }} (' + (user.email || '') + ')';
-      identityBtn.onclick        = function () { window.location.href = '{{ with site.GetPage "section" "private" }}{{ .RelPermalink }}{{ end }}'; };
+      identityBtns.forEach(function (identityBtn) {
+        var iconLocked = identityBtn.querySelector('[data-identity-locked]');
+        var iconUnlocked = identityBtn.querySelector('[data-identity-unlocked]');
+        if (iconLocked) iconLocked.style.display = 'none';
+        if (iconUnlocked) iconUnlocked.style.display = 'block';
+        identityBtn.title = '{{ i18n "privateArea" }} (' + (user.email || '') + ')';
+        identityBtn.onclick = function () {
+          window.location.href = '{{ with site.GetPage "section" "private" }}{{ .RelPermalink }}{{ end }}';
+        };
+      });
     }
 
     function setLoggedOut() {
-      iconLocked.style.display   = 'block';
-      iconUnlocked.style.display = 'none';
-      identityBtn.title          = '{{ i18n "loginPrivate" }}';
-      identityBtn.onclick        = function () {
-        if (window.netlifyIdentity) window.netlifyIdentity.open('login');
-      };
+      identityBtns.forEach(function (identityBtn) {
+        var iconLocked = identityBtn.querySelector('[data-identity-locked]');
+        var iconUnlocked = identityBtn.querySelector('[data-identity-unlocked]');
+        if (iconLocked) iconLocked.style.display = 'block';
+        if (iconUnlocked) iconUnlocked.style.display = 'none';
+        identityBtn.title = '{{ i18n "loginPrivate" }}';
+        identityBtn.onclick = function () {
+          setMobileMenu(false);
+          if (window.netlifyIdentity) window.netlifyIdentity.open('login');
+        };
+      });
     }
 
     /* Stato default immediato: il lucchetto non dipende dal widget esterno. */
