@@ -6,7 +6,7 @@ title = 'Tommaso Francescon'
 [params]
   # URL MagicDNS dell'area privata, es. https://server.tua-tailnet.ts.net/private/
   # Rimane vuoto finché Tailscale Serve non viene configurato sul server.
-  privateURL = ''
+  privateURL = 'https://piserver.taila86e78.ts.net/private/'
 
 [languages]
   [languages.it]
