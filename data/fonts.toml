@@ -1,6 +1,18 @@
 # Registro degli alias disponibili per lo shortcode {{< font >}}.
 # Scarica i file .woff2 da Google Fonts e copiali in static/fonts/.
 
+[Brygada]
+family = "Brygada 1918"
+fallback = "Georgia, 'Times New Roman', serif"
+file = "/fonts/Brygada1918VariableFont_wght.woff2"
+weight = "400 800"
+
+[Bowlby]
+family = "Bowlby One SC"
+fallback = "'Arial Black', Impact, sans-serif"
+file = "/fonts/BowlbyOneSC-Regular.woff2"
+weight = "400"
+
 [Bit]
 family = "bit"
 fallback = "Georgia, 'Times New Roman', serif"

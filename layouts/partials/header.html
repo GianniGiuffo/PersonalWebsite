@@ -5,7 +5,7 @@
 {{ $privateURL := site.Params.privateURL | default "" }}
 {{ $privateAccessURL := "/accesso-privato/" | relURL }}
 
-<header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
+<header class="site-header sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
   <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
 
     <button id="mobile-menu-btn" type="button" class="mobile-menu-btn md:hidden"
@@ -109,7 +109,7 @@
         {{ range first 1 . }}
           <a href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Lang }}"
              aria-label="{{ i18n "switchLanguage" }}" title="{{ i18n "switchLanguage" }}"
-             class="hidden md:flex h-8 px-2 items-center justify-center rounded-md text-xs font-semibold tracking-wide text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+             class="font-display hidden md:flex h-8 px-2 items-center justify-center rounded-md text-xs font-semibold tracking-wide text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
             {{ $languageLabel }}
           </a>
         {{ end }}
@@ -169,7 +169,7 @@
         {{ range first 1 . }}
           <a href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Lang }}"
              aria-label="{{ i18n "switchLanguage" }}" title="{{ i18n "switchLanguage" }}"
-             class="mobile-language-link">{{ $languageLabel }}</a>
+             class="font-display mobile-language-link">{{ $languageLabel }}</a>
         {{ end }}
       {{ end }}
 

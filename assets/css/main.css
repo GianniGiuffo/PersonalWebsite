@@ -9,3 +9,26 @@
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Font globale: Brygada per lettura e interfaccia. */
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "Brygada 1918", Georgia, "Times New Roman", serif;
+}
+
+/* Elementi di richiamo: Bowlby esiste solo nel peso Regular. */
+.font-display {
+  font-family: "Bowlby One SC", "Arial Black", Impact, sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+}
+
+.site-header,
+.mobile-sidebar-panel {
+  font-family: "Bowlby One SC", "Arial Black", Impact, sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+}
