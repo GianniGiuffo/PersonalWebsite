@@ -26,6 +26,18 @@ select {
   font-synthesis: none;
 }
 
+/* Tutti i titoli del sito, inclusi quelli generati dai contenuti Markdown. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Bowlby One SC", "Arial Black", Impact, sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+}
+
 .site-header,
 .mobile-sidebar-panel {
   font-family: "Bowlby One SC", "Arial Black", Impact, sans-serif;
