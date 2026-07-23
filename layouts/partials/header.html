@@ -3,6 +3,7 @@
 {{ $headerPostsActive := eq $headerSection "posts" }}
 {{ $headerProjectsActive := eq $headerSection "projects" }}
 {{ $privateURL := site.Params.privateURL | default "" }}
+{{ $privateAccessURL := "/accesso-privato/" | relURL }}
 
 <header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
   <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
@@ -78,7 +79,7 @@
 
       <!-- Area privata: disponibile soltanto tramite URL Tailscale. -->
       {{ if $privateURL }}
-      <a id="identity-btn" href="{{ $privateURL }}" aria-label="{{ i18n "privateArea" }}" title="{{ i18n "privateArea" }}"
+      <a id="identity-btn" href="{{ $privateAccessURL }}" aria-label="{{ i18n "privateArea" }}" title="{{ i18n "privateArea" }}"
          class="hidden md:flex w-8 h-8 flex-shrink-0 items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
       {{ else }}
       <span id="identity-btn" aria-label="{{ i18n "privateArea" }}" title="Area privata disponibile solo tramite Tailscale"
@@ -147,7 +148,7 @@
       {{ end }}
 
       {{ if $privateURL }}
-      <a href="{{ $privateURL }}" class="mobile-sidebar-link mobile-sidebar-identity"
+      <a href="{{ $privateAccessURL }}" class="mobile-sidebar-link mobile-sidebar-identity"
          aria-label="{{ i18n "privateArea" }}" title="{{ i18n "privateArea" }}">
       {{ else }}
       <span class="mobile-sidebar-link mobile-sidebar-identity opacity-60 cursor-not-allowed"

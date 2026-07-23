@@ -1,8 +1,9 @@
 # Area privata con Caddy e Tailscale
 
 L'area privata del sito non usa password, account o JavaScript per autenticare.
-Il sito pubblico resta su `tommasofrancescon.it`; Caddy restituisce `404` per
-le pagine private. Il Caddy del Raspberry ascolta anche su una porta pubblicata
+Il sito pubblico resta su `tommasofrancescon.it`: l'ingresso `/private/`
+reindirizza a una pagina informativa, mentre gli URL dei documenti privati
+restituiscono `404`. Il Caddy del Raspberry ascolta anche su una porta pubblicata
 solo su `127.0.0.1`; Tailscale Serve espone l'intero sito Hugo sulla porta HTTPS
 dedicata `8443`, accessibile esclusivamente dal tailnet.
 
@@ -21,9 +22,15 @@ http://{$SITE_1_DOMAIN} {
     root * /srv/sites/site-1/current
     encode zstd gzip
 
-    # Questi URL non sono mai disponibili sul dominio pubblico.
-    @private path /private /private/* /en/private /en/private/*
-    handle @private {
+    # L'ingresso pubblico mostra le istruzioni, non i documenti.
+    @privateEntry path /private /private/ /en/private /en/private/
+    handle @privateEntry {
+        redir /accesso-privato/ 302
+    }
+
+    # I documenti privati non sono mai disponibili sul dominio pubblico.
+    @privateDocuments path /private/* /en/private/*
+    handle @privateDocuments {
         respond 404
     }
 
@@ -96,13 +103,16 @@ In `hugo.toml`, inserisci l'URL esatto restituito da `tailscale serve status`:
 privateURL = 'https://nome-server.nome-tailnet.ts.net:8443/private/'
 ```
 
-Finché `privateURL` è vuoto il lucchetto rimane volutamente disabilitato,
-evitando di inviare richieste all'URL pubblico bloccato.
+Il lucchetto apre prima la pagina pubblica `/accesso-privato/`. Il pulsante
+presente nella pagina usa `privateURL` per raggiungere Tailscale. In questo modo
+le istruzioni restano visibili anche quando Tailscale è spento o disconnesso.
+Finché `privateURL` è vuoto il lucchetto rimane volutamente disabilitato.
 
 ## 4. Verifica
 
 1. Da una rete senza Tailscale, `https://tommasofrancescon.it/private/` deve
-   restituire `404`.
+   reindirizzare a `/accesso-privato/`, mentre un URL come
+   `/private/primo-post/` deve restituire `404`.
 2. Da un dispositivo connesso al tuo tailnet,
    `https://nome-server.nome-tailnet.ts.net:8443/private/` deve aprire l'area
    privata italiana.
