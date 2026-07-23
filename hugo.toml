@@ -4,9 +4,9 @@ defaultContentLanguageInSubdir = false
 title = 'Tommaso Francescon'
 
 [params]
-  # URL MagicDNS dell'area privata, es. https://server.tua-tailnet.ts.net/private/
+  # URL MagicDNS dell'area privata, es. https://server.tua-tailnet.ts.net:8443/private/
   # Rimane vuoto finché Tailscale Serve non viene configurato sul server.
-  privateURL = 'https://piserver.taila86e78.ts.net/private/'
+  privateURL = 'https://piserver.taila86e78.ts.net:8443/private/'
 
 [languages]
   [languages.it]

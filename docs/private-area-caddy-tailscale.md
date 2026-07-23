@@ -3,8 +3,8 @@
 L'area privata del sito non usa password, account o JavaScript per autenticare.
 Il sito pubblico resta su `tommasofrancescon.it`; Caddy restituisce `404` per
 le pagine private. Il Caddy del Raspberry ascolta anche su una porta pubblicata
-solo su `127.0.0.1`; Tailscale Serve instrada a quella porta esclusivamente gli
-URL privati all'interno del tailnet.
+solo su `127.0.0.1`; Tailscale Serve espone l'intero sito Hugo sulla porta HTTPS
+dedicata `8443`, accessibile esclusivamente dal tailnet.
 
 > Configura prima Caddy e Tailscale, poi pubblica il deploy che contiene
 > contenuti privati.
@@ -61,9 +61,9 @@ docker compose up -d caddy
 
 ## 2. Tailscale Serve
 
-Sul server, aggiorna tutte le route Tailscale insieme. Questo conserva
-Nextcloud su `/` e Pi-hole su `/admin/`, aggiungendo `/private/` e
-`/en/private/`:
+Sul server, aggiorna tutte le route Tailscale insieme. Lo script conserva
+Nextcloud su `/` e Pi-hole su `/admin/` nella porta HTTPS standard `443`, e
+pubblica l'intero sito Hugo sulla porta HTTPS `8443`:
 
 ```bash
 cd /opt/raspberry-server
@@ -74,13 +74,13 @@ sudo tailscale serve status
 Il secondo comando mostra l'URL MagicDNS, con una forma simile a:
 
 ```text
-https://nome-server.nome-tailnet.ts.net
+https://nome-server.nome-tailnet.ts.net:8443
 ```
 
 L'area privata si apre quindi a:
 
 ```text
-https://nome-server.nome-tailnet.ts.net/private/
+https://nome-server.nome-tailnet.ts.net:8443/private/
 ```
 
 Tailscale Serve è disponibile solo ai dispositivi autorizzati nel tailnet;
@@ -93,7 +93,7 @@ In `hugo.toml`, inserisci l'URL esatto restituito da `tailscale serve status`:
 
 ```toml
 [params]
-privateURL = 'https://nome-server.nome-tailnet.ts.net/private/'
+privateURL = 'https://nome-server.nome-tailnet.ts.net:8443/private/'
 ```
 
 Finché `privateURL` è vuoto il lucchetto rimane volutamente disabilitato,
@@ -103,18 +103,20 @@ evitando di inviare richieste all'URL pubblico bloccato.
 
 1. Da una rete senza Tailscale, `https://tommasofrancescon.it/private/` deve
    restituire `404`.
-2. Da un dispositivo connesso al tuo tailnet, l'URL MagicDNS deve aprire
-   `/private/` e `/en/private/`.
+2. Da un dispositivo connesso al tuo tailnet,
+   `https://nome-server.nome-tailnet.ts.net:8443/private/` deve aprire l'area
+   privata italiana.
 3. Aprendo la pagina privata, le richieste a `/css/main.…css` devono restituire
    `200` nel pannello Network del browser. Se sono `404`, il listener locale
    sta servendo soltanto `/private` e va sostituito con il blocco completo qui
    sopra.
-4. Solo dopo questi controlli, aggiungi contenuti in `content/*/private/`.
+4. Solo dopo questi controlli, aggiungi contenuti in
+   `content/italian/private/`.
 
 ## 5. Aggiungere documenti
 
-La sezione ora usa lo stesso stile della pagina Post. Crea un file Markdown in
-`content/italian/private/` oppure in `content/english/private/`, ad esempio:
+La sezione ora usa lo stesso stile della pagina Post. Crea un file Markdown
+soltanto in `content/italian/private/`, ad esempio:
 
 ```md
 ---
