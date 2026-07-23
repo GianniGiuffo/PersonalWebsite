@@ -40,6 +40,14 @@ other = "Nessun post ancora."
 other = "Note, pensieri e aggiornamenti dal mio percorso nel game development."
 [addPosts]
 other = "Aggiungi file in content/posts/."
+[privateIntro]
+other = "Documenti personali disponibili solo tramite Tailscale."
+[allPrivateDocuments]
+other = "Tutti i documenti"
+[noPrivateDocuments]
+other = "Nessun documento privato ancora."
+[addPrivateDocuments]
+other = "Aggiungi file in content/italian/private/."
 [projectsIntro]
 other = "Giochi e progetti su cui sto lavorando."
 [noProjects]
