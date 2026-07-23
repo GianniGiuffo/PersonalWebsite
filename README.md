@@ -2,16 +2,16 @@
 
 Sito personale di Tommaso Francescon, realizzato con [Hugo](https://gohugo.io/). Il progetto raccoglie informazioni personali, articoli e progetti in un'esperienza editoriale bilingue italiano/inglese.
 
-> **Stato:** la versione 1.0 è completata. Il sito non è ancora pubblico; la pubblicazione sarà effettuata in un secondo momento.
+> **Stato:** il sito è pubblicato su `tommasofrancescon.it` tramite Caddy.
 
 ## Caratteristiche
 
 - contenuti disponibili in italiano e inglese;
 - sezioni About, articoli e progetti;
-- area privata protetta e configurata per non essere indicizzata;
+- area privata accessibile soltanto tramite Tailscale;
 - layout personalizzati e tipografia basata su font locali;
 - shortcode per contenuti esterni come mappe, YouTube, Spotify e Instagram;
-- build ottimizzata e predisposta per Netlify;
+- build statica ottimizzata per Caddy;
 - output HTML, RSS e JSON per la home page.
 
 ## Tecnologie
@@ -19,7 +19,8 @@ Sito personale di Tommaso Francescon, realizzato con [Hugo](https://gohugo.io/).
 - Hugo `0.163.3`;
 - Tailwind CSS `4`;
 - Node.js `24` per gli strumenti di build;
-- Netlify per il deployment previsto.
+- Caddy per la pubblicazione sul server personale;
+- Tailscale Serve per l'area privata.
 
 ## Sviluppo locale
 
@@ -57,7 +58,8 @@ La lingua predefinita è l'italiano. La versione inglese è disponibile nella re
 
 ## Pubblicazione
 
-La configurazione per Netlify è presente in `netlify.toml`. Prima della pubblicazione definitiva è necessario verificare dominio, contenuti e impostazioni del deployment.
+Il sito viene pubblicato dal server personale tramite Caddy. Per rendere privata
+la sezione `/private/`, segui [la configurazione Caddy e Tailscale](docs/private-area-caddy-tailscale.md).
 
 ## Licenza
 
@@ -69,6 +71,8 @@ Questo repository contiene il sito personale e i relativi contenuti. Non è attu
 
 Personal website of Tommaso Francescon, built with [Hugo](https://gohugo.io/). The project contains personal information, posts and projects in an Italian/English bilingual experience.
 
-> **Status:** version 1.0 is complete. The website is not public yet; publication will take place later.
+> **Status:** the website is published at `tommasofrancescon.it` through Caddy.
 
-The project includes localized content, custom layouts, a protected private area, external-content shortcodes, and a Netlify-ready production build. See the sections above for local development and project structure.
+The project includes localized content, custom layouts, a Tailscale-only private area,
+external-content shortcodes, and a Caddy-ready static production build. See the
+sections above for local development and project structure.

@@ -1,7 +1,12 @@
-baseURL = 'https://personalwebsite-gg.netlify.app/'
+baseURL = 'https://tommasofrancescon.it/'
 defaultContentLanguage = 'it'
 defaultContentLanguageInSubdir = false
 title = 'Tommaso Francescon'
+
+[params]
+  # URL MagicDNS dell'area privata, es. https://server.tua-tailnet.ts.net/private/
+  # Rimane vuoto finché Tailscale Serve non viene configurato sul server.
+  privateURL = ''
 
 [languages]
   [languages.it]

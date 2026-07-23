@@ -19,7 +19,8 @@ Erano tutte cose che volevo da qualche tempo ma tra una scusa e l'altra non l'ho
 Comunque ci sarà spazio per i dettagli, il perché di alcune scelte e tutte le specifiche all'interno della sezione Projects.
 Devo ancora capire se mi piace diviso tra Posts e Projects a dire il vero, ho paura di non trovare una vera utilità alla seconda.
 
-Ma ora la domanda più grande e risonante: 
+Ma ora la domanda più grande e risonante:
+
 {{< font name="paura" size="2rem" >}} come mai questo sito? {{< /font >}}
 
 La risposta rapida è: boh mi divertiva fare un sito.

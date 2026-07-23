@@ -2,6 +2,7 @@
 {{ $headerHomeActive := .IsHome }}
 {{ $headerPostsActive := eq $headerSection "posts" }}
 {{ $headerProjectsActive := eq $headerSection "projects" }}
+{{ $privateURL := site.Params.privateURL | default "" }}
 
 <header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
   <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
@@ -75,22 +76,20 @@
       </a>
       {{ end }}
 
-      <!-- Bottone Area Privata / Identity -->
-      <button id="identity-btn" type="button" data-identity-btn aria-label="{{ i18n "privateArea" }}" title="{{ i18n "loginPrivate" }}"
-              class="hidden md:flex w-8 h-8 flex-shrink-0 items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-        <!-- Lucchetto chiuso: non loggato -->
-        <svg id="identity-icon-locked" data-identity-locked xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block">
+      <!-- Area privata: disponibile soltanto tramite URL Tailscale. -->
+      {{ if $privateURL }}
+      <a id="identity-btn" href="{{ $privateURL }}" aria-label="{{ i18n "privateArea" }}" title="{{ i18n "privateArea" }}"
+         class="hidden md:flex w-8 h-8 flex-shrink-0 items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+      {{ else }}
+      <span id="identity-btn" aria-label="{{ i18n "privateArea" }}" title="Area privata disponibile solo tramite Tailscale"
+            class="hidden md:flex w-8 h-8 flex-shrink-0 items-center justify-center rounded-md text-slate-400 dark:text-slate-500 cursor-not-allowed">
+      {{ end }}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
           <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
-        <!-- Lucchetto aperto: loggato -->
-        <svg id="identity-icon-unlocked" data-identity-unlocked xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-          <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
-        </svg>
-      </button>
+      {{ if $privateURL }}</a>{{ else }}</span>{{ end }}
 
       <button id="theme-toggle" type="button" data-theme-toggle aria-label="{{ i18n "changeTheme" }}"
               class="hidden md:flex w-8 h-8 items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
@@ -147,22 +146,21 @@
         </a>
       {{ end }}
 
-      <button type="button" data-identity-btn class="mobile-sidebar-link mobile-sidebar-identity"
-              aria-label="{{ i18n "privateArea" }}" title="{{ i18n "loginPrivate" }}">
-        <svg data-identity-locked xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+      {{ if $privateURL }}
+      <a href="{{ $privateURL }}" class="mobile-sidebar-link mobile-sidebar-identity"
+         aria-label="{{ i18n "privateArea" }}" title="{{ i18n "privateArea" }}">
+      {{ else }}
+      <span class="mobile-sidebar-link mobile-sidebar-identity opacity-60 cursor-not-allowed"
+            aria-label="{{ i18n "privateArea" }}" title="Area privata disponibile solo tramite Tailscale">
+      {{ end }}
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             aria-hidden="true" style="display:block">
+             aria-hidden="true">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
           <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
-        <svg data-identity-unlocked xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             aria-hidden="true" style="display:none">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-          <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
-        </svg>
         <span>{{ i18n "privateArea" }}</span>
-      </button>
+      {{ if $privateURL }}</a>{{ else }}</span>{{ end }}
     </nav>
 
     <div class="mobile-sidebar-footer">
@@ -588,118 +586,6 @@ body.mobile-menu-open { overflow: hidden; }
   input.addEventListener('input', function () {
     runSearch(input.value.trim().toLowerCase());
   });
-
-  /* ============================================================
-     Netlify Identity
-     Strategia: aspetta che il widget sia pronto con un polling
-     leggero (max ~2s), poi registra i listener.
-     Questo risolve il race condition sulla home page dove
-     window.netlifyIdentity puo' non essere ancora definito
-     quando questo script inline viene eseguito.
-  ============================================================ */
-  (function () {
-    var identityBtns = Array.prototype.slice.call(document.querySelectorAll('[data-identity-btn]'));
-    if (!identityBtns.length) return;
-
-    function setLoggedIn(user) {
-      identityBtns.forEach(function (identityBtn) {
-        var iconLocked = identityBtn.querySelector('[data-identity-locked]');
-        var iconUnlocked = identityBtn.querySelector('[data-identity-unlocked]');
-        if (iconLocked) iconLocked.style.display = 'none';
-        if (iconUnlocked) iconUnlocked.style.display = 'block';
-        identityBtn.title = '{{ i18n "privateArea" }} (' + (user.email || '') + ')';
-        identityBtn.onclick = function () {
-          window.location.href = '{{ with site.GetPage "section" "private" }}{{ .RelPermalink }}{{ end }}';
-        };
-      });
-    }
-
-    function setLoggedOut() {
-      identityBtns.forEach(function (identityBtn) {
-        var iconLocked = identityBtn.querySelector('[data-identity-locked]');
-        var iconUnlocked = identityBtn.querySelector('[data-identity-unlocked]');
-        if (iconLocked) iconLocked.style.display = 'block';
-        if (iconUnlocked) iconUnlocked.style.display = 'none';
-        identityBtn.title = '{{ i18n "loginPrivate" }}';
-        identityBtn.onclick = function () {
-          setMobileMenu(false);
-          if (window.netlifyIdentity) window.netlifyIdentity.open('login');
-        };
-      });
-    }
-
-    /* Stato default immediato: il lucchetto non dipende dal widget esterno. */
-    setLoggedOut();
-
-    function bindIdentity() {
-      if (!window.netlifyIdentity) return false;
-      if (window.netlifyIdentity.__tfBound) return true;
-      window.netlifyIdentity.__tfBound = true;
-
-      var currentUser = window.netlifyIdentity.currentUser
-        ? window.netlifyIdentity.currentUser()
-        : null;
-      if (currentUser) setLoggedIn(currentUser);
-
-      window.netlifyIdentity.on('init', function (user) {
-        user ? setLoggedIn(user) : setLoggedOut();
-      });
-      window.netlifyIdentity.on('open', function () {
-        setTimeout(applyIdentityTheme, 0);
-      });
-      window.netlifyIdentity.on('login', function (user) {
-        window.netlifyIdentity.close();
-        setLoggedIn(user);
-          window.location.href = '{{ with site.GetPage "section" "private" }}{{ .RelPermalink }}{{ end }}';
-      });
-      window.netlifyIdentity.on('logout', function () {
-        setLoggedOut();
-        if (window.location.pathname.indexOf('/private') !== -1) {
-          window.location.href = '{{ .Site.Home.RelPermalink }}';
-        }
-      });
-      return true;
-    }
-
-    function applyIdentityTheme() {
-      var iframe = document.getElementById('netlify-identity-widget');
-      if (!iframe || !iframe.contentDocument) return;
-
-      var doc = iframe.contentDocument;
-      var style = doc.getElementById('site-identity-theme');
-      if (!style) {
-        style = doc.createElement('style');
-        style.id = 'site-identity-theme';
-        doc.head.appendChild(style);
-      }
-
-      if (html.classList.contains('dark')) {
-        style.textContent = [
-          ':root { --baseColor: #e2e8f0; --subduedColor: #94a3b8; }',
-          '.modalContainer::before { background-color: rgba(2, 6, 23, 0.82) !important; }',
-          '.modalContent, .btnClose, .btnHeader, .formControl, .hr::before { background: #1e293b !important; color: #e2e8f0 !important; }',
-          '.modalContent { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55) !important; }',
-          '.btnHeader { border-color: #334155 !important; }',
-          '.btnHeader.active, .btnHeader:focus { color: #f8fafc !important; border-color: #2dd4bf !important; }',
-          '.btnLink { color: #99f6e4 !important; border-color: #334155 !important; }',
-          '.formControl { border-color: #475569 !important; }',
-          '.flashMessage { background: #334155 !important; color: #e2e8f0 !important; }',
-          '.hr { border-color: #475569 !important; }'
-        ].join('');
-      } else {
-        style.textContent = '';
-      }
-    }
-
-    window.addEventListener('site-theme-change', applyIdentityTheme);
-
-    /* Aspetta che netlifyIdentity sia disponibile (polling max 40 x 50ms = 2s). */
-    var attempts = 0;
-    var poll = setInterval(function () {
-      attempts++;
-      if (bindIdentity() || attempts >= 40) clearInterval(poll);
-    }, 50);
-  })();
 
 })();
 </script>
