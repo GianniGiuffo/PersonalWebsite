@@ -4,7 +4,7 @@ translationKey: first-post
 date: 2026-07-22T14:00:00
 draft: false
 description: Descrizione per SEO e anteprime social
-summary: Testo che appare nelle card e nelle liste
+summary: Ora vi racconto io
 cover: https://res.cloudinary.com/nhuws9fe/image/upload/v1783378859/Shrek_vtjnqb.png
 ---
 Eccoci qua, con un nuovo progetto in divenire, l'ennesimo.
@@ -43,4 +43,4 @@ Non c'è neanche da dirlo che alla fine molto meno non spendevo, però la soddis
 
 Ed ora è rimasto tutto così, più consapevole di molte cose, più capace ovviamente.
 
-Ma la curiosità, l'ingegno e la voglia di imparare a fare cose nuove, quella è sempre perfettamente identica.
+Ma la curiosità, l'ingegno, la voglia di imparare a fare cose nuove e soprattutto gli sbagli, è sempre tutto perfettamente identico ed al suo posto.
