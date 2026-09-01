@@ -24,11 +24,11 @@
         ]
       },
       {
-        "id": "d4ea476add77f206",
+        "id": "37c09148f016ffdd",
         "type": "tabs",
         "children": [
           {
-            "id": "b7cd57a12f95e3ce",
+            "id": "482faa0695041b44",
             "type": "leaf",
             "state": {
               "type": "hugo-preview-view",
@@ -57,10 +57,12 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
-              "title": "Esplora risorse"
+              "title": "Esplora file"
             }
           },
           {
@@ -190,10 +192,10 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Apri selezione rapida": false,
+      "switcher:Apri selettore rapido": false,
+      "daily-notes:Apri nota giornaliera": false,
       "graph:Apri vista grafo": false,
       "canvas:Crea nuova lavagna": false,
-      "daily-notes:Apri nota del giorno": false,
       "templates:Inserisci modello": false,
       "command-palette:Apri riquadro comandi": false,
       "bases:Crea nuova Base": false
@@ -201,9 +203,9 @@
   },
   "active": "dc78356ee80a883d",
   "lastOpenFiles": [
-    "content/italian/posts/primo-post.md",
-    "content/italian/posts/Un po'(st) così.md",
     "content/italian/posts/secondo-post.md",
+    "content/italian/posts/Un po'(st) così.md",
+    "content/italian/posts/primo-post.md",
     "public/posts/un-post-così/index.html",
     "public/posts/un-post-così",
     "public/posts/un-post-cosi/index.html",

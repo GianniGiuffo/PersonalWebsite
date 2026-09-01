@@ -2,7 +2,7 @@
 title: Un po'(st) così
 translationKey: first-post
 date: 2026-08-31T01:00:00
-draft: true
+draft: false
 description: Descrizione per SEO e anteprime social
 summary: Come procede
 cover: https://res.cloudinary.com/nhuws9fe/image/upload/v1783378859/Shrek_vtjnqb.png
