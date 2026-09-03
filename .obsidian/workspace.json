@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/italian/private/primo-post.md",
+                "file": "content/english/posts/Un po'(st) così.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "primo-post"
+              "title": "Un po'(st) così"
             }
           }
         ]
@@ -205,13 +205,18 @@
   },
   "active": "dc78356ee80a883d",
   "lastOpenFiles": [
-    "content/italian/accesso-privato.md",
-    "content/english/posts/secondo-post.md",
+    "public/en/posts/un-post-così/index.html",
+    "public/en/posts/un-post-così",
     "content/english/posts/primo-post.md",
+    "content/english/posts/Un po'(st) così.md",
+    "public/posts/un-post-così-1/index.html",
+    "public/posts/un-post-così-1",
+    "content/italian/posts/Un po'(st) così.md",
+    "content/english/posts/secondo-post.md",
+    "content/italian/private/primo-post.md",
+    "content/italian/accesso-privato.md",
     "content/italian/posts/primo-post.md",
     "content/italian/posts/_index.md",
-    "content/italian/posts/Un po'(st) così.md",
-    "content/italian/private/primo-post.md",
     "content/italian/posts/secondo-post.md",
     "public/posts/un-post-così/index.html",
     "public/posts/un-post-così",
