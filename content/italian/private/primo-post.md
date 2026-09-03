@@ -54,6 +54,9 @@ func main() {
 **Google Maps con URL parziale**
 {{< maps url="https://www.google.com/maps/@45.0145544,7.6532388,17z" >}}
 
+**Google Maps con percorso. Partenza e Arrivo**
+{{< maps url="https://www.google.com/maps/@45.0147227,7.6528157,17z/" to="https://www.google.com/maps/@45.0690511,7.6919054,16.83z/" >}}
+
 **Inserire post di Instagram**
 {{< instagram id=DZsBp0LjcFd hideCaption=true >}}
 
