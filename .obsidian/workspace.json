@@ -6,6 +6,7 @@
       {
         "id": "0f6be730307ab190",
         "type": "tabs",
+        "dimension": 50,
         "children": [
           {
             "id": "dc78356ee80a883d",
@@ -13,22 +14,37 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/italian/posts/Un po'(st) così.md",
+                "file": "content/italian/private/primo-post.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Un po'(st) così"
+              "title": "primo-post"
+            }
+          },
+          {
+            "id": "b40aa9ead6e69db8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "content/italian/posts/secondo-post.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "secondo-post"
             }
           }
         ]
       },
       {
-        "id": "37c09148f016ffdd",
+        "id": "7cc1a74975cb1a89",
         "type": "tabs",
+        "dimension": 50,
         "children": [
           {
-            "id": "482faa0695041b44",
+            "id": "627f98e1dbd2bb1d",
             "type": "leaf",
             "state": {
               "type": "hugo-preview-view",
@@ -201,11 +217,12 @@
       "bases:Crea nuova Base": false
     }
   },
-  "active": "dc78356ee80a883d",
+  "active": "627f98e1dbd2bb1d",
   "lastOpenFiles": [
     "content/italian/posts/secondo-post.md",
-    "content/italian/posts/Un po'(st) così.md",
+    "content/italian/private/primo-post.md",
     "content/italian/posts/primo-post.md",
+    "content/italian/posts/Un po'(st) così.md",
     "public/posts/un-post-così/index.html",
     "public/posts/un-post-così",
     "public/posts/un-post-cosi/index.html",

@@ -1,5 +1,5 @@
 ---
-title: Primo post
+title: il PRIMO post
 translationKey: first-post
 date: 2026-07-22T14:00:00
 draft: false
@@ -27,9 +27,9 @@ La risposta rapida è: *"boh mi divertiva fare un sito"*
 
 Quella più lunga suona tipo così:
 
-ho bisogno di un posto dove passare il tempo quando non sviluppo i miei progetti, {{< annotation >}} sono disoccupato per ora, non per scelta, cerco part-time : ) {{< /annotation >}} un modo nonché una scusa per allontanarmi da instagram e dall'intelligenza artificiale.
+ho bisogno di un posto dove passare il tempo quando non sviluppo i miei progetti, {{< annotation >}} sono disoccupato per ora, non per scelta, cerco part-time : ) {{< /annotation >}} un modo nonché una scusa per allontanarmi da instagram, dal telefono e dall'intelligenza artificiale.
 
-Un posto dove poter raccontare di alcune avventure, idee folli o esperienze di vita, svagare tra un argomento e l'altro senza un vero filo logico. Ho cercato di implementare molte funzioni su questo sito proprio per venire in contro alle mie esigenze che già immagino avrò quando scriverò i post ma conoscendomi mi immagino già tra qualche settimana: "Avrei proprio bisogno di implementare uno shortcode per *Inserisci richiesta folle tipo __pagamenti della banca__*".
+Un posto dove poter raccontare di alcune avventure, idee folli o esperienze di vita, svagare tra un argomento e l'altro senza un vero filo logico. Ho cercato di implementare molte funzioni su questo sito proprio per venire in contro alle mie esigenze che già immagino avrò quando scriverò i post ma conoscendomi mi immagino già tra qualche settimana: {{< font name="stilizzato" size="1.3rem" >}} "Avrei proprio bisogno di implementare uno shortcode per {{< /font >}} {{< font name="stilizzato" size="1rem" >}} *Inserisci richiesta folle tipo __pagamenti della banca__*" {{< /font >}}.
 
 Un posto dove raccontare i miei pensieri, i miei dubbi senza dovermi giustificare, senza dovermi scusare o preoccupare dei pensieri altrui. Uno spazio completamente personale. {{< annotation >}} e pensare che a scuola mi faceva schifo scrivere, ora addirittura voglio farlo per svago - Follia {{< /annotation >}}
 
@@ -41,6 +41,8 @@ Smanetto su qualsiasi cosa abbia della corrente o anche solo del rame da quando 
 Quando ero più piccolo smontavo qualsiasi cosa mi passasse per le mani solo per capire come fosse fatto o se potevo recuperare dei pezzi, costruivo degli accrocchi che non si potevano vedere ma anche cose molto carine e ben fatte. {{< annotation >}} il cabinato è uno di quelli, un progetto che arriverà sul sito sicuramente in futuro {{< /annotation >}} Tutto con l'obiettivo di spendere poco per non comprare le solite *"cose già fatte"*.
 Non c'è neanche da dirlo che alla fine molto meno non spendevo, però la soddisfazione di fare tutto questo con le mie mani, imparare cose nuove da 0, sbagliare tutto e ricominciare, quella soddisfazione era ineguagliabile.
 
-Ed ora è rimasto tutto così, più consapevole di molte cose, più capace ovviamente.
+Ed ora è rimasto tutto così, più consapevole di molte cose, più capace ovviamente. Ma la curiosità, l'ingegno, la voglia di imparare a fare cose nuove e soprattutto gli sbagli, è sempre tutto perfettamente identico ed al suo posto.
 
-Ma la curiosità, l'ingegno, la voglia di imparare a fare cose nuove e soprattutto gli sbagli, è sempre tutto perfettamente identico ed al suo posto.
+E finalmente è tutto raccontato
+
+Quindi se ti va puoi leggere la mia storia {{< annotation >}} Presente più che passata direi {{< /annotation >}} e raccontarmi la tua :)

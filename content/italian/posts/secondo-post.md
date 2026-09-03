@@ -18,21 +18,17 @@ Questa e' una foto di esempio
 {{< annotation >}} Questo e' un esempio di annotazione
 {{< /annotation >}}
 
-Questa e' la prova numero 2 se il sito viene aggiornato in automatico
+Esempi di Font da utilizzare:
 
-Questo invece e' l'esempio {{< font name="giocoso" size="2rem" >}} DI UN FONT {{< /font >}} cambiato totalmente
-
-E potrei farlo {{< font name="streghetta" size="2rem" >}} ANCORA {{< /font >}} e {{< font name="happy" size="2rem" >}} ANCORA {{< /font >}} 
-
-E questo fa {{< font name="paura" size="3rem" >}} PAURA ? {{< /font >}}
-
-Oppure {{< font name="pensieri" size="2rem" >}} QUESTO QUI {{< /font >}} e' piu' {{< font name="pensieri" size="2rem" >}} INQUETANTE {{< /font >}}
-
-C'e' anche questo {{< font name="murales" size="2rem" >}} Bellissimo font, {{< /font >}} {{< font name="psx" size="1rem" >}} anche se e' molto particolare {{< /font >}}
-
-{{< font name="stilizzato" size="2rem" >}} QUESTO QUI {{< /font >}} l'ho chiamato stilizzato
-
-{{< font name="fumetto" size="2rem" >}} Mentre lui nella mia testa mi ricordava un fumetto {{< /font >}}
+1. {{< font name="giocoso" size="2rem" >}} Giocoso {{< /font >}}
+2. {{< font name="streghetta" size="2rem" >}} Streghetta {{< /font >}}
+3. {{< font name="happy" size="2rem" >}} Happy {{< /font >}} 
+4. {{< font name="paura" size="2rem" >}} Paura {{< /font >}}
+5. {{< font name="pensieri" size="2rem" >}} Pensieri {{< /font >}}
+6. {{< font name="murales" size="2rem" >}} Murales {{< /font >}}
+7. {{< font name="psx" size="2rem" >}} Psx {{< /font >}}
+8. {{< font name="stilizzato" size="2rem" >}} Stilizzato {{< /font >}}
+9. {{< font name="fumetto" size="2rem" >}} Fumetto {{< /font >}}
 
 
 ![Gumball foto di prova](https://res.cloudinary.com/nhuws9fe/image/upload/v1783376711/GumballTest_bitivy.jpg)
@@ -43,7 +39,6 @@ C'e' anche questo {{< font name="murales" size="2rem" >}} Bellissimo font, {{< /
 
 {{< youtube O_IViNjCApU >}}
 
-{{/* Highlight con numero di riga e riga evidenziata */}}
 {{< highlight go "linenos=true,hl_lines=3 5" >}}
 package main
 func main() {
