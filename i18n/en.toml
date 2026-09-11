@@ -68,3 +68,25 @@ other = "No content in this section."
 other = "Contact"
 [contactsIntro]
 other = "Write to me about collaborations, questions, or just to say hello."
+[navidromePlayerUnavailable]
+other = "Navidrome player unavailable"
+[navidromeUnavailable]
+other = "This track is not available right now."
+[navidromeOpen]
+other = "Open on Navidrome"
+[navidromeOpenShare]
+other = "Open the share on Navidrome"
+[navidromeOpenTrack]
+other = "Open {{ . }} on Navidrome"
+[navidromeCover]
+other = "Cover art for {{ . }}"
+[navidromePlay]
+other = "Play"
+[navidromePause]
+other = "Pause"
+[navidromeTrackUnavailable]
+other = "Track unavailable"
+[navidromePosition]
+other = "Track position"
+[navidromeStartsAt]
+other = "Playback starts at {{ . }}."

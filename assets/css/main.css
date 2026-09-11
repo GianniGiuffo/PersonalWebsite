@@ -3,6 +3,7 @@
 @source "../notwatching/hugo_stats.json";
 @import "./annotations.css";
 @import "./maps.css";
+@import "./navidrome-player.css";
 
 @theme {
   --color-slate-900: #14213D;

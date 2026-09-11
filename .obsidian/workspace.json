@@ -6,7 +6,6 @@
       {
         "id": "0f6be730307ab190",
         "type": "tabs",
-        "dimension": 50,
         "children": [
           {
             "id": "dc78356ee80a883d",
@@ -14,23 +13,22 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/english/posts/Un po'(st) così.md",
+                "file": "content/italian/private/primo-post.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Un po'(st) così"
+              "title": "primo-post"
             }
           }
         ]
       },
       {
-        "id": "7cc1a74975cb1a89",
+        "id": "8dc9748c478cdd1e",
         "type": "tabs",
-        "dimension": 50,
         "children": [
           {
-            "id": "627f98e1dbd2bb1d",
+            "id": "9d238fda1759d57d",
             "type": "leaf",
             "state": {
               "type": "hugo-preview-view",
@@ -205,25 +203,29 @@
   },
   "active": "dc78356ee80a883d",
   "lastOpenFiles": [
-    "public/en/posts/un-post-così/index.html",
-    "public/en/posts/un-post-così",
-    "content/english/posts/primo-post.md",
-    "content/english/posts/Un po'(st) così.md",
-    "public/posts/un-post-così-1/index.html",
-    "public/posts/un-post-così-1",
+    "content/italian/projects/ProgettoServer.md",
+    "public/projects/progettoserver/index.html",
+    "public/projects/progettoserver",
     "content/italian/posts/Un po'(st) così.md",
-    "content/english/posts/secondo-post.md",
+    "public/js/navidrome-player.c84fd63c7ed4df3f70b6e0e047608a9db543343d122163126662dbf08ba6eb94.js",
+    "public/css/main.b28f6aab18a14a0877b49c4ad43573b7c3315d0f3aafc02ba515813ad6c7734e.css",
+    "content/english/projects/ProgettoTest2.md",
+    "content/english/projects/ProgettoTest3.md",
+    "content/english/projects/ProgettoTest.md",
     "content/italian/private/primo-post.md",
+    "public/posts/navidrome-player-test/index.html",
+    "public/posts/navidrome-player-test",
+    "public/js/navidrome-player.js",
+    "public/js",
+    "content/italian/posts/navidrome-player-test.md",
+    "public/css/main.fe7fa6368c18986a5f60da16b88194b601a1410d76078c573fd6928545131c49.css",
+    "layouts/shortcodes/navidrome.html",
+    "content/english/posts/Un po'(st) così.md",
+    "content/english/posts/primo-post.md",
+    "content/english/posts/secondo-post.md",
     "content/italian/accesso-privato.md",
     "content/italian/posts/primo-post.md",
     "content/italian/posts/_index.md",
-    "content/italian/posts/secondo-post.md",
-    "public/posts/un-post-così/index.html",
-    "public/posts/un-post-così",
-    "public/posts/un-post-cosi/index.html",
-    "public/posts/un-post-cosi",
-    "public/posts/primo-post-1/index.html",
-    "public/posts/primo-post-1",
-    "public/css/main.css"
+    "content/italian/posts/secondo-post.md"
   ]
 }

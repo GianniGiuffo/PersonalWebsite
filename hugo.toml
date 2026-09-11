@@ -7,6 +7,11 @@ title = 'Tommaso Francescon'
   # URL MagicDNS dell'area privata, es. https://server.tua-tailnet.ts.net:8443/private/
   # Rimane vuoto finché Tailscale Serve non viene configurato sul server.
   privateURL = 'https://mini-pc.taila86e78.ts.net:8443/private/'
+  navidromeSharePrefix = 'https://music.tommasofrancescon.it/share/'
+
+[security.http]
+  mediaTypes = ['^text/html$']
+  urls = ['^https://music\.tommasofrancescon\.it/share/']
 
 [languages]
   [languages.it]

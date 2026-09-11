@@ -61,6 +61,24 @@ La lingua predefinita è l'italiano. La versione inglese è disponibile nella re
 Il sito viene pubblicato dal server personale tramite Caddy. Per rendere privata
 la sezione `/private/`, segui [la configurazione Caddy e Tailscale](docs/private-area-caddy-tailscale.md).
 
+## Shortcode Navidrome
+
+Per incorporare un brano condiviso pubblicamente da Navidrome usa:
+
+```go-html-template
+{{</* navidrome url="https://music.tommasofrancescon.it/share/ID_CONDIVISIONE" */>}}
+```
+
+Il player recupera automaticamente titolo, artista, album e copertina. Il parametro
+opzionale `start` accetta secondi, `m:ss` oppure `h:mm:ss`:
+
+```go-html-template
+{{</* navidrome url="https://music.tommasofrancescon.it/share/ID_CONDIVISIONE" start="1:03" */>}}
+```
+
+La condivisione deve contenere un singolo brano ed essere valida nel momento in cui
+Hugo genera il sito. Non sono richieste credenziali Navidrome.
+
 ## Licenza
 
 Questo repository contiene il sito personale e i relativi contenuti. Non è attualmente definita una licenza di riuso.

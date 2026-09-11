@@ -30,8 +30,14 @@ Annotazione {{< annotation >}} Questo e' un esempio di annotazione
 **Inserire una immagine**
 ![Gumball foto di prova](https://res.cloudinary.com/nhuws9fe/image/upload/v1783376711/GumballTest_bitivy.jpg)
 
-**Inserire una canzone di spotify**
+**Inserire una canzone di Spotify**
 {{< spotify type="track" id="0vmFuEhyHR8SbOhDFq021Y?si=cc1e323f0d764a87" >}}
+
+**Inserire una canzone da Navidrome**
+{{< navidrome url="https://music.tommasofrancescon.it/share/6aNzLMAS0f" >}}
+
+**Inserire una canzone da Navidrome che parte ad un tempo prestabilito**
+{{< navidrome url="https://music.tommasofrancescon.it/share/6aNzLMAS0f" start="1:03" >}}
 
 **Inserire un link**
 

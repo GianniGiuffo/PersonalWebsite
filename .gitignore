@@ -5,6 +5,7 @@ resources/_gen/
 
 # Node
 node_modules/
+.hugo_cache/
 
 # OS
 .DS_Store

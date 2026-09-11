@@ -43,5 +43,8 @@
     {{ block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}
+  {{ if .Store.Get "hasNavidromePlayer" }}
+    {{ partial "navidrome-player-script.html" . }}
+  {{ end }}
 </body>
 </html>
