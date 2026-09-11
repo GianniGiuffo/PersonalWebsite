@@ -88,5 +88,3 @@ other = "Pause"
 other = "Track unavailable"
 [navidromePosition]
 other = "Track position"
-[navidromeStartsAt]
-other = "Playback starts at {{ . }}."

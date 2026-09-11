@@ -4,8 +4,11 @@ L'area privata del sito non usa password, account o JavaScript per autenticare.
 Il sito pubblico resta su `tommasofrancescon.it`: l'ingresso `/private/`
 reindirizza a una pagina informativa, mentre gli URL dei documenti privati
 restituiscono `404`. Il Caddy del Raspberry ascolta anche su una porta pubblicata
-solo su `127.0.0.1`; Tailscale Serve espone l'intero sito Hugo sulla porta HTTPS
-dedicata `8443`, accessibile esclusivamente dal tailnet.
+solo su `127.0.0.1`; Tailscale Serve espone il sito Hugo sulla porta HTTPS
+dedicata `8443`, accessibile esclusivamente dal tailnet. Nell'interfaccia,
+soltanto le pagine `/private/` restano su quell'origine: uscendo dalla sezione
+si torna all'origine pubblica dalla quale si è entrati, incluso `localhost`
+durante lo sviluppo.
 
 > Configura prima Caddy e Tailscale, poi pubblica il deploy che contiene
 > contenuti privati.
@@ -49,10 +52,11 @@ http://:8083 {
 }
 ```
 
-Non limitare il listener `127.0.0.1:8083` al solo percorso `/private`:
-le pagine Hugo caricano i fogli di stile da URL assoluti come `/css/main.…css`.
-Il listener deve quindi servire **tutta** la cartella `public`; è comunque
-raggiungibile soltanto dal tailnet attraverso Tailscale Serve.
+Non limitare il listener `127.0.0.1:8083` al solo percorso `/private`: le pagine
+Hugo caricano fogli di stile e script da URL assoluti come `/css/main.…css`.
+Il ritorno all'origine pubblica viene gestito dal sito, che memorizza l'origine
+ricevuta all'ingresso nella sezione privata. Un redirect Caddy fisso verso il
+dominio canonico impedirebbe il ritorno al server `localhost` di sviluppo.
 
 Se il blocco del dominio contiene già altri handler o proxy, integra i due
 `handle` al suo interno mantenendo quello di `/private` prima del fallback.
@@ -118,10 +122,22 @@ Finché `privateURL` è vuoto il lucchetto rimane volutamente disabilitato.
    privata italiana.
 3. Aprendo la pagina privata, le richieste a `/css/main.…css` devono restituire
    `200` nel pannello Network del browser. Se sono `404`, il listener locale
-   sta servendo soltanto `/private` e va sostituito con il blocco completo qui
+   non include le risorse statiche e va sostituito con il blocco completo qui
    sopra.
-4. Solo dopo questi controlli, aggiungi contenuti in
+4. Entra nell'area privata partendo da un server locale, quindi premi “Progetti”:
+   il browser deve tornare allo stesso host e alla stessa porta `localhost`.
+   Partendo dal sito pubblico online deve invece tornare a
+   `https://tommasofrancescon.it/projects/`.
+5. Solo dopo questi controlli, aggiungi contenuti in
    `content/italian/private/`.
+
+Se la pagina Tailnet mostra un layout vecchio o non include contenuti presenti
+su `localhost`, non si tratta di elementi generati dal browser: il listener
+`8083` sta leggendo una build Hugo precedente. Pubblica nuovamente il sito e
+verifica che `/srv/sites/site-1/current` punti allo stesso deploy appena creato.
+La build destinata alla Tailnet deve essere aggiornata insieme a quella pubblica,
+perché contiene sia i documenti privati sia gli script che gestiscono il ritorno
+all'origine pubblica.
 
 ## 5. Aggiungere documenti
 

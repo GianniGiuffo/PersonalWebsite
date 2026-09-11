@@ -27,6 +27,61 @@
 
   <script>
     (function(){
+      {{ with site.Params.privateURL }}
+      const privateOrigin = new URL({{ printf "%q" . | safe.JS }}).origin;
+      const configuredPublicOrigin = new URL({{ printf "%q" site.BaseURL | safe.JS }}).origin;
+      const isPrivatePath = /^\/(?:en\/)?private(?:\/|$)/.test(window.location.pathname);
+      const isPrivateOrigin = window.location.origin === privateOrigin;
+      const publicOriginKey = 'private-area-public-origin';
+
+      function allowedPublicOrigin(value) {
+        if (!value) return '';
+        try {
+          const candidate = new URL(value);
+          const isWebURL = candidate.protocol === 'http:' || candidate.protocol === 'https:';
+          const isLoopback = candidate.hostname === 'localhost'
+            || candidate.hostname === '127.0.0.1'
+            || candidate.hostname === '[::1]';
+          const isConfiguredOrigin = candidate.origin === configuredPublicOrigin;
+          return isWebURL && (isLoopback || isConfiguredOrigin) ? candidate.origin : '';
+        } catch (_) {
+          return '';
+        }
+      }
+
+      if (isPrivateOrigin) {
+        const currentURL = new URL(window.location.href);
+        const incomingOrigin = allowedPublicOrigin(currentURL.searchParams.get('public_origin'));
+        let storedOrigin = '';
+
+        try {
+          if (incomingOrigin) localStorage.setItem(publicOriginKey, incomingOrigin);
+          storedOrigin = allowedPublicOrigin(localStorage.getItem(publicOriginKey));
+        } catch (_) {
+          storedOrigin = '';
+        }
+
+        const publicOrigin = incomingOrigin || storedOrigin || configuredPublicOrigin;
+
+        if (!isPrivatePath) {
+          window.location.replace(publicOrigin + window.location.pathname + window.location.search + window.location.hash);
+          return;
+        }
+
+        if (incomingOrigin) {
+          currentURL.searchParams.delete('public_origin');
+          window.history.replaceState(null, '', currentURL.pathname + currentURL.search + currentURL.hash);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+          document.querySelectorAll('[data-public-path]').forEach(function (link) {
+            const path = link.getAttribute('data-public-path');
+            if (path) link.href = new URL(path, publicOrigin + '/').href;
+          });
+        });
+      }
+      {{ end }}
+
       const saved = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const theme = saved || (prefersDark ? 'dark' : 'light');

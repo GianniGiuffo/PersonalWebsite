@@ -6,6 +6,7 @@
       {
         "id": "0f6be730307ab190",
         "type": "tabs",
+        "dimension": 48.99665551839465,
         "children": [
           {
             "id": "dc78356ee80a883d",
@@ -13,28 +14,33 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/italian/private/primo-post.md",
+                "file": "content/italian/projects/ProgettoServer.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "primo-post"
+              "title": "ProgettoServer"
             }
           }
         ]
       },
       {
-        "id": "8dc9748c478cdd1e",
+        "id": "85c7f56df132a911",
         "type": "tabs",
+        "dimension": 51.00334448160535,
         "children": [
           {
-            "id": "9d238fda1759d57d",
+            "id": "4c8688a83d715a5b",
             "type": "leaf",
             "state": {
-              "type": "hugo-preview-view",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "Hugo Preview"
+              "type": "webviewer",
+              "state": {
+                "url": "https://mini-pc.taila86e78.ts.net:8443/",
+                "title": "Tommaso Francescon",
+                "mode": "webview"
+              },
+              "icon": "globe-2",
+              "title": "Tommaso Francescon"
             }
           }
         ]
@@ -96,7 +102,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 295.8359184265137
   },
   "right": {
     "id": "04769f26f63c47c5",
@@ -198,12 +204,16 @@
       "canvas:Crea nuova lavagna": false,
       "templates:Inserisci modello": false,
       "command-palette:Apri riquadro comandi": false,
-      "bases:Crea nuova Base": false
+      "bases:Crea nuova Base": false,
+      "hugo-publish:hugo sync": false
     }
   },
-  "active": "dc78356ee80a883d",
+  "active": "4c8688a83d715a5b",
   "lastOpenFiles": [
+    "public/css/main.950249b86fc1241c864d703fee8e885a4127aa86f9ab9b68bc9ee5c7cdae5e75.css",
     "content/italian/projects/ProgettoServer.md",
+    "content/italian/private/primo-post.md",
+    "public/css/main.198613347cff2e5d79b6383e909ad782b8799d614ded79d7059f9661b892a50c.css",
     "public/projects/progettoserver/index.html",
     "public/projects/progettoserver",
     "content/italian/posts/Un po'(st) così.md",
@@ -212,14 +222,12 @@
     "content/english/projects/ProgettoTest2.md",
     "content/english/projects/ProgettoTest3.md",
     "content/english/projects/ProgettoTest.md",
-    "content/italian/private/primo-post.md",
     "public/posts/navidrome-player-test/index.html",
     "public/posts/navidrome-player-test",
     "public/js/navidrome-player.js",
     "public/js",
     "content/italian/posts/navidrome-player-test.md",
     "public/css/main.fe7fa6368c18986a5f60da16b88194b601a1410d76078c573fd6928545131c49.css",
-    "layouts/shortcodes/navidrome.html",
     "content/english/posts/Un po'(st) così.md",
     "content/english/posts/primo-post.md",
     "content/english/posts/secondo-post.md",

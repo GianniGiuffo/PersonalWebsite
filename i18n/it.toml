@@ -88,5 +88,3 @@ other = "Metti in pausa"
 other = "Brano non disponibile"
 [navidromePosition]
 other = "Posizione nel brano"
-[navidromeStartsAt]
-other = "La riproduzione inizia da {{ . }}."

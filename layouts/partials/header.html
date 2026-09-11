@@ -3,7 +3,8 @@
 {{ $headerPostsActive := eq $headerSection "posts" }}
 {{ $headerProjectsActive := eq $headerSection "projects" }}
 {{ $privateURL := site.Params.privateURL | default "" }}
-{{ $privateAccessURL := "/accesso-privato/" | relURL }}
+{{ $privateAccessURL := "/accesso-privato/" | absURL }}
+{{ $onPrivatePage := eq .Section "private" }}
 
 <header class="site-header sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
   <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
@@ -15,7 +16,7 @@
 
     <!-- Sinistra: logo + navigazione desktop -->
     <div class="hidden md:flex items-center gap-6">
-      <a href="{{ .Site.Home.RelPermalink }}" aria-label="{{ i18n "homepage" }}" class="flex-shrink-0 hover:opacity-80 transition-opacity">
+      <a href="{{ .Site.Home.Permalink }}" data-public-path="{{ .Site.Home.RelPermalink }}" aria-label="{{ i18n "homepage" }}" class="flex-shrink-0 hover:opacity-80 transition-opacity">
         <img src="https://res.cloudinary.com/nhuws9fe/image/upload/v1783374914/Logo_ewohcb.jpg"
              alt="Logo Tommaso Francescon" width="32" height="32" class="h-8 w-auto">
       </a>
@@ -25,7 +26,7 @@
         {{ $section := .Section }}
 
         {{ $homeActive := $isHome }}
-        <a href="{{ .Site.Home.RelPermalink }}" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
+        <a href="{{ .Site.Home.Permalink }}" data-public-path="{{ .Site.Home.RelPermalink }}" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
            {{ if $homeActive }}font-semibold text-teal-700 dark:text-teal-400
            {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
           {{ i18n "home" }}
@@ -34,7 +35,7 @@
 
         {{ $postsActive := eq $section "posts" }}
         {{ with site.GetPage "section" "posts" }}
-        <a href="{{ .RelPermalink }}" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
+        <a href="{{ .Permalink }}" data-public-path="{{ .RelPermalink }}" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
            {{ if $postsActive }}font-semibold text-teal-700 dark:text-teal-400
            {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
           {{ i18n "posts" }}
@@ -44,7 +45,7 @@
 
         {{ $projectsActive := eq $section "projects" }}
         {{ with site.GetPage "section" "projects" }}
-        <a href="{{ .RelPermalink }}" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
+        <a href="{{ .Permalink }}" data-public-path="{{ .RelPermalink }}" class="relative px-3 py-1.5 rounded-md text-sm transition-colors
            {{ if $projectsActive }}font-semibold text-teal-700 dark:text-teal-400
            {{ else }}font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800{{ end }}">
           {{ i18n "projects" }}
@@ -66,7 +67,7 @@
 
       {{ $aboutActive := eq $section "about" }}
       {{ with site.GetPage "section" "about" }}
-      <a href="{{ .RelPermalink }}"
+      <a href="{{ .Permalink }}" data-public-path="{{ .RelPermalink }}"
          class="order-2 md:order-none flex-shrink-0 w-8 h-8 rounded-full overflow-hidden transition-all
                 {{ if $aboutActive }}ring-2 ring-teal-500 dark:ring-teal-400
                 {{ else }}ring-2 ring-slate-200 dark:ring-slate-700 hover:ring-teal-500 dark:hover:ring-teal-400{{ end }}"
@@ -79,7 +80,7 @@
 
       <!-- Area privata: disponibile soltanto tramite URL Tailscale. -->
       {{ if $privateURL }}
-      <a id="identity-btn" href="{{ $privateAccessURL }}" aria-label="{{ i18n "privateArea" }}" title="{{ i18n "privateArea" }}"
+      <a id="identity-btn" href="{{ $privateAccessURL }}" data-public-path="{{ "/accesso-privato/" | relURL }}" aria-label="{{ i18n "privateArea" }}" title="{{ i18n "privateArea" }}"
          class="hidden md:flex w-8 h-8 flex-shrink-0 items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
       {{ else }}
       <span id="identity-btn" aria-label="{{ i18n "privateArea" }}" title="Area privata disponibile solo tramite Tailscale"
@@ -107,7 +108,7 @@
       {{ if eq .Language.Lang "it" }}{{ $languageLabel = "IT" }}{{ end }}
       {{ with .Translations }}
         {{ range first 1 . }}
-          <a href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Lang }}"
+          <a href="{{ if $onPrivatePage }}{{ .RelPermalink }}{{ else }}{{ .Permalink }}{{ end }}" {{ if not $onPrivatePage }}data-public-path="{{ .RelPermalink }}"{{ end }} hreflang="{{ .Language.Locale }}" lang="{{ .Language.Lang }}"
              aria-label="{{ i18n "switchLanguage" }}" title="{{ i18n "switchLanguage" }}"
              class="font-display hidden md:flex h-8 px-2 items-center justify-center rounded-md text-xs font-semibold tracking-wide text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
             {{ $languageLabel }}
@@ -121,34 +122,34 @@
 <!-- Navigazione laterale, visibile soltanto su telefono. -->
 <div id="mobile-sidebar-backdrop" class="mobile-sidebar-backdrop md:hidden" aria-hidden="true">
   <aside id="mobile-sidebar" class="mobile-sidebar-panel" aria-label="Menu">
-    <a href="{{ .Site.Home.RelPermalink }}" class="mobile-sidebar-brand" aria-label="{{ i18n "homepage" }}">
+    <a href="{{ .Site.Home.Permalink }}" data-public-path="{{ .Site.Home.RelPermalink }}" class="mobile-sidebar-brand" aria-label="{{ i18n "homepage" }}">
       <img src="https://res.cloudinary.com/nhuws9fe/image/upload/v1783374914/Logo_ewohcb.jpg"
            alt="" width="38" height="38">
       <span>{{ .Site.Title }}</span>
     </a>
 
     <nav class="mobile-sidebar-nav">
-      <a href="{{ .Site.Home.RelPermalink }}" class="mobile-sidebar-link {{ if $headerHomeActive }}is-active{{ end }}"
+      <a href="{{ .Site.Home.Permalink }}" data-public-path="{{ .Site.Home.RelPermalink }}" class="mobile-sidebar-link {{ if $headerHomeActive }}is-active{{ end }}"
          {{ if $headerHomeActive }}aria-current="page"{{ end }}>
         {{ i18n "home" }}
       </a>
 
       {{ with site.GetPage "section" "posts" }}
-        <a href="{{ .RelPermalink }}" class="mobile-sidebar-link {{ if $headerPostsActive }}is-active{{ end }}"
+        <a href="{{ .Permalink }}" data-public-path="{{ .RelPermalink }}" class="mobile-sidebar-link {{ if $headerPostsActive }}is-active{{ end }}"
            {{ if $headerPostsActive }}aria-current="page"{{ end }}>
           {{ i18n "posts" }}
         </a>
       {{ end }}
 
       {{ with site.GetPage "section" "projects" }}
-        <a href="{{ .RelPermalink }}" class="mobile-sidebar-link {{ if $headerProjectsActive }}is-active{{ end }}"
+        <a href="{{ .Permalink }}" data-public-path="{{ .RelPermalink }}" class="mobile-sidebar-link {{ if $headerProjectsActive }}is-active{{ end }}"
            {{ if $headerProjectsActive }}aria-current="page"{{ end }}>
           {{ i18n "projects" }}
         </a>
       {{ end }}
 
       {{ if $privateURL }}
-      <a href="{{ $privateAccessURL }}" class="mobile-sidebar-link mobile-sidebar-identity"
+      <a href="{{ $privateAccessURL }}" data-public-path="{{ "/accesso-privato/" | relURL }}" class="mobile-sidebar-link mobile-sidebar-identity"
          aria-label="{{ i18n "privateArea" }}" title="{{ i18n "privateArea" }}">
       {{ else }}
       <span class="mobile-sidebar-link mobile-sidebar-identity opacity-60 cursor-not-allowed"
@@ -167,7 +168,7 @@
     <div class="mobile-sidebar-footer">
       {{ with .Translations }}
         {{ range first 1 . }}
-          <a href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Lang }}"
+          <a href="{{ if $onPrivatePage }}{{ .RelPermalink }}{{ else }}{{ .Permalink }}{{ end }}" {{ if not $onPrivatePage }}data-public-path="{{ .RelPermalink }}"{{ end }} hreflang="{{ .Language.Locale }}" lang="{{ .Language.Lang }}"
              aria-label="{{ i18n "switchLanguage" }}" title="{{ i18n "switchLanguage" }}"
              class="font-display mobile-language-link">{{ $languageLabel }}</a>
         {{ end }}
