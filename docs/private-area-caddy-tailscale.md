@@ -157,3 +157,12 @@ Il contenuto del documento.
 
 Non inserire file privati nelle altre sezioni: l'indice di ricerca pubblico,
 il feed e la sitemap escludono automaticamente solo la sezione `private`.
+Anche le pagine pubbliche di tag e categorie escludono documenti e termini
+presenti soltanto nell'area privata. I feed della sezione privata sono disabilitati.
+Questi filtri evitano divulgazioni attraverso gli indici; l'accesso ai file HTML
+rimane protetto da Caddy e Tailscale.
+
+Dopo un aggiornamento che cambia questi filtri, genera una directory di deploy
+nuova oppure usa `hugo build --gc --minify --cleanDestinationDir`. Pubblica
+l'intera directory, rimuovendo dal server anche i file del deploy precedente:
+sovrascrivere soltanto i file nuovi può lasciare online vecchi feed e indici.

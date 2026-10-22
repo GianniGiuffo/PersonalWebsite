@@ -1,0 +1,10 @@
+{{/* Hugo taxonomies include pages even when build.list is local. Filter both
+     documents and terms that have no public documents, including RSS/sitemaps. */}}
+{{- $pages := where .Pages "Section" "ne" "private" -}}
+{{- $visible := slice -}}
+{{- range $pages -}}
+  {{- if or (ne .Kind "term") (where .RegularPages "Section" "ne" "private") -}}
+    {{- $visible = $visible | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $visible -}}

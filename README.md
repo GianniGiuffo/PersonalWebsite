@@ -36,10 +36,22 @@ Il sito sarà disponibile all'indirizzo indicato da Hugo, normalmente `http://lo
 Per generare la build di produzione:
 
 ```bash
-hugo build --gc --minify
+hugo build --gc --minify --cleanDestinationDir
 ```
 
 I file generati vengono salvati nella directory `public/`.
+La pulizia rimuove anche vecchi feed o indici che non devono più essere pubblicati.
+
+Per verificare che i documenti privati non compaiano negli indici pubblici:
+
+```bash
+npm test
+npm audit
+```
+
+Il test richiede Hugo e le dipendenze npm installate. Il controllo del 22 ottobre
+2026 e i limiti della verifica sono descritti nel
+[rapporto di sicurezza](docs/security-review-2026-10-22.md).
 
 ## Struttura principale
 

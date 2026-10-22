@@ -3,6 +3,18 @@ defaultContentLanguage = 'it'
 defaultContentLanguageInSubdir = false
 title = 'Tommaso Francescon'
 
+# Keep private pages navigable locally without adding them to public collections,
+# feeds or sitemaps. Taxonomies also need filtering in templates.
+# Applies to both languages and descendants.
+[[cascade]]
+  outputs = ['HTML']
+  [cascade.build]
+    list = 'local'
+  [cascade.sitemap]
+    disable = true
+  [cascade.target]
+    path = '/private{,/**}'
+
 [params]
   # URL MagicDNS dell'area privata, es. https://server.tua-tailnet.ts.net:8443/private/
   # Rimane vuoto finché Tailscale Serve non viene configurato sul server.

@@ -1,10 +1,12 @@
 <!-- layouts/_default/baseof.html -->
+{{- if not (and (eq .Kind "term") (not (partial "public-list-pages.html" .))) -}}
 <!doctype html>
 <html lang="{{ .Site.Language.Locale }}" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  {{ if eq .Section "private" }}<meta name="robots" content="noindex, nofollow">{{ end }}
 
   {{ with (templates.Defer (dict "key" "global")) }}
     {{ partial "css.html" . }}
@@ -103,3 +105,4 @@
   {{ end }}
 </body>
 </html>
+{{- end -}}
