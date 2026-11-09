@@ -16,6 +16,7 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+*.obsidian/
 
 # Env
 .env
